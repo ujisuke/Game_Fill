@@ -6,9 +6,11 @@ namespace Assets.Scripts.Player.Data
     public class PlayerData : ScriptableObject
     {
         [SerializeField] private float moveSpeed;
-        [SerializeField] private float hurtBoxScale;
+        [SerializeField] private Vector2 hurtBoxScale;
+        [SerializeField] private Vector2 viewScale;
 
         public float MoveSpeed => moveSpeed;
-        public float HurtBoxScale => hurtBoxScale;
+        public Vector2 HurtBoxScale => hurtBoxScale;
+        public Vector2 ViewScale => viewScale;
     }
 }
