@@ -1,6 +1,8 @@
 using UnityEngine;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Controller;
+using Cysharp.Threading.Tasks;
+using System;
 
 namespace Assets.Scripts.Stage.Model
 {
@@ -25,15 +27,13 @@ namespace Assets.Scripts.Stage.Model
             isVisited = false;
         }
 
-        public void SetWall()
-        {
-            isWall = true;
-            blockController.Fill();
-        }
-
-        public void Visit()
+        public async UniTask Fill()
         {
             isVisited = true;
+            blockController.PlayAnim("Filled", 0.5f);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            isWall = true;
+            blockController.Fill();
         }
     }
 }

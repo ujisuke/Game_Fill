@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9007690671505843389}
   - component: {fileID: -2046592517252175311}
   - component: {fileID: 1441661521480339512}
+  - component: {fileID: -3090968861783275903}
   m_Layer: 0
   m_Name: DevBlock
   m_TagString: Untagged
@@ -78,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Sprite: {fileID: -7674837327361904316, guid: 66aadb7c030b14d46b7b952c9ca68055, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,7 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f681967f4f1990459e79812af5e0ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isWallOnFirst: 0
   blockView: {fileID: 1441661521480339512}
 --- !u!114 &1441661521480339512
 MonoBehaviour:
@@ -116,5 +116,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 9007690671505843389}
-  animator: {fileID: 0}
+  filledSprite: {fileID: -7674837327361904316, guid: 66aadb7c030b14d46b7b952c9ca68055, type: 3}
+  emptySprite: {fileID: 3889051101229669611, guid: 66aadb7c030b14d46b7b952c9ca68055, type: 3}
+  animator: {fileID: -3090968861783275903}
   hitBoxPrefab: {fileID: 6126964767519016552, guid: 36846f4fb2c8d5d4c9e1e90081e6b7ba, type: 3}
+  isWallInitial: 1
+--- !u!95 &-3090968861783275903
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207277224530256961}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 4245433559893102244, guid: 66aadb7c030b14d46b7b952c9ca68055, type: 3}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

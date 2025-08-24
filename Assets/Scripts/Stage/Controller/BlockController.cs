@@ -6,28 +6,30 @@ namespace Assets.Scripts.Stage.Controller
 {
     public class BlockController : MonoBehaviour
     {
-        [SerializeField] private bool isWallOnFirst;
         [SerializeField] private BlockView blockView;
         private BlockModel blockModel;
-        public bool IsWallOnFirst => isWallOnFirst;
         public BlockModel BlockModel => blockModel;
 
         public void Initialize()
         {
-            blockModel = new BlockModel(this, transform.position, transform.localScale, isWallOnFirst);
+            bool isWallInitial = blockView.IsWallInitial;
+            blockModel = new BlockModel(this, transform.position, transform.localScale, isWallInitial);
             blockView.InstantiateHitBox(blockModel.HitBox);
-            blockView.SetHitBoxActive(isWallOnFirst);
-        }
-
-        private void Update()
-        {
-
+            blockView.SetHitBoxActive(isWallInitial);
+            if (isWallInitial)
+                PlayAnim("Wall");
+            else
+                PlayAnim("Empty");
         }
 
         public void Fill()
         {
             blockView.SetHitBoxActive(true);
-            blockView.Fill();
+        }
+
+        public void PlayAnim(string animName, float speed = 1f)
+        {
+            blockView.PlayAnim(animName, speed);
         }
     }
 }
