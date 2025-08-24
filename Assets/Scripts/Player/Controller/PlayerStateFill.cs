@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Player.Controller
 {
-    public class PlayerStateMove : IPlayerState
+    public class PlayerStateFill : IPlayerState
     {
         private readonly PlayerModel pM;
         private readonly PlayerController pC;
@@ -12,7 +12,7 @@ namespace Assets.Scripts.Player.Controller
         private bool isLookingLeft;
         private bool isKeyPushed;
 
-        public PlayerStateMove(PlayerModel pM, PlayerController pC, PlayerStateMachine pSM)
+        public PlayerStateFill(PlayerModel pM, PlayerController pC, PlayerStateMachine pSM)
         {
             this.pM = pM;
             this.pC = pC;
@@ -44,13 +44,14 @@ namespace Assets.Scripts.Player.Controller
                 isLookingLeft = Input.GetKey(KeyCode.A) || (isLookingLeft && !Input.GetKey(KeyCode.D));
                 pC.FlipX(isLookingLeft);
             }
+            StageModel.Instance.FillBlock(pM.HurtBox);
 
             isKeyPushed = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
 
             if (StageModel.Instance.IsPlayerHittingWall(pM.HurtBox))
                 pSM.ChangeState(new PlayerStateDead(pM, pC, pSM));
-            else if (Input.GetMouseButtonDown(0))
-                pSM.ChangeState(new PlayerStateFill(pM, pC, pSM));
+            else if (!Input.GetMouseButton(0))
+                pSM.ChangeState(new PlayerStateMove(pM, pC, pSM));
         }
 
         public void OnStateExit()

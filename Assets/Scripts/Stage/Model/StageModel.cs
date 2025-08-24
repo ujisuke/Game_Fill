@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Controller;
+using Cysharp.Threading.Tasks;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,14 +13,12 @@ namespace Assets.Scripts.Stage.Model
     public class StageModel
     {
         private readonly BlockModel[,] blockMap;
-        private readonly List<BlockModel> visitedBlockList;
         private static StageModel instance;
         public static StageModel Instance => instance;
 
         public StageModel(Tilemap tilemap)
         {
             blockMap = GetBlockMap(tilemap);
-            visitedBlockList = new();
             instance = this;
         }
 
@@ -80,25 +79,12 @@ namespace Assets.Scripts.Stage.Model
 
         public void FillBlock(HurtBox playerHurtBox)
         {
-            for (int i = visitedBlockList.Count - 1; i >= 0; i--)
-            {
-                BlockModel visitedBlock = visitedBlockList[i];
-                if (math.abs(visitedBlock.Pos.x - playerHurtBox.Pos.x) >= 0.6f + playerHurtBox.Scale.x * 0.5f || math.abs(visitedBlock.Pos.y - playerHurtBox.Pos.y) >= 0.6f + playerHurtBox.Scale.y * 0.5f)
-                {
-                    visitedBlock.SetWall();
-                    visitedBlockList.RemoveAt(i);
-                }
-            }
-            
             Vector2Int playerPosIndex = ConvertPosToIndex(playerHurtBox.Pos);
             if (!DoesExistBlock(playerPosIndex))
                 return;
             BlockModel block = blockMap[playerPosIndex.x, playerPosIndex.y];
             if (!block.IsVisited)
-            {
-                block.Visit();
-                visitedBlockList.Add(block);
-            }
+                block.Fill().Forget();
         }
     }
 }

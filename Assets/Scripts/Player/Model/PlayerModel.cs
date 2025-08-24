@@ -23,14 +23,12 @@ namespace Assets.Scripts.Player.Model
         {
             playerMove = playerMove.MoveTurn(moveDir);
             hurtBox = hurtBox.SetPos(Pos);
-            StageModel.Instance.FillBlock(HurtBox);
         }
 
         public void MoveStraight()
         {
             playerMove = playerMove.MoveStraight();
             hurtBox = hurtBox.SetPos(Pos);
-            StageModel.Instance.FillBlock(HurtBox);
         }
 
         public void Destroy()

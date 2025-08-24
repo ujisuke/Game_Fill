@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce589f4ba17a1940a72609e4e47dbf2, type: 3}
   m_Name: DevPlayerData
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 8
   hurtBoxScale: {x: 0.25, y: 0.25}
   viewScale: {x: 1, y: 1}
