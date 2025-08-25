@@ -9,14 +9,17 @@ namespace Assets.Scripts.Player.Model
         private readonly PlayerData playerData;
         private HurtBox hurtBox;
         private PlayerMove playerMove;
+        private static PlayerModel instance;
         public Vector2 Pos => playerMove.Pos;
         public HurtBox HurtBox => hurtBox;
+        public static PlayerModel Instance => instance;
 
         public PlayerModel(PlayerData playerData, Vector2 pos)
         {
             this.playerData = playerData;
             playerMove = new PlayerMove(pos, playerData.MoveSpeed);
             hurtBox = new HurtBox(pos, playerData.HurtBoxScale);
+            instance = this;
         }
 
         public void MoveTurn(Vector2 moveDir)
@@ -33,7 +36,7 @@ namespace Assets.Scripts.Player.Model
 
         public void Destroy()
         {
-
+            instance = null;
         }
     }
 }
