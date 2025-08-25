@@ -5126,6 +5126,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DevBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 1441661521480339512, guid: 4234916c9d1663444ba7074788d1a81a, type: 3}
+      propertyPath: isWallInitial
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5000527993764406926, guid: 4234916c9d1663444ba7074788d1a81a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.5
@@ -5166,6 +5170,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9007690671505843389, guid: 4234916c9d1663444ba7074788d1a81a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3889051101229669611, guid: 66aadb7c030b14d46b7b952c9ca68055, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8791,7 +8799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1441661521480339512, guid: 4234916c9d1663444ba7074788d1a81a, type: 3}
       propertyPath: isWallInitial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5000527993764406926, guid: 4234916c9d1663444ba7074788d1a81a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8836,7 +8844,7 @@ PrefabInstance:
     - target: {fileID: 9007690671505843389, guid: 4234916c9d1663444ba7074788d1a81a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 3889051101229669611, guid: 66aadb7c030b14d46b7b952c9ca68055, type: 3}
+      objectReference: {fileID: -7674837327361904316, guid: 66aadb7c030b14d46b7b952c9ca68055, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9201,6 +9209,7 @@ GameObject:
   - component: {fileID: 2068900231}
   - component: {fileID: 2068900230}
   - component: {fileID: 2068900229}
+  - component: {fileID: 2068900232}
   m_Layer: 0
   m_Name: Stage
   m_TagString: Untagged
@@ -9248,6 +9257,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2068900232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068900228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d2ad14d62b2bd429fa2f6dd04a9002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFinalStage: 0
+  nextStageName: DevStage
+  sceneNameData: {fileID: 11400000, guid: 153f935e99b39cb468f1a33e575aa590, type: 2}
 --- !u!1001 &2073450929
 PrefabInstance:
   m_ObjectHideFlags: 0

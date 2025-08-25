@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fce589f4ba17a1940a72609e4e47dbf2, type: 3}
-  m_Name: DevPlayerData
+  m_Script: {fileID: 11500000, guid: db25e19a04db6254f8738558f2fdc70e, type: 3}
+  m_Name: DevStageNameData
   m_EditorClassIdentifier: 
-  moveSpeed: 12
-  hurtBoxScale: {x: 0.1, y: 0.1}
-  viewScale: {x: 1, y: 1}
+  mapSceneName: DevMap
+  stageNameList:
+  - DevStage

@@ -86,5 +86,23 @@ namespace Assets.Scripts.Stage.Model
             if (!block.IsVisited)
                 block.Fill().Forget();
         }
+
+        public bool IsAllBlockFilled()
+        {
+            foreach (BlockModel block in blockMap)
+            {
+                if (block == null)
+                    continue;
+                if (!block.IsWall)
+                    return false;
+            }
+            return true;
+        }
+
+        public void DestroyAllBlock()
+        {
+            foreach (BlockModel block in blockMap)
+                block?.OnDestroy();
+        }
     }
 }
