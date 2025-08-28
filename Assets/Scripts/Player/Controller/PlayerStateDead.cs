@@ -19,14 +19,17 @@ namespace Assets.Scripts.Player.Controller
 
         public void OnStateEnter()
         {
-            pC.PlayAnim("Dead", 1f);
             Dead().Forget();
         }
 
         private async UniTask Dead()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(1f));
-            pC.OnDestroy();
+            pC.PlayAnim("Dead", 1f);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
+            PlayerModel.RemoveInstance();
+            await UniTask.Delay(TimeSpan.FromSeconds(0.8f));
+            if(pC != null)
+                pC.OnDestroy();
         }
 
         public void HandleInput()

@@ -77,6 +77,25 @@ namespace Assets.Scripts.Stage.View
                 PlayAnim("Empty");
         }
 
+        public void StopAnim()
+        {
+            objectAnimation?.Stop();
+        }
+
+        public void PaintColor(Color color)
+        {
+            light2D.enabled = false;
+            spriteRenderer.color = color;
+            if (blockType == BlockType.Prohibited)
+                PlayAnim("WhiteProhibited");
+            else if (blockType == BlockType.Enter)
+                PlayAnim("WhiteEnter");
+            else if (blockType == BlockType.Exit)
+                PlayAnim("WhiteExit");
+            else
+                PlayAnim("WhiteFilled");
+        }
+
 #if UNITY_EDITOR
         private void OnValidate()
         {
@@ -100,12 +119,12 @@ namespace Assets.Scripts.Stage.View
             }
             else if (blockType == BlockType.Enter)
             {
-                light2D.enabled = false;
+                light2D.enabled = true;
                 spriteRenderer.sprite = enterSprite;
             }
             else if (blockType == BlockType.Exit)
             {
-                light2D.enabled = false;
+                light2D.enabled = true;
                 spriteRenderer.sprite = exitSprite;
             }
             else

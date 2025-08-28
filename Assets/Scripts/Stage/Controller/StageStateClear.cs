@@ -7,10 +7,12 @@ namespace Assets.Scripts.Stage.Controller
     public class StageStateClear : IStageState
     {
         private readonly StageStateMachine sSM;
+        private readonly StageController sC;
 
-        public StageStateClear(StageStateMachine sSM)
+        public StageStateClear(StageStateMachine sSM, StageController sC)
         {
             this.sSM = sSM;
+            this.sC = sC;
         }
 
         public void OnStateEnter()
@@ -20,7 +22,7 @@ namespace Assets.Scripts.Stage.Controller
 
         private async UniTask Clear()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(1f));
+            await sC.PlayClearEffect();
             if (sSM.IsFinalStage)
                 SceneManager.LoadScene(sSM.NextStageName);
             else

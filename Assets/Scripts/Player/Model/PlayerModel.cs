@@ -46,7 +46,7 @@ namespace Assets.Scripts.Player.Model
             StageModel.Instance.StopSlowEffect();
         }
 
-        public static void Destroy()
+        public static void RemoveInstance()
         {
             instance = null;
         }

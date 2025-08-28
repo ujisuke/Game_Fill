@@ -23,6 +23,12 @@ namespace Assets.Scripts.Player.View
             objectAnimation.Play(animName, animSeconds);
         }
 
+        public void StopAnim()
+        {
+            objectAnimation ??= new ObjectAnimation(animator, spriteRenderer);
+            objectAnimation.Stop();
+        }
+
         public void FlipX(bool isLeft)
         {
             objectAnimation ??= new ObjectAnimation(animator, spriteRenderer);

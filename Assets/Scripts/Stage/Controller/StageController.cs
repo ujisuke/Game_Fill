@@ -15,6 +15,7 @@ namespace Assets.Scripts.Stage.Controller
         private void Awake()
         {
             stageModel = new StageModel(tilemap, this);
+            stageView.SetBlockMap(tilemap);
         }
 
         public void PlaySlowEffect()
@@ -25,6 +26,21 @@ namespace Assets.Scripts.Stage.Controller
         public void StopSlowEffect()
         {
             stageView.StopSlowEffect();
+        }
+
+        public async UniTask PlayClearEffect()
+        {
+            await stageView.PlayClearEffect();
+        }
+
+        public void CloseStage(bool isRetry)
+        {
+            stageView.CloseStage(isRetry);
+        }
+
+        public void OpenStage()
+        {
+            stageView.OpenStage();
         }
 
         public void OnDestroy()

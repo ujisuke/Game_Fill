@@ -18,7 +18,10 @@ namespace Assets.Scripts.Stage.View
 
         private void Update()
         {
+            image.enabled = dummySpriteRenderer.enabled;
             image.sprite = dummySpriteRenderer.sprite;
+            image.rectTransform.sizeDelta = dummySpriteRenderer.sprite.textureRect.size;
+            image.rectTransform.pivot = dummySpriteRenderer.sprite.pivot / dummySpriteRenderer.sprite.rect.size;
         }
 
         public void PlayAnim(string animName, float animSeconds = 1f)

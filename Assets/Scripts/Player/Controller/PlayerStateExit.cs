@@ -21,10 +21,10 @@ namespace Assets.Scripts.Player.Controller
 
         public void OnStateEnter()
         {
-            pC.PlayAnim("Exit");
-            Time.timeScale = 1.0f;
             if (!StageModel.Instance.IsAllBlockFilled())
                 pSM.ChangeState(new PlayerStateDead(pM, pC, pSM));
+            else
+                pC.StopAnim();
         }
 
         public void HandleInput()

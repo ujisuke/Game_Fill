@@ -17,6 +17,7 @@ namespace Assets.Scripts.Common.View
         {
             if (animator == null)
                 return;
+            animator.enabled = true;
             animator.Play(animName);
             if (animSeconds > 0f)
                 animator.speed = 1f / animSeconds;

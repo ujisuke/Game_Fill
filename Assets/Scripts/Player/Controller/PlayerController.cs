@@ -32,6 +32,11 @@ namespace Assets.Scripts.Player.Controller
             playerView.PlayAnim(animName, animSeconds);
         }
 
+        public void StopAnim()
+        {
+            playerView.StopAnim();
+        }
+
         public void FlipX(bool isLeft)
         {
             playerView.FlipX(isLeft);
@@ -40,7 +45,6 @@ namespace Assets.Scripts.Player.Controller
         public void OnDestroy()
         {
             playerView.DestroyHurtBox();
-            PlayerModel.Destroy();
             Destroy(gameObject);
         }
     }

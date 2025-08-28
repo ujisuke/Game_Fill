@@ -9,6 +9,7 @@ namespace Assets.Scripts.Stage.Controller
         [SerializeField] private bool isFinalStage;
         [SerializeField] private string nextStageName;
         [SerializeField] private SceneNameData sceneNameData;
+        [SerializeField] private StageController stageController;
         private IStageState currentState;
         public bool IsFinalStage => isFinalStage;
         public string NextStageName => nextStageName;
@@ -16,7 +17,7 @@ namespace Assets.Scripts.Stage.Controller
 
         private void Awake()
         {
-            currentState = new StageStateInitial(this);
+            currentState = new StageStateInitial(this, stageController);
             currentState.OnStateEnter();
         }
 
