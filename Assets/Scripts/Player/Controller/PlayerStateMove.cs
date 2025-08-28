@@ -10,24 +10,25 @@ namespace Assets.Scripts.Player.Controller
         private readonly PlayerController pC;
         private readonly PlayerStateMachine pSM;
         private bool isLookingLeft;
-        private bool isKeyPushed;
+        private bool isDirKeyPushed;
 
-        public PlayerStateMove(PlayerModel pM, PlayerController pC, PlayerStateMachine pSM)
+        public PlayerStateMove(PlayerModel pM, PlayerController pC, PlayerStateMachine pSM, bool isLookingLeft = false)
         {
             this.pM = pM;
             this.pC = pC;
             this.pSM = pSM;
-            isLookingLeft = false;
+            this.isLookingLeft = isLookingLeft;
+            isDirKeyPushed = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
         }
 
         public void OnStateEnter()
         {
-
+            pC.PlayAnim("Move");
         }
 
         public void HandleInput()
         {
-            if (isKeyPushed)
+            if (isDirKeyPushed)
                 pM.MoveStraight();
             else
             {
@@ -45,12 +46,19 @@ namespace Assets.Scripts.Player.Controller
                 pC.FlipX(isLookingLeft);
             }
 
-            isKeyPushed = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
+            isDirKeyPushed = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
 
-            if (StageModel.Instance.IsPlayerHittingWall(pM.HurtBox))
+            if (Input.GetMouseButton(1))
+                pM.Deceleration();
+            else
+                pM.Acceleration();
+
+            if (StageModel.Instance.IsPlayerHittingWall(pM.HurtBox) || !StageModel.Instance.IsPlayerOnBlock(pM.Pos))
                 pSM.ChangeState(new PlayerStateDead(pM, pC, pSM));
-            else if (Input.GetMouseButtonDown(0))
-                pSM.ChangeState(new PlayerStateFill(pM, pC, pSM));
+            else if (pM.IsOnExit)
+                pSM.ChangeState(new PlayerStateExit(pM, pC, pSM));
+            else if (Input.GetMouseButton(0))
+                pSM.ChangeState(new PlayerStateFill(pM, pC, pSM, isLookingLeft));
         }
 
         public void OnStateExit()

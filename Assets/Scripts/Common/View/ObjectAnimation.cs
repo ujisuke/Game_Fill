@@ -24,6 +24,12 @@ namespace Assets.Scripts.Common.View
                 animator.speed = 1f;
         }
 
+        public void SetSpeed(float speed)
+        {
+            if (animator != null)
+                animator.speed = speed;
+        }
+
         public void FlipX(bool isLeft)
         {
             if (spriteRenderer != null)

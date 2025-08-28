@@ -7,10 +7,8 @@ namespace Assets.Scripts.Player.Data
     {
         [SerializeField] private float moveSpeed;
         [SerializeField] private Vector2 hurtBoxScale;
-        [SerializeField] private Vector2 viewScale;
 
         public float MoveSpeed => moveSpeed;
         public Vector2 HurtBoxScale => hurtBoxScale;
-        public Vector2 ViewScale => viewScale;
     }
 }

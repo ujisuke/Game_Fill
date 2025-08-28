@@ -19,7 +19,7 @@ namespace Assets.Scripts.Stage.Controller
 
         public void HandleInput()
         {
-            if (StageModel.Instance.IsAllBlockFilled())
+            if (PlayerModel.Instance != null && StageModel.Instance.IsAllBlockFilled() && PlayerModel.Instance.IsOnExit)
                 sSM.ChangeState(new StageStateClear(sSM));
             else if (PlayerModel.Instance == null)
                 sSM.ChangeState(new StageStateDead(sSM));

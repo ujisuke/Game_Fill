@@ -15,7 +15,6 @@ namespace Assets.Scripts.Player.Controller
         private void Awake()
         {
             playerModel = new PlayerModel(playerData, transform.position);
-            playerView.SetViewScale(playerData.ViewScale);
             playerView.SetPos(playerModel.Pos);
             playerView.InstantiateHurtBox(playerModel.HurtBox);
             pSM = new PlayerStateMachine(playerModel, this);
@@ -41,7 +40,7 @@ namespace Assets.Scripts.Player.Controller
         public void OnDestroy()
         {
             playerView.DestroyHurtBox();
-            playerModel.Destroy();
+            PlayerModel.Destroy();
             Destroy(gameObject);
         }
     }

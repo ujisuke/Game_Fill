@@ -1,17 +1,18 @@
+using System;
 using Assets.Scripts.Player.Model;
-using Assets.Scripts.Stage.Controller;
 using Assets.Scripts.Stage.Model;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.Controller
 {
-    public class PlayerStateBorn : IPlayerState
+    public class PlayerStateExit : IPlayerState
     {
         private readonly PlayerModel pM;
         private readonly PlayerController pC;
         private readonly PlayerStateMachine pSM;
 
-        public PlayerStateBorn(PlayerModel pM, PlayerController pC, PlayerStateMachine pSM)
+        public PlayerStateExit(PlayerModel pM, PlayerController pC, PlayerStateMachine pSM)
         {
             this.pM = pM;
             this.pC = pC;
@@ -20,12 +21,15 @@ namespace Assets.Scripts.Player.Controller
 
         public void OnStateEnter()
         {
-            
+            pC.PlayAnim("Exit");
+            Time.timeScale = 1.0f;
+            if (!StageModel.Instance.IsAllBlockFilled())
+                pSM.ChangeState(new PlayerStateDead(pM, pC, pSM));
         }
 
         public void HandleInput()
         {
-            pSM.ChangeState(new PlayerStateMove(pM, pC, pSM));
+
         }
 
         public void OnStateExit()

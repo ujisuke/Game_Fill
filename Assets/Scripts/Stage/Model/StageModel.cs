@@ -13,13 +13,15 @@ namespace Assets.Scripts.Stage.Model
     public class StageModel
     {
         private readonly BlockModel[,] blockMap;
+        private readonly StageController stageController;
         private static StageModel instance;
         public static StageModel Instance => instance;
 
-        public StageModel(Tilemap tilemap)
+        public StageModel(Tilemap tilemap, StageController stageController)
         {
             blockMap = GetBlockMap(tilemap);
             instance = this;
+            this.stageController = stageController;
         }
 
         private static BlockModel[,] GetBlockMap(Tilemap tilemap)
@@ -61,6 +63,20 @@ namespace Assets.Scripts.Stage.Model
                 || IsWallPos(rightBottomIndex) || IsWallPos(leftBottomIndex);
         }
 
+        public bool IsPlayerOnBlock(Vector2 playerPos)
+        {
+            Vector2Int playerIndex = ConvertPosToIndex(playerPos);
+            return DoesExistBlock(playerIndex);
+        }
+
+        public bool IsPlayerOnExit(Vector2 playerPos)
+        {
+            Vector2Int playerIndex = ConvertPosToIndex(playerPos);
+            if (!DoesExistBlock(playerIndex))
+                return false;
+            return blockMap[playerIndex.x, playerIndex.y].IsExit;
+        }
+
         private bool DoesExistBlock(Vector2Int posIndex)
         {
             if (posIndex.x < 0 || posIndex.x >= blockMap.GetLength(0) || posIndex.y < 0 || posIndex.y >= blockMap.GetLength(1))
@@ -83,7 +99,7 @@ namespace Assets.Scripts.Stage.Model
             if (!DoesExistBlock(playerPosIndex))
                 return;
             BlockModel block = blockMap[playerPosIndex.x, playerPosIndex.y];
-            if (!block.IsVisited)
+            if (block.CanBeFilled)
                 block.Fill().Forget();
         }
 
@@ -93,7 +109,7 @@ namespace Assets.Scripts.Stage.Model
             {
                 if (block == null)
                     continue;
-                if (!block.IsWall)
+                if (block.CanBeFilled)
                     return false;
             }
             return true;
@@ -103,6 +119,17 @@ namespace Assets.Scripts.Stage.Model
         {
             foreach (BlockModel block in blockMap)
                 block?.OnDestroy();
+            stageController.OnDestroy();
+        }
+
+        public void PlaySlowEffect()
+        {
+            stageController.PlaySlowEffect();
+        }
+
+        public void StopSlowEffect()
+        {
+            stageController.StopSlowEffect();
         }
     }
 }

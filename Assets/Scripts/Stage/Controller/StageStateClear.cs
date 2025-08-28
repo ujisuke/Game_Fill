@@ -1,3 +1,5 @@
+using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Stage.Controller
@@ -13,6 +15,12 @@ namespace Assets.Scripts.Stage.Controller
 
         public void OnStateEnter()
         {
+            Clear().Forget();
+        }
+
+        private async UniTask Clear()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(1f));
             if (sSM.IsFinalStage)
                 SceneManager.LoadScene(sSM.NextStageName);
             else

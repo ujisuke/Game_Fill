@@ -1,4 +1,6 @@
+using System;
 using Assets.Scripts.Player.Model;
+using Cysharp.Threading.Tasks;
 
 namespace Assets.Scripts.Player.Controller
 {
@@ -17,6 +19,13 @@ namespace Assets.Scripts.Player.Controller
 
         public void OnStateEnter()
         {
+            pC.PlayAnim("Dead", 1f);
+            Dead().Forget();
+        }
+
+        private async UniTask Dead()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(1f));
             pC.OnDestroy();
         }
 

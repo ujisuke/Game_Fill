@@ -17,11 +17,6 @@ namespace Assets.Scripts.Player.View
             transform.position = pos;
         }
 
-        public void SetViewScale(Vector2 viewScale)
-        {
-            transform.localScale = viewScale;
-        }
-
         public void PlayAnim(string animName, float animSeconds)
         {
             objectAnimation ??= new ObjectAnimation(animator, spriteRenderer);
