@@ -1,22 +1,14 @@
-using Assets.Scripts.Map.Data;
-using Assets.Scripts.Player.Controller;
 using UnityEngine;
 
 namespace Assets.Scripts.Stage.Controller
 {
-    public class StageStateMachine : MonoBehaviour
+    public class StageStateMachine
     {
-        [SerializeField] private bool isFinalStage;
-        [SerializeField] private string nextStageName;
-        [SerializeField] private SceneNameData sceneNameData;
         private IStageState currentState;
-        public bool IsFinalStage => isFinalStage;
-        public string NextStageName => nextStageName;
-        public string MapSceneName => sceneNameData.MapSceneName;
 
-        private void Awake()
+        public StageStateMachine(StageController stageController)
         {
-            currentState = new StageStateInitial(this);
+            currentState = new StageStateInitial(this, stageController);
             currentState.OnStateEnter();
         }
 

@@ -10,13 +10,13 @@ namespace Assets.Scripts.Map.Data
     {
         [SerializeField] private string mapSceneName;
         [SerializeField] private List<string> stageNameList;
-        private int index = 0;
+        public static int CurrentStageIndex = 0;
         public string MapSceneName => mapSceneName;
-        public string CurrentStageName => stageNameList[index];
+        public string CurrentStageName => stageNameList[CurrentStageIndex];
 
-        public void UpdateCurrentStageName(bool isGoingToNext)
+        public void UpdateCurrentStageName(int additionIndex)
         {
-            index = math.clamp(index + (isGoingToNext ? 1 : -1), 0, stageNameList.Count - 1);
+            CurrentStageIndex = math.clamp(CurrentStageIndex + additionIndex, 0, stageNameList.Count - 1);
         }
     }
 }

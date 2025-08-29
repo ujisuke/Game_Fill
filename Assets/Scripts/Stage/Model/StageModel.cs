@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Player.Model;
@@ -13,13 +14,18 @@ namespace Assets.Scripts.Stage.Model
     public class StageModel
     {
         private readonly BlockModel[,] blockMap;
+        private readonly StageController stageController;
+        private int timeLimit;
         private static StageModel instance;
+        public int TimeLimit => timeLimit;
         public static StageModel Instance => instance;
 
-        public StageModel(Tilemap tilemap)
+        public StageModel(Tilemap tilemap, StageController stageController, int timeLimit)
         {
             blockMap = GetBlockMap(tilemap);
             instance = this;
+            this.stageController = stageController;
+            this.timeLimit = timeLimit;
         }
 
         private static BlockModel[,] GetBlockMap(Tilemap tilemap)
@@ -61,6 +67,20 @@ namespace Assets.Scripts.Stage.Model
                 || IsWallPos(rightBottomIndex) || IsWallPos(leftBottomIndex);
         }
 
+        public bool IsPlayerOnBlock(Vector2 playerPos)
+        {
+            Vector2Int playerIndex = ConvertPosToIndex(playerPos);
+            return DoesExistBlock(playerIndex);
+        }
+
+        public bool IsPlayerOnExit(Vector2 playerPos)
+        {
+            Vector2Int playerIndex = ConvertPosToIndex(playerPos);
+            if (!DoesExistBlock(playerIndex))
+                return false;
+            return blockMap[playerIndex.x, playerIndex.y].IsExit;
+        }
+
         private bool DoesExistBlock(Vector2Int posIndex)
         {
             if (posIndex.x < 0 || posIndex.x >= blockMap.GetLength(0) || posIndex.y < 0 || posIndex.y >= blockMap.GetLength(1))
@@ -83,7 +103,7 @@ namespace Assets.Scripts.Stage.Model
             if (!DoesExistBlock(playerPosIndex))
                 return;
             BlockModel block = blockMap[playerPosIndex.x, playerPosIndex.y];
-            if (!block.IsVisited)
+            if (block.CanBeFilled)
                 block.Fill().Forget();
         }
 
@@ -93,7 +113,7 @@ namespace Assets.Scripts.Stage.Model
             {
                 if (block == null)
                     continue;
-                if (!block.IsWall)
+                if (block.CanBeFilled)
                     return false;
             }
             return true;
@@ -103,6 +123,29 @@ namespace Assets.Scripts.Stage.Model
         {
             foreach (BlockModel block in blockMap)
                 block?.OnDestroy();
+            stageController.OnDestroy();
+        }
+
+        public void PlaySlowEffect()
+        {
+            stageController.PlaySlowEffect();
+        }
+
+        public void StopSlowEffect()
+        {
+            stageController.StopSlowEffect();
+        }
+
+        public async UniTask CountDownTimer()
+        {
+            while (timeLimit > 0)
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+                if (PlayerModel.Instance == null || PlayerModel.Instance.IsOnExit)
+                    break;
+                timeLimit--;
+                stageController.SetTimeLimit(timeLimit);
+            }
         }
     }
 }

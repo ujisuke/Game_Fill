@@ -1,4 +1,8 @@
 using Assets.Scripts.Player.Model;
+using Assets.Scripts.Stage.Controller;
+using Assets.Scripts.Stage.Model;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Player.Controller
 {
@@ -17,17 +21,18 @@ namespace Assets.Scripts.Player.Controller
 
         public void OnStateEnter()
         {
-
+            
         }
 
         public void HandleInput()
         {
-            pSM.ChangeState(new PlayerStateMove(pM, pC, pSM));
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+                pSM.ChangeState(new PlayerStateMove(pM, pC, pSM, isInitial: true));
         }
 
         public void OnStateExit()
         {
-
+            StageModel.Instance.CountDownTimer().Forget();
         }
     }
 }

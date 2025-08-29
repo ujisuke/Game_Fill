@@ -3,15 +3,13 @@ using UnityEngine;
 
 namespace Assets.Scripts.Map.Controller
 {
-    public class MapStateMachine : MonoBehaviour
+    public class MapStateMachine
     {
-        [SerializeField] private SceneNameData stageNameData;
         private IMapState currentState;
-        public SceneNameData StageNameData => stageNameData;
 
-        private void Awake()
+        public MapStateMachine(MapController mC)
         {
-            currentState = new MapStateInitial(this);
+            currentState = new MapStateInitial(this, mC);
             currentState.OnStateEnter();
         }
 
@@ -22,7 +20,7 @@ namespace Assets.Scripts.Map.Controller
             currentState.OnStateEnter();
         }
 
-        public void Update()
+        public void HandleInput()
         {
             currentState.HandleInput();
         }

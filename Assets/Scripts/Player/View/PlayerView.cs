@@ -17,15 +17,16 @@ namespace Assets.Scripts.Player.View
             transform.position = pos;
         }
 
-        public void SetViewScale(Vector2 viewScale)
-        {
-            transform.localScale = viewScale;
-        }
-
         public void PlayAnim(string animName, float animSeconds)
         {
             objectAnimation ??= new ObjectAnimation(animator, spriteRenderer);
             objectAnimation.Play(animName, animSeconds);
+        }
+
+        public void StopAnim()
+        {
+            objectAnimation ??= new ObjectAnimation(animator, spriteRenderer);
+            objectAnimation.Stop();
         }
 
         public void FlipX(bool isLeft)

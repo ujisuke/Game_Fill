@@ -10,7 +10,7 @@ namespace Assets.Scripts.Common.Controller
         private bool isPushingBack;
         private bool isOnCooldownLeft;
         private bool isOnCooldownRight;
-        private readonly float cooldownSeconds = 0.1f;
+        private readonly float cooldownSeconds = 0.3f;
         private static CustomInputSystem instance;
         public static CustomInputSystem Instance => instance ??= new CustomInputSystem();
 
@@ -78,7 +78,7 @@ namespace Assets.Scripts.Common.Controller
         private async UniTask CooldownRight()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(cooldownSeconds));
-            isOnCooldownLeft = false;
+            isOnCooldownRight = false;
         }
 
         public bool GetRightKeyWithCooldown()

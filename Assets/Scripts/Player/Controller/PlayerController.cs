@@ -15,7 +15,6 @@ namespace Assets.Scripts.Player.Controller
         private void Awake()
         {
             playerModel = new PlayerModel(playerData, transform.position);
-            playerView.SetViewScale(playerData.ViewScale);
             playerView.SetPos(playerModel.Pos);
             playerView.InstantiateHurtBox(playerModel.HurtBox);
             pSM = new PlayerStateMachine(playerModel, this);
@@ -33,6 +32,11 @@ namespace Assets.Scripts.Player.Controller
             playerView.PlayAnim(animName, animSeconds);
         }
 
+        public void StopAnim()
+        {
+            playerView.StopAnim();
+        }
+
         public void FlipX(bool isLeft)
         {
             playerView.FlipX(isLeft);
@@ -41,7 +45,6 @@ namespace Assets.Scripts.Player.Controller
         public void OnDestroy()
         {
             playerView.DestroyHurtBox();
-            playerModel.Destroy();
             Destroy(gameObject);
         }
     }

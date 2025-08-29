@@ -6,17 +6,17 @@ namespace Assets.Scripts.Player.Model
 {
     public class PlayerModel
     {
-        private readonly PlayerData playerData;
         private HurtBox hurtBox;
         private PlayerMove playerMove;
         private static PlayerModel instance;
         public Vector2 Pos => playerMove.Pos;
         public HurtBox HurtBox => hurtBox;
+        public bool IsOnExit => StageModel.Instance.IsPlayerOnExit(Pos);
+        public float CurrentDecelerationFactor => playerMove.CurrentDecelerationFactor;
         public static PlayerModel Instance => instance;
 
         public PlayerModel(PlayerData playerData, Vector2 pos)
         {
-            this.playerData = playerData;
             playerMove = new PlayerMove(pos, playerData.MoveSpeed);
             hurtBox = new HurtBox(pos, playerData.HurtBoxScale);
             instance = this;
@@ -34,7 +34,19 @@ namespace Assets.Scripts.Player.Model
             hurtBox = hurtBox.SetPos(Pos);
         }
 
-        public void Destroy()
+        public void Deceleration()
+        {
+            playerMove = playerMove.Deceleration();
+            StageModel.Instance.PlaySlowEffect();
+        }
+
+        public void Acceleration()
+        {
+            playerMove = playerMove.Acceleration();
+            StageModel.Instance.StopSlowEffect();
+        }
+
+        public static void RemoveInstance()
         {
             instance = null;
         }

@@ -1,5 +1,6 @@
 using Assets.Scripts.Stage.Model;
 using Assets.Scripts.Stage.View;
+using Assets.Scripts.Stage.Data;
 using UnityEngine;
 
 namespace Assets.Scripts.Stage.Controller
@@ -7,19 +8,20 @@ namespace Assets.Scripts.Stage.Controller
     public class BlockController : MonoBehaviour
     {
         [SerializeField] private BlockView blockView;
+        [SerializeField] private BlockData blockData;
+
         private BlockModel blockModel;
         public BlockModel BlockModel => blockModel;
 
         public void Initialize()
         {
             bool isWallInitial = blockView.IsWallInitial;
-            blockModel = new BlockModel(this, transform.position, transform.localScale, isWallInitial);
+            bool canBeFilled = blockView.CanBeFilled;
+            bool isExit = blockView.IsExit;
+            blockModel = new BlockModel(this, transform.position, transform.localScale, isWallInitial, canBeFilled, isExit, blockData);
             blockView.InstantiateHitBox(blockModel.HitBox);
             blockView.SetHitBoxActive(isWallInitial);
-            if (isWallInitial)
-                PlayAnim("Wall");
-            else
-                PlayAnim("Empty");
+            blockView.SetInitialAnim();
         }
 
         public void Fill()
@@ -30,6 +32,11 @@ namespace Assets.Scripts.Stage.Controller
         public void PlayAnim(string animName, float speed = 1f)
         {
             blockView.PlayAnim(animName, speed);
+        }
+
+        public void SetAnimSpeed(float speed)
+        {
+            blockView.SetAnimSpeed(speed);
         }
     }
 }
