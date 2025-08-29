@@ -1,11 +1,13 @@
 using System;
 using System.Threading;
+using Assets.Scripts.Common.View;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Controller;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Stage.View
 {
@@ -17,7 +19,8 @@ namespace Assets.Scripts.Stage.View
         [SerializeField] private ImageView clearTextView;
         [SerializeField] private ImageView screenView;
         [SerializeField] private ImageView GoodView;
-        [SerializeField] private Light2D globalLight2D;
+        [SerializeField] private Text timeLimitText;
+        [SerializeField] private Sprite frontOpenRellInitSprite;
         private static bool isRetry = false;
         private BlockView[,] blockMap;
         private CancellationTokenSource cTS;
@@ -78,6 +81,7 @@ namespace Assets.Scripts.Stage.View
             await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: token);
             screenView.PlayAnim("Play");
             GoodView.PlayAnim("Empty");
+            timeLimitText.enabled = false;
             fillEffectView.PlayAnim("Clear", 0.3f);
             await PaintStage();
             await UniTask.Delay(TimeSpan.FromSeconds(0.3f), cancellationToken: token);
@@ -124,9 +128,19 @@ namespace Assets.Scripts.Stage.View
         public void OpenStage()
         {
             if (isRetry)
+            {
+                frontView.SetSprite(frontOpenRellInitSprite);
                 frontView.PlayAnim("OpenRell", 0.25f);
+            }
             else
                 frontView.PlayAnim("Open", 0.25f);
+        }
+
+        public void SetTimeLimit(int timeLimit)
+        {
+            if (timeLimitText == null)
+                return;
+            timeLimitText.text = timeLimit.ToString();
         }
 
         public void OnDestroy()

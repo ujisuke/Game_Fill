@@ -12,13 +12,13 @@ namespace Assets.Scripts.Player.Controller
         private bool isLookingLeft;
         private bool isDirKeyPushed;
 
-        public PlayerStateMove(PlayerModel pM, PlayerController pC, PlayerStateMachine pSM, bool isLookingLeft = false)
+        public PlayerStateMove(PlayerModel pM, PlayerController pC, PlayerStateMachine pSM, bool isLookingLeft = false, bool isInitial = false)
         {
             this.pM = pM;
             this.pC = pC;
             this.pSM = pSM;
             this.isLookingLeft = isLookingLeft;
-            isDirKeyPushed = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
+            isDirKeyPushed = !isInitial && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D));
         }
 
         public void OnStateEnter()
@@ -53,7 +53,7 @@ namespace Assets.Scripts.Player.Controller
             else
                 pM.Acceleration();
 
-            if (StageModel.Instance.IsPlayerHittingWall(pM.HurtBox) || !StageModel.Instance.IsPlayerOnBlock(pM.Pos))
+            if (StageModel.Instance.IsPlayerHittingWall(pM.HurtBox) || !StageModel.Instance.IsPlayerOnBlock(pM.Pos) || StageModel.Instance.TimeLimit <= 0)
                 pSM.ChangeState(new PlayerStateDead(pM, pC, pSM));
             else if (pM.IsOnExit)
                 pSM.ChangeState(new PlayerStateExit(pM, pC, pSM));

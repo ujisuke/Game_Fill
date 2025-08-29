@@ -1,3 +1,5 @@
+using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,17 +8,25 @@ namespace Assets.Scripts.Map.Controller
     public class MapStateLoadScene : IMapState
     {
         private readonly MapStateMachine mSM;
+        private readonly MapController mC;
 
-        public MapStateLoadScene(MapStateMachine stateMachine)
+        public MapStateLoadScene(MapStateMachine stateMachine, MapController mC)
         {
             mSM = stateMachine;
+            this.mC = mC;
         }
 
         public void OnStateEnter()
         {
-            SceneManager.LoadScene(mSM.StageNameData.CurrentStageName);
+            LoadScene().Forget();
         }
 
+        private async UniTask LoadScene()
+        {
+            mC.CloseStage();
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            SceneManager.LoadScene(mC.SceneNameData.CurrentStageName);
+        }
         public void HandleInput()
         {
 

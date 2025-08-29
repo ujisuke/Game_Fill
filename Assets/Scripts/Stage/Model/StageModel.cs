@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Player.Model;
@@ -14,14 +15,17 @@ namespace Assets.Scripts.Stage.Model
     {
         private readonly BlockModel[,] blockMap;
         private readonly StageController stageController;
+        private int timeLimit;
         private static StageModel instance;
+        public int TimeLimit => timeLimit;
         public static StageModel Instance => instance;
 
-        public StageModel(Tilemap tilemap, StageController stageController)
+        public StageModel(Tilemap tilemap, StageController stageController, int timeLimit)
         {
             blockMap = GetBlockMap(tilemap);
             instance = this;
             this.stageController = stageController;
+            this.timeLimit = timeLimit;
         }
 
         private static BlockModel[,] GetBlockMap(Tilemap tilemap)
@@ -130,6 +134,18 @@ namespace Assets.Scripts.Stage.Model
         public void StopSlowEffect()
         {
             stageController.StopSlowEffect();
+        }
+
+        public async UniTask CountDownTimer()
+        {
+            while (timeLimit > 0)
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+                if (PlayerModel.Instance == null || PlayerModel.Instance.IsOnExit)
+                    break;
+                timeLimit--;
+                stageController.SetTimeLimit(timeLimit);
+            }
         }
     }
 }

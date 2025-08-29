@@ -21,6 +21,7 @@ namespace Assets.Scripts.Stage.Controller
             StageModel.Instance.DestroyAllBlock();
             Dead().Forget();
         }
+        
         private async UniTask Dead()
         {
             sC.CloseStage(true);

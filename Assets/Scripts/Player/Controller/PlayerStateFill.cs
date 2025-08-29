@@ -55,7 +55,7 @@ namespace Assets.Scripts.Player.Controller
             else
                 pM.Acceleration();
 
-            if (StageModel.Instance.IsPlayerHittingWall(pM.HurtBox) || !StageModel.Instance.IsPlayerOnBlock(pM.Pos))
+            if (StageModel.Instance.IsPlayerHittingWall(pM.HurtBox) || !StageModel.Instance.IsPlayerOnBlock(pM.Pos) || StageModel.Instance.TimeLimit <= 0)
                 pSM.ChangeState(new PlayerStateDead(pM, pC, pSM));
             else if (pM.IsOnExit)
                 pSM.ChangeState(new PlayerStateExit(pM, pC, pSM));

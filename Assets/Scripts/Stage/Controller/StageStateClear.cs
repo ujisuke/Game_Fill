@@ -23,10 +23,10 @@ namespace Assets.Scripts.Stage.Controller
         private async UniTask Clear()
         {
             await sC.PlayClearEffect();
-            if (sSM.IsFinalStage)
-                SceneManager.LoadScene(sSM.NextStageName);
+            if (sC.IsFinalStage)
+                SceneManager.LoadScene(sC.MapSceneName);
             else
-                SceneManager.LoadScene(sSM.MapSceneName);
+                SceneManager.LoadScene(sC.NextStageName);
         }
 
         public void HandleInput()

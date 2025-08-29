@@ -2,7 +2,7 @@ using Assets.Scripts.Common.View;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Stage.View
+namespace Assets.Scripts.Common.View
 {
     public class ImageView : MonoBehaviour
     {
@@ -26,12 +26,19 @@ namespace Assets.Scripts.Stage.View
 
         public void PlayAnim(string animName, float animSeconds = 1f)
         {
+            objectAnimation ??= new ObjectAnimation(animator, dummySpriteRenderer);
             objectAnimation.Play(animName, animSeconds);
         }
 
         public void SetAnimSpeed(float seconds)
         {
             objectAnimation.SetSpeed(seconds);
+        }
+
+        public void SetSprite(Sprite sprite)
+        {
+            image.sprite = sprite;
+            dummySpriteRenderer.sprite = sprite;
         }
 
         public void FlipX(bool isLeft)
