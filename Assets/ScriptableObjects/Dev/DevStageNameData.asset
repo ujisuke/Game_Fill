@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DevStageNameData
   m_EditorClassIdentifier: 
   mapSceneName: DevMap
+  pauseSceneName: DevPause
   stageNameList:
   - DevStage
   - DevStage

@@ -22,7 +22,8 @@ namespace Assets.Scripts.Player.Controller
 
         public void HandleInput()
         {
-            currentState.HandleInput();
+            if(Time.timeScale > 0.5f)
+                currentState.HandleInput();
         }
     }
 }

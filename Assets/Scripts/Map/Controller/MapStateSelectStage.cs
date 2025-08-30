@@ -24,16 +24,19 @@ namespace Assets.Scripts.Map.Controller
         {
             if (CustomInputSystem.Instance.GetRightKeyWithCooldown())
             {
-                mC.SceneNameData.UpdateCurrentStageName(1);
+                mC.UpdateCurrentStageName(1);
                 mC.SelectRight(SceneNameData.CurrentStageIndex);
             }
             else if (CustomInputSystem.Instance.GetLeftKeyWithCooldown())
             {
-                mC.SceneNameData.UpdateCurrentStageName(-1);
+                mC.UpdateCurrentStageName(-1);
                 mC.SelectLeft(SceneNameData.CurrentStageIndex);
             }
+
             if (CustomInputSystem.Instance.DoesSelectKeyUp())
                 mSM.ChangeState(new MapStateLoadScene(mSM, mC));
+            else if (CustomInputSystem.Instance.GetPauseKeyWithCooldown())
+                mSM.ChangeState(new MapStatePause(mSM, mC));
         }
 
         public void OnStateExit()

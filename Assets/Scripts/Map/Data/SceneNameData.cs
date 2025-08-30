@@ -9,9 +9,11 @@ namespace Assets.Scripts.Map.Data
     public class SceneNameData : ScriptableObject
     {
         [SerializeField] private string mapSceneName;
+        [SerializeField] private string pauseSceneName;
         [SerializeField] private List<string> stageNameList;
         public static int CurrentStageIndex = 0;
         public string MapSceneName => mapSceneName;
+        public string PauseSceneName => pauseSceneName;
         public string CurrentStageName => stageNameList[CurrentStageIndex];
 
         public void UpdateCurrentStageName(int additionIndex)
