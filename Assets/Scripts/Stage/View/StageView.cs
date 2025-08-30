@@ -87,8 +87,7 @@ namespace Assets.Scripts.Stage.View
             await UniTask.Delay(TimeSpan.FromSeconds(0.3f), cancellationToken: token);
             clearTextView.PlayAnim("Awake", 0.25f);
             await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
-            CloseStage(false);
-            await UniTask.Delay(TimeSpan.FromSeconds(1f));
+            await CloseStage(false);
         }
 
         private async UniTask PaintStage()
@@ -116,13 +115,14 @@ namespace Assets.Scripts.Stage.View
                     block.StopAnim();
         }
 
-        public void CloseStage(bool isRetryCurrent)
+        public async UniTask CloseStage(bool isRetryCurrent)
         {
             if (isRetryCurrent)
                 frontView.PlayAnim("CloseRell", 0.25f);
             else
                 frontView.PlayAnim("Close", 0.25f);
             isRetry = isRetryCurrent;
+            await UniTask.Delay(TimeSpan.FromSeconds(1f));
         }
 
         public void OpenStage()

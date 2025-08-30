@@ -44,5 +44,8 @@ TagManager:
   - name: Front
     uniqueID: 2167466709
     locked: 0
+  - name: Pause
+    uniqueID: 4259205731
+    locked: 0
   m_RenderingLayers:
   - Default

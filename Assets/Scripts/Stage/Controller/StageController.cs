@@ -21,6 +21,7 @@ namespace Assets.Scripts.Stage.Controller
         public bool IsFinalStage => isFinalStage;
         public string NextStageName => nextStageName;
         public string MapSceneName => sceneNameData.MapSceneName;
+        public string PauseSceneName => sceneNameData.PauseSceneName;
 
         private void Awake()
         {
@@ -50,9 +51,9 @@ namespace Assets.Scripts.Stage.Controller
             await stageView.PlayClearEffect();
         }
 
-        public void CloseStage(bool isRetry)
+        public async UniTask CloseStage(bool isRetry)
         {
-            stageView.CloseStage(isRetry);
+            await stageView.CloseStage(isRetry);
         }
 
         public void OpenStage()

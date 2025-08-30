@@ -25,7 +25,7 @@ namespace Assets.Scripts.Map.Controller
         {
             mC.CloseStage();
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
-            SceneManager.LoadScene(mC.SceneNameData.CurrentStageName);
+            SceneManager.LoadScene(mC.CurrentStageName);
         }
         public void HandleInput()
         {

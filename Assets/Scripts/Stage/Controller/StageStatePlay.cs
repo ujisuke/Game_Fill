@@ -1,5 +1,8 @@
+using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Model;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Assets.Scripts.Stage.Controller
 {
@@ -25,6 +28,8 @@ namespace Assets.Scripts.Stage.Controller
                 sSM.ChangeState(new StageStateClear(sSM, sC));
             else if (PlayerModel.Instance == null)
                 sSM.ChangeState(new StageStateDead(sSM, sC));
+            else if (CustomInputSystem.Instance.GetPauseKeyWithCooldown())
+                sSM.ChangeState(new StageStatePause(sSM, sC));
         }
 
         public void OnStateExit()

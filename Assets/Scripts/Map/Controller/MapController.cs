@@ -11,7 +11,8 @@ namespace Assets.Scripts.Map.Controller
         [SerializeField] private SceneNameData sceneNameData;
         private MapStateMachine mapStateMachine;
 
-        public SceneNameData SceneNameData => sceneNameData;
+        public string CurrentStageName => sceneNameData.CurrentStageName;
+        public string PauseSceneName => sceneNameData.PauseSceneName;
 
         private void Awake()
         {
@@ -46,6 +47,11 @@ namespace Assets.Scripts.Map.Controller
         public void OpenStage()
         {
             mapView.OpenStage();
+        }
+
+        public void UpdateCurrentStageName(int direction)
+        {
+            sceneNameData.UpdateCurrentStageName(direction);
         }
 
         public void OnDestroy()

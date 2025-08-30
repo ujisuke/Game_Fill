@@ -10,6 +10,9 @@ namespace Assets.Scripts.Common.Controller
         private bool isPushingBack;
         private bool isOnCooldownLeft;
         private bool isOnCooldownRight;
+        private bool isOnCooldownUp;
+        private bool isOnCooldownDown;
+        private bool isOnCooldownPause;
         private readonly float cooldownSeconds = 0.3f;
         private static CustomInputSystem instance;
         public static CustomInputSystem Instance => instance ??= new CustomInputSystem();
@@ -20,6 +23,7 @@ namespace Assets.Scripts.Common.Controller
             isPushingBack = false;
             isOnCooldownLeft = false;
             isOnCooldownRight = false;
+            isOnCooldownPause = false;
         }
 
         public bool DoesSelectKeyUp()
@@ -60,9 +64,17 @@ namespace Assets.Scripts.Common.Controller
 
         public bool GetDownKey() => Input.GetKey(KeyCode.S);
 
+        public bool GetPauseKey() => Input.GetKey(KeyCode.Escape);
+
         private async UniTask CooldownLeft()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(cooldownSeconds));
+            float cooldownSecondsDelta = cooldownSeconds * 0.1f;
+            for (int i = 0; i < 10; i++)
+            {
+                if (!GetLeftKey())
+                    break;
+                await UniTask.Delay(TimeSpan.FromSeconds(cooldownSecondsDelta), ignoreTimeScale: true);
+            }
             isOnCooldownLeft = false;
         }
 
@@ -77,7 +89,13 @@ namespace Assets.Scripts.Common.Controller
 
         private async UniTask CooldownRight()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(cooldownSeconds));
+            float cooldownSecondsDelta = cooldownSeconds * 0.1f;
+            for (int i = 0; i < 10; i++)
+            {
+                if (!GetRightKey())
+                    break;
+                await UniTask.Delay(TimeSpan.FromSeconds(cooldownSecondsDelta), ignoreTimeScale: true);
+            }
             isOnCooldownRight = false;
         }
 
@@ -87,6 +105,62 @@ namespace Assets.Scripts.Common.Controller
                 return false;
             isOnCooldownRight = true;
             CooldownRight().Forget();
+            return true;
+        }
+
+        private async UniTask CooldownUp()
+        {
+            float cooldownSecondsDelta = cooldownSeconds * 0.1f;
+            for (int i = 0; i < 10; i++)
+            {
+                if (!GetUpKey())
+                    break;
+                await UniTask.Delay(TimeSpan.FromSeconds(cooldownSecondsDelta), ignoreTimeScale: true);
+            }
+            isOnCooldownUp = false;
+        }
+
+        public bool GetUpKeyWithCooldown()
+        {
+            if (isOnCooldownUp || !GetUpKey())
+                return false;
+            isOnCooldownUp = true;
+            CooldownUp().Forget();
+            return true;
+        }
+
+        private async UniTask CooldownDown()
+        {
+            float cooldownSecondsDelta = cooldownSeconds * 0.1f;
+            for (int i = 0; i < 10; i++)
+            {
+                if (!GetDownKey())
+                    break;
+                await UniTask.Delay(TimeSpan.FromSeconds(cooldownSecondsDelta), ignoreTimeScale: true);
+            }
+            isOnCooldownDown = false;
+        }
+
+        public bool GetDownKeyWithCooldown()
+        {
+            if (isOnCooldownDown || !GetDownKey())
+                return false;
+            isOnCooldownDown = true;
+            CooldownDown().Forget();
+            return true;
+        }
+
+        public bool GetPauseKeyWithCooldown()
+        {
+            if (isOnCooldownPause)
+            {
+                if (!GetPauseKey())
+                    isOnCooldownPause = false;
+                return false;
+            }
+            if (!GetPauseKey())
+                return false;
+            isOnCooldownPause = true;
             return true;
         }
     }
