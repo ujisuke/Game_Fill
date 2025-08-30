@@ -253,7 +253,7 @@ RectTransform:
   m_GameObject: {fileID: 57646874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.3, y: 4.3, z: 1}
+  m_LocalScale: {x: 4.4, y: 4.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1532433491}
@@ -1529,7 +1529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.33205768, g: 0.7735849, b: 0.7140138, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13181,6 +13181,7 @@ MonoBehaviour:
   GoodView: {fileID: 1655102373}
   timeLimitText: {fileID: 736935422}
   frontOpenRellInitSprite: {fileID: -3354758309202222504, guid: 672c0e5b256cd594aa85263f3622080c, type: 3}
+  stageViewData: {fileID: 11400000, guid: 6cb140ad01fab364e9f65aedfe59657b, type: 2}
 --- !u!114 &2068900230
 MonoBehaviour:
   m_ObjectHideFlags: 0

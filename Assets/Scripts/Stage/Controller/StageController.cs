@@ -48,7 +48,7 @@ namespace Assets.Scripts.Stage.Controller
 
         public async UniTask PlayClearEffect()
         {
-            await stageView.PlayClearEffect();
+            await stageView.PlayClearEffect(isFinalStage);
         }
 
         public async UniTask CloseStage(bool isRetry)

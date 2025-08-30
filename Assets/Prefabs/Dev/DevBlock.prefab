@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockView: {fileID: 1441661521480339512}
-  blockData: {fileID: 11400000, guid: 97aec72bccd7bab43bd4aec8e536cb0a, type: 2}
+  viewData: {fileID: 11400000, guid: 6cb140ad01fab364e9f65aedfe59657b, type: 2}
 --- !u!114 &1441661521480339512
 MonoBehaviour:
   m_ObjectHideFlags: 0

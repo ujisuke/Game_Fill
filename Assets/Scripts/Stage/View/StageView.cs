@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Controller;
@@ -21,6 +22,7 @@ namespace Assets.Scripts.Stage.View
         [SerializeField] private ImageView GoodView;
         [SerializeField] private Text timeLimitText;
         [SerializeField] private Sprite frontOpenRellInitSprite;
+        [SerializeField] private ViewData stageViewData;
         private static bool isRetry = false;
         private BlockView[,] blockMap;
         private CancellationTokenSource cTS;
@@ -64,7 +66,7 @@ namespace Assets.Scripts.Stage.View
             if (PlayerModel.Instance == null)
                 return;
             slowEffectView.transform.position = PlayerModel.Instance.Pos;
-            slowEffectView.PlayAnim("SlowIn", 0.3f);
+            slowEffectView.PlayAnim("SlowIn", stageViewData.SlowInAnimSeconds);
         }
 
         public void StopSlowEffect()
@@ -72,27 +74,32 @@ namespace Assets.Scripts.Stage.View
             slowEffectView.PlayAnim("SlowOut");
         }
 
-        public async UniTask PlayClearEffect()
+        public async UniTask PlayClearEffect(bool isFinalStage)
         {
             StopAllBlocks();
             screenView.PlayAnim("Stop");
             GoodView.transform.position = PlayerModel.Instance.Pos + Vector2.up;
-            GoodView.PlayAnim("Good");
-            await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: token);
+            GoodView.PlayAnim("Good", stageViewData.GoodAnimSeconds);
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ClearAnimDelaySeconds), cancellationToken: token);
             screenView.PlayAnim("Play");
             GoodView.PlayAnim("Empty");
             timeLimitText.enabled = false;
-            fillEffectView.PlayAnim("Clear", 0.3f);
+            fillEffectView.PlayAnim("Clear", stageViewData.ClearAnimSeconds);
             await PaintStage();
-            await UniTask.Delay(TimeSpan.FromSeconds(0.3f), cancellationToken: token);
-            clearTextView.PlayAnim("Awake", 0.25f);
-            await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ClearTextDelaySeconds), cancellationToken: token);
+            clearTextView.PlayAnim("Awake", stageViewData.ClearTextAnimSeconds);
+            if (isFinalStage)
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ClearFinalAnimDelaySeconds), cancellationToken: token);
+                fillEffectView.PlayAnim("ClearFinal", stageViewData.ClearAnimSeconds);
+            }
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.CloseAnimDelaySeconds), cancellationToken: token);
             await CloseStage(false);
         }
 
         private async UniTask PaintStage()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.3f), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.PaintStageDelaySeconds), cancellationToken: token);
             for (int i = 0; i < blockMap.GetLength(0) + blockMap.GetLength(1); i++)
             {
                 for (int x = 0; x <= i; x++)
@@ -118,11 +125,11 @@ namespace Assets.Scripts.Stage.View
         public async UniTask CloseStage(bool isRetryCurrent)
         {
             if (isRetryCurrent)
-                frontView.PlayAnim("CloseRell", 0.25f);
+                frontView.PlayAnim("CloseRell", stageViewData.CloseAnimSeconds);
             else
-                frontView.PlayAnim("Close", 0.25f);
+                frontView.PlayAnim("Close", stageViewData.CloseAnimSeconds);
             isRetry = isRetryCurrent;
-            await UniTask.Delay(TimeSpan.FromSeconds(1f));
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneDelaySeconds));
         }
 
         public void OpenStage()
@@ -130,10 +137,10 @@ namespace Assets.Scripts.Stage.View
             if (isRetry)
             {
                 frontView.SetSprite(frontOpenRellInitSprite);
-                frontView.PlayAnim("OpenRell", 0.25f);
+                frontView.PlayAnim("OpenRell", stageViewData.OpenAnimSeconds);
             }
             else
-                frontView.PlayAnim("Open", 0.25f);
+                frontView.PlayAnim("Open", stageViewData.OpenAnimSeconds);
         }
 
         public void SetTimeLimit(int timeLimit)

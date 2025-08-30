@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Controller;
@@ -14,6 +15,7 @@ namespace Assets.Scripts.Map.View
 {
     public class MapView : MonoBehaviour
     {
+        [SerializeField] private ViewData viewData;
         [SerializeField] private ImageView frontView;
         [SerializeField] private ImageView rightArrowView;
         [SerializeField] private ImageView leftArrowView;
@@ -33,12 +35,12 @@ namespace Assets.Scripts.Map.View
 
         public void CloseStage()
         {
-            frontView.PlayAnim("Close", 0.25f);
+            frontView.PlayAnim("Close", viewData.CloseAnimSeconds);
         }
 
         public void OpenStage()
         {
-            frontView.PlayAnim("Open", 0.25f);
+            frontView.PlayAnim("Open", viewData.OpenAnimSeconds);
         }
 
         public void InitializeMail(int stageIndex)
