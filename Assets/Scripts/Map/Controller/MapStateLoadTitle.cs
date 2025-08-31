@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,10 +9,14 @@ namespace Assets.Scripts.Map.Controller
     public class MapStateLoadTitle : IMapState
     {
         private readonly MapController mC;
+        private readonly CancellationTokenSource cTS;
+        private readonly CancellationToken token;
 
         public MapStateLoadTitle(MapController mC)
         {
             this.mC = mC;
+            cTS = new();
+            token = cTS.Token;
         }
 
         public void OnStateEnter()
@@ -21,7 +26,7 @@ namespace Assets.Scripts.Map.Controller
 
         private async UniTask LoadScene()
         {
-            await mC.CloseSceneToTitle();
+            await mC.CloseSceneToTitle(token);
             SceneManager.LoadScene(mC.TitleSceneName);
         }
 
@@ -32,7 +37,8 @@ namespace Assets.Scripts.Map.Controller
 
         public void OnStateExit()
         {
-
+            cTS.Cancel();
+            cTS.Dispose();
         }
     }
 }

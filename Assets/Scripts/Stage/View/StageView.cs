@@ -26,14 +26,10 @@ namespace Assets.Scripts.Stage.View
         [SerializeField] private ViewData stageViewData;
         private static bool isRetry = false;
         private BlockView[,] blockMap;
-        private CancellationTokenSource cTS;
-        private CancellationToken token;
 
         private void Awake()
         {
             slowEffectView.SetColor(stageViewData.SlowEffectColor);
-            cTS = new();
-            token = cTS.Token;
         }
 
         public void SetBlockMap(Tilemap tilemap)
@@ -76,7 +72,25 @@ namespace Assets.Scripts.Stage.View
             slowEffectView.PlayAnim("SlowOut");
         }
 
-        public async UniTask PlayClearEffect(bool isFinalStage)
+        public async UniTask PlayClearEffect(CancellationToken token)
+        {
+            await PlayGoodAndText(token);
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.CloseAnimDelaySeconds), cancellationToken: token);
+            await CloseStage(token);
+        }
+
+        public async UniTask PlayClearFinalEffect(CancellationToken token)
+        {
+            await PlayGoodAndText(token);
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ClearFinalAnimDelaySeconds), cancellationToken: token);
+            fillEffectView.PlayAnim("ClearFinal", stageViewData.ClearAnimSeconds);
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.CloseAnimDelaySeconds), cancellationToken: token);
+            frontView.PlayAnim("InBlack", stageViewData.InBlackAnimSeconds);
+            isRetry = false;
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneWithBlackDelaySeconds), cancellationToken: token);
+        }
+
+        private async UniTask PlayGoodAndText(CancellationToken token)
         {
             StopAllBlocks();
             screenView.PlayAnim("Stop");
@@ -87,19 +101,12 @@ namespace Assets.Scripts.Stage.View
             GoodView.PlayAnim("Empty");
             timeLimitText.enabled = false;
             fillEffectView.PlayAnim("Clear", stageViewData.ClearAnimSeconds);
-            await PaintStage();
+            await PaintStage(token);
             await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ClearTextDelaySeconds), cancellationToken: token);
             clearTextView.PlayAnim("Awake", stageViewData.ClearTextAnimSeconds);
-            if (isFinalStage)
-            {
-                await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ClearFinalAnimDelaySeconds), cancellationToken: token);
-                fillEffectView.PlayAnim("ClearFinal", stageViewData.ClearAnimSeconds);
-            }
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.CloseAnimDelaySeconds), cancellationToken: token);
-            await CloseStage(false);
         }
 
-        private async UniTask PaintStage()
+        private async UniTask PaintStage(CancellationToken token)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.PaintStageDelaySeconds), cancellationToken: token);
             for (int i = 0; i < blockMap.GetLength(0) + blockMap.GetLength(1); i++)
@@ -124,14 +131,18 @@ namespace Assets.Scripts.Stage.View
                     block.StopAnim();
         }
 
-        public async UniTask CloseStage(bool isRetryCurrent)
+        public async UniTask CloseStage(CancellationToken token)
         {
-            if (isRetryCurrent)
-                frontView.PlayAnim("CloseRell", stageViewData.CloseAnimSeconds);
-            else
-                frontView.PlayAnim("Close", stageViewData.CloseAnimSeconds);
-            isRetry = isRetryCurrent;
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneDelaySeconds));
+            frontView.PlayAnim("Close", stageViewData.CloseAnimSeconds);
+            isRetry = false;
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneDelaySeconds), cancellationToken: token);
+        }
+
+        public async UniTask CloseStageRetry(CancellationToken token)
+        {
+            frontView.PlayAnim("CloseRell", stageViewData.CloseAnimSeconds);
+            isRetry = true;
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneDelaySeconds), cancellationToken: token);
         }
 
         public void OpenStage()
@@ -153,11 +164,6 @@ namespace Assets.Scripts.Stage.View
             if (timeLimitText == null)
                 return;
             timeLimitText.text = timeLimit.ToString();
-        }
-
-        public void OnDestroy()
-        {
-            cTS?.Cancel();
         }
     }
 }

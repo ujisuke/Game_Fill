@@ -1,3 +1,4 @@
+using System.Threading;
 using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Model;
@@ -7,13 +8,17 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Stage.Controller
 {
-    public class StageStateMap : IStageState
+    public class StageStateLoadMap : IStageState
     {
         private readonly StageController sC;
+        private readonly CancellationTokenSource cTS;
+        private readonly CancellationToken token;
 
-        public StageStateMap(StageController sC)
+        public StageStateLoadMap(StageController sC)
         {
             this.sC = sC;
+            cTS = new();
+            token = cTS.Token;
         }
 
         public void OnStateEnter()
@@ -23,7 +28,7 @@ namespace Assets.Scripts.Stage.Controller
 
         private async UniTask Load()
         {
-            await sC.CloseStage(false);
+            await sC.CloseStage(false, token);
             SceneManager.LoadScene(sC.MapSceneName);
         }
 
@@ -34,7 +39,8 @@ namespace Assets.Scripts.Stage.Controller
 
         public void OnStateExit()
         {
-
+            cTS.Cancel();
+            cTS.Dispose();
         }
     }
 }

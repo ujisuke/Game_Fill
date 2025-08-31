@@ -25,29 +25,25 @@ namespace Assets.Scripts.Map.View
         [SerializeField] private Text mailText;
         [SerializeField] private List<MailText> mailTextList;
         private int mailIndexPrev;
-        private CancellationTokenSource cTS;
-        private CancellationToken token;
 
         private void Awake()
         {
             mailIndexPrev = 0;
-            cTS = new();
-            token = cTS.Token;
         }
 
-        public async UniTask CloseScene()
+        public async UniTask CloseScene(CancellationToken token)
         {
             frontView.PlayAnim("Close", viewData.CloseAnimSeconds);
             await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneDelaySeconds), cancellationToken: token);
         }
 
-        public async UniTask CloseSceneToTitle()
+        public async UniTask CloseSceneToTitle(CancellationToken token)
         {
-            frontView.PlayAnim("CloseWithTitle", viewData.CloseWithTitleAnimSeconds);
-            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneWithTitleDelaySeconds), cancellationToken: token);
+            frontView.PlayAnim("InBlack", viewData.InBlackAnimSeconds);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneWithBlackDelaySeconds), cancellationToken: token);
         }
 
-        public void OpenSceneFromStage()
+        public void OpenSceneNotFromTitle()
         {
             frontView.PlayAnim("Open", viewData.OpenAnimSeconds);
             frontView.Initialize(frontOpenInitSprite);
@@ -55,7 +51,7 @@ namespace Assets.Scripts.Map.View
 
         public void OpenSceneFromTitle()
         {
-            frontView.PlayAnim("OpenWithTitle", viewData.OpenWithTitleAnimSeconds);
+            frontView.PlayAnim("OutBlack", viewData.OutBlackAnimSeconds);
             frontView.Initialize(frontOpenFromTitleInitSprite);
         }
 
@@ -69,7 +65,7 @@ namespace Assets.Scripts.Map.View
             UpdateMailText(stageIndex);
         }
 
-        public async UniTask SelectRight(int stageIndex)
+        public async UniTask SelectRight(int stageIndex, CancellationToken token)
         {
             if (stageIndex == mailTextList.Count - 1 && mailIndexPrev == mailTextList.Count - 1)
                 return;
@@ -87,7 +83,7 @@ namespace Assets.Scripts.Map.View
             rightArrowView.PlayAnim("Empty");
         }
 
-        public async UniTask SelectLeft(int stageIndex)
+        public async UniTask SelectLeft(int stageIndex, CancellationToken token)
         {
             if (stageIndex == 0 && mailIndexPrev == 0)
                 return;
@@ -108,11 +104,6 @@ namespace Assets.Scripts.Map.View
         private void UpdateMailText(int stageIndex)
         {
             mailText.text = mailTextList[stageIndex].GetText(mailText.fontSize);
-        }
-
-        public void OnDestroy()
-        {
-            cTS?.Cancel();
         }
     }
 

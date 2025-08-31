@@ -20,7 +20,7 @@ namespace Assets.Scripts.Map.Controller
             if (isFromTitle)
                 mC.OpenSceneFromTitle();
             else
-                mC.OpenSceneFromStage();
+                mC.OpenSceneNotFromTitle();
             isFromTitle = false;
         }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
 using Cysharp.Threading.Tasks;
@@ -41,14 +42,14 @@ namespace Assets.Scripts.Title.View
 
         public void Open()
         {
-            frontView.PlayAnim("OpenWithTitle", viewData.OpenWithTitleAnimSeconds);
+            frontView.PlayAnim("OutBlack", viewData.OutBlackAnimSeconds);
             frontView.Initialize(frontOpenFromMapInitSprite);
         }
 
-        public async UniTask Close()
+        public async UniTask Close(CancellationToken token)
         {
-            frontView.PlayAnim("CloseWithTitle", viewData.CloseWithTitleAnimSeconds);
-            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneWithTitleDelaySeconds));
+            frontView.PlayAnim("InBlack", viewData.InBlackAnimSeconds);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneWithBlackDelaySeconds), cancellationToken: token);
         }
     }
 }

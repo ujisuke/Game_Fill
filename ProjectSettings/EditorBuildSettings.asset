@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dev/DevVolume.unity
     guid: 097cd24e89217384eabc0287ec9c79e6
+  - enabled: 1
+    path: Assets/Scenes/Dev/DevFarce.unity
+    guid: 5140b7c601a517345b7c4f659d0fdc35
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

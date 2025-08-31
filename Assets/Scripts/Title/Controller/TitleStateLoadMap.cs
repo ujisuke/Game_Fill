@@ -1,3 +1,4 @@
+using System.Threading;
 using Assets.Scripts.Map.Controller;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -8,10 +9,14 @@ namespace Assets.Scripts.Title.Controller
     public class TitleStateLoadMap : ITitleState
     {
         private readonly TitleController tC;
+        private readonly CancellationTokenSource cTS;
+        private readonly CancellationToken token;
 
         public TitleStateLoadMap(TitleController tC)
         {
             this.tC = tC;
+            cTS = new();
+            token = cTS.Token;
         }
 
         public void OnStateEnter()
@@ -22,7 +27,7 @@ namespace Assets.Scripts.Title.Controller
 
         private async UniTask LoadScene()
         {
-            await tC.CloseScene();
+            await tC.CloseScene(token);
             SceneManager.LoadScene(tC.SelectStageSceneName);
         }
 
@@ -33,7 +38,8 @@ namespace Assets.Scripts.Title.Controller
 
         public void OnStateExit()
         {
-
+            cTS.Cancel();
+            cTS.Dispose();
         }
     }
 }

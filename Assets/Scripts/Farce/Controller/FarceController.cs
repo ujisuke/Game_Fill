@@ -1,5 +1,6 @@
 using System.Threading;
 using Assets.Scripts.Common.Controller;
+using Assets.Scripts.Farce.View;
 using Assets.Scripts.Map.Data;
 using Assets.Scripts.Pause.View;
 using Assets.Scripts.Stage.Controller;
@@ -8,44 +9,35 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts.Title.Controller
+namespace Assets.Scripts.Farce.Controller
 {
-    public class TitleController : MonoBehaviour
+    public class FarceController : MonoBehaviour
     {
-        [SerializeField] private TitleView titleView;
+        [SerializeField] private FarceView farceView;
         [SerializeField] private SceneNameData sceneNameData;
-        private TitleStateMachine tSM;
+        private FarceStateMachine fSM;
         public string VolumeSceneName => sceneNameData.VolumeSceneName;
         public string SelectStageSceneName => sceneNameData.MapSceneName;
+        public string PauseSceneName => sceneNameData.PauseSceneName;
 
         private void Awake()
         {
-            tSM = new TitleStateMachine(this);
+            fSM = new FarceStateMachine(this);
         }
 
         private void Update()
         {
-            tSM.HandleInput();
-        }
-
-        public void UpdateInitButtonSelection(int index)
-        {
-            titleView.UpdateInitButtonSelection(index);
-        }
-
-        public void SetActiveButtons(bool isActive)
-        {
-            titleView.SetActiveButtons(isActive);
+            fSM.HandleInput();
         }
 
         public void OpenScene()
         {
-            titleView.Open();
+            farceView.Open();
         }
 
         public async UniTask CloseScene(CancellationToken token)
         {
-            await titleView.Close(token);
+            await farceView.Close(token);
         }
     }
 }

@@ -16,6 +16,7 @@ MonoBehaviour:
   mapSceneName: DevMap
   pauseSceneName: DevPause
   volumeSceneName: DevVolume
+  farceSceneName: DevFarce
   stageNameList:
   - DevStage
   - DevStage

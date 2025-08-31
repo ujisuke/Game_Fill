@@ -1,3 +1,4 @@
+using System.Threading;
 using Assets.Scripts.Map.Data;
 using Assets.Scripts.Stage.Model;
 using Assets.Scripts.Stage.View;
@@ -22,6 +23,7 @@ namespace Assets.Scripts.Stage.Controller
         public string NextStageName => nextStageName;
         public string MapSceneName => sceneNameData.MapSceneName;
         public string PauseSceneName => sceneNameData.PauseSceneName;
+        public string FarceSceneName => sceneNameData.FarceSceneName;
 
         private void Awake()
         {
@@ -46,14 +48,22 @@ namespace Assets.Scripts.Stage.Controller
             stageView.StopSlowEffect();
         }
 
-        public async UniTask PlayClearEffect()
+        public async UniTask PlayClearEffect(CancellationToken token)
         {
-            await stageView.PlayClearEffect(isFinalStage);
+            await stageView.PlayClearEffect(token);
         }
 
-        public async UniTask CloseStage(bool isRetry)
+        public async UniTask PlayClearFinalEffect(CancellationToken token)
         {
-            await stageView.CloseStage(isRetry);
+            await stageView.PlayClearFinalEffect(token);
+        }
+
+        public async UniTask CloseStage(bool isRetry, CancellationToken token)
+        {
+            if (isRetry)
+                await stageView.CloseStageRetry(token);
+            else
+                await stageView.CloseStage(token);
         }
 
         public void OpenStage()
@@ -64,11 +74,6 @@ namespace Assets.Scripts.Stage.Controller
         public void SetTimeLimit(int timeLimit)
         {
             stageView.SetTimeLimit(timeLimit);
-        }
-
-        public void OnDestroy()
-        {
-            stageView.OnDestroy();
         }
     }
 }

@@ -1,20 +1,18 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts.Map.Controller
+namespace Assets.Scripts.Farce.Controller
 {
-    public class MapStateLoadStage : IMapState
+    public class FarceStateLoadMap : IFarceState
     {
-        private readonly MapController mC;
+        private readonly FarceController fC;
         private readonly CancellationTokenSource cTS;
         private readonly CancellationToken token;
 
-        public MapStateLoadStage(MapController mC)
+        public FarceStateLoadMap(FarceController fC)
         {
-            this.mC = mC;
+            this.fC = fC;
             cTS = new();
             token = cTS.Token;
         }
@@ -26,8 +24,8 @@ namespace Assets.Scripts.Map.Controller
 
         private async UniTask LoadScene()
         {
-            await mC.CloseScene(token);
-            SceneManager.LoadScene(mC.CurrentStageName);
+            await fC.CloseScene(token);
+            SceneManager.LoadScene(fC.SelectStageSceneName);
         }
 
         public void HandleInput()

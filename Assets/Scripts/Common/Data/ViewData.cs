@@ -17,11 +17,11 @@ namespace Assets.Scripts.Common.Data
         [SerializeField] private float clearFinalAnimDelaySeconds;
         [SerializeField] private float closeAnimDelaySeconds;
         [SerializeField] private float closeAnimSeconds;
-        [SerializeField] private float closeWithTitleAnimSeconds;
+        [SerializeField] private float inBlackAnimSeconds;
         [SerializeField] private float loadSceneDelaySeconds;
-        [SerializeField] private float loadSceneWithTitleDelaySeconds;
+        [SerializeField] private float loadSceneWithBlackDelaySeconds;
         [SerializeField] private float openAnimSeconds;
-        [SerializeField] private float openWithTitleAnimSeconds;
+        [SerializeField] private float outBlackAnimSeconds;
 
         public float BlockBecomeWallSeconds => blockBecomeWallSeconds;
         public float BlockFilledAnimSeconds => blockFilledAnimSeconds;
@@ -35,11 +35,11 @@ namespace Assets.Scripts.Common.Data
         public float ClearFinalAnimDelaySeconds => clearFinalAnimDelaySeconds;
         public float CloseAnimDelaySeconds => closeAnimDelaySeconds;
         public float CloseAnimSeconds => closeAnimSeconds;
-        public float CloseWithTitleAnimSeconds => closeWithTitleAnimSeconds;
+        public float InBlackAnimSeconds => inBlackAnimSeconds;
         public float LoadSceneDelaySeconds => loadSceneDelaySeconds;
-        public float LoadSceneWithTitleDelaySeconds => loadSceneWithTitleDelaySeconds;
+        public float LoadSceneWithBlackDelaySeconds => loadSceneWithBlackDelaySeconds;
         public float OpenAnimSeconds => openAnimSeconds;
-        public float OpenWithTitleAnimSeconds => openWithTitleAnimSeconds;
+        public float OutBlackAnimSeconds => outBlackAnimSeconds;
 
         [SerializeField] private Color pauseBackColor;
         [SerializeField] private Color slowEffectColor;
