@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db25e19a04db6254f8738558f2fdc70e, type: 3}
   m_Name: DevStageNameData
   m_EditorClassIdentifier: 
+  titleSceneName: DevTitle
   mapSceneName: DevMap
   pauseSceneName: DevPause
+  volumeSceneName: DevVolume
+  farceSceneName: DevFarce
   stageNameList:
   - DevStage
   - DevStage

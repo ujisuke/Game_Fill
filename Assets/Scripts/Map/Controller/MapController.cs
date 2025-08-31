@@ -1,3 +1,4 @@
+using System.Threading;
 using Assets.Scripts.Map.Data;
 using Assets.Scripts.Map.View;
 using Cysharp.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace Assets.Scripts.Map.Controller
 
         public string CurrentStageName => sceneNameData.CurrentStageName;
         public string PauseSceneName => sceneNameData.PauseSceneName;
+        public string TitleSceneName => sceneNameData.TitleSceneName;
 
         private void Awake()
         {
@@ -29,34 +31,39 @@ namespace Assets.Scripts.Map.Controller
             mapView.InitializeMail(SceneNameData.CurrentStageIndex);
         }
 
-        public void SelectRight(int stageIndex)
+        public void SelectRight(int stageIndex, CancellationToken token)
         {
-            mapView.SelectRight(stageIndex).Forget();
+            mapView.SelectRight(stageIndex, token).Forget();
         }
 
-        public void SelectLeft(int stageIndex)
+        public void SelectLeft(int stageIndex, CancellationToken token)
         {
-            mapView.SelectLeft(stageIndex).Forget();
+            mapView.SelectLeft(stageIndex, token).Forget();
         }
 
-        public void CloseStage()
+        public async UniTask CloseScene(CancellationToken token)
         {
-            mapView.CloseStage();
+            await mapView.CloseScene(token);
         }
 
-        public void OpenStage()
+        public async UniTask CloseSceneToTitle(CancellationToken token)
         {
-            mapView.OpenStage();
+            await mapView.CloseSceneToTitle(token);
+        }
+
+        public void OpenSceneNotFromTitle()
+        {
+            mapView.OpenSceneNotFromTitle();
+        }
+
+        public void OpenSceneFromTitle()
+        {
+            mapView.OpenSceneFromTitle();
         }
 
         public void UpdateCurrentStageName(int direction)
         {
             sceneNameData.UpdateCurrentStageName(direction);
-        }
-
-        public void OnDestroy()
-        {
-            mapView.OnDestroy();
         }
     }
 }

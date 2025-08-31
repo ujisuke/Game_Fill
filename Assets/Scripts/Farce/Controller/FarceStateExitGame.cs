@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts.Map.Controller
+namespace Assets.Scripts.Farce.Controller
 {
-    public class MapStateExitGame : IMapState
+    public class FarceStateExitGame : IFarceState
     {
-        public MapStateExitGame()
+
+        public FarceStateExitGame()
         {
 
         }

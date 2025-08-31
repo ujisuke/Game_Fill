@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
@@ -6,13 +7,15 @@ namespace Assets.Scripts.Stage.Controller
 {
     public class StageStateClear : IStageState
     {
-        private readonly StageStateMachine sSM;
         private readonly StageController sC;
+        private readonly CancellationTokenSource cTS;
+        private readonly CancellationToken token;
 
-        public StageStateClear(StageStateMachine sSM, StageController sC)
+        public StageStateClear(StageController sC)
         {
-            this.sSM = sSM;
             this.sC = sC;
+            cTS = new();
+            token = cTS.Token;
         }
 
         public void OnStateEnter()
@@ -22,11 +25,16 @@ namespace Assets.Scripts.Stage.Controller
 
         private async UniTask Clear()
         {
-            await sC.PlayClearEffect();
             if (sC.IsFinalStage)
-                SceneManager.LoadScene(sC.MapSceneName);
+            {
+                await sC.PlayClearFinalEffect(token);
+                SceneManager.LoadScene(sC.FarceSceneName);
+            }
             else
+            {
+                await sC.PlayClearEffect(token);
                 SceneManager.LoadScene(sC.NextStageName);
+            }
         }
 
         public void HandleInput()
@@ -36,7 +44,8 @@ namespace Assets.Scripts.Stage.Controller
 
         public void OnStateExit()
         {
-
+            cTS.Cancel();
+            cTS.Dispose();
         }
     }
 }

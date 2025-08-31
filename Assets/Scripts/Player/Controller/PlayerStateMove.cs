@@ -49,16 +49,22 @@ namespace Assets.Scripts.Player.Controller
             isDirKeyPushed = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
 
             if (Input.GetMouseButton(1))
+            {
                 pM.Deceleration();
+                pC.PlayAnim("MoveSlow");
+            }
             else
+            {
                 pM.Acceleration();
+                pC.PlayAnim("Move");
+            }
 
             if (StageModel.Instance.IsPlayerHittingWall(pM.HurtBox) || !StageModel.Instance.IsPlayerOnBlock(pM.Pos) || StageModel.Instance.TimeLimit <= 0)
-                pSM.ChangeState(new PlayerStateDead(pM, pC, pSM));
-            else if (pM.IsOnExit)
-                pSM.ChangeState(new PlayerStateExit(pM, pC, pSM));
-            else if (Input.GetMouseButton(0))
-                pSM.ChangeState(new PlayerStateFill(pM, pC, pSM, isLookingLeft));
+                    pSM.ChangeState(new PlayerStateDead(pM, pC, pSM));
+                else if (pM.IsOnExit)
+                    pSM.ChangeState(new PlayerStateExit(pM, pC, pSM));
+                else if (Input.GetMouseButton(0))
+                    pSM.ChangeState(new PlayerStateFill(pM, pC, pSM, isLookingLeft));
         }
 
         public void OnStateExit()

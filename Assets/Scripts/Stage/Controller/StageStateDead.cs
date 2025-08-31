@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Assets.Scripts.Stage.Model;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
@@ -7,13 +8,15 @@ namespace Assets.Scripts.Stage.Controller
 {
     public class StageStateDead : IStageState
     {
-        private readonly StageStateMachine sSM;
         private readonly StageController sC;
+        private readonly CancellationTokenSource cTS;
+        private readonly CancellationToken token;
 
-        public StageStateDead(StageStateMachine sSM, StageController sC)
+        public StageStateDead(StageController sC)
         {
-            this.sSM = sSM;
             this.sC = sC;
+            cTS = new();
+            token = cTS.Token;
         }
 
         public void OnStateEnter()
@@ -24,7 +27,7 @@ namespace Assets.Scripts.Stage.Controller
         
         private async UniTask Dead()
         {
-            await sC.CloseStage(true);
+            await sC.CloseStage(true, token);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
@@ -35,7 +38,8 @@ namespace Assets.Scripts.Stage.Controller
 
         public void OnStateExit()
         {
-
+            cTS.Cancel();
+            cTS.Dispose();
         }
     }
 }

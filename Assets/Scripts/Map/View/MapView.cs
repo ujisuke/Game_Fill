@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Controller;
@@ -14,6 +15,9 @@ namespace Assets.Scripts.Map.View
 {
     public class MapView : MonoBehaviour
     {
+        [SerializeField] private Sprite frontOpenInitSprite;
+        [SerializeField] private Sprite frontOpenFromTitleInitSprite;
+        [SerializeField] private ViewData viewData;
         [SerializeField] private ImageView frontView;
         [SerializeField] private ImageView rightArrowView;
         [SerializeField] private ImageView leftArrowView;
@@ -21,24 +25,34 @@ namespace Assets.Scripts.Map.View
         [SerializeField] private Text mailText;
         [SerializeField] private List<MailText> mailTextList;
         private int mailIndexPrev;
-        private CancellationTokenSource cTS;
-        private CancellationToken token;
 
         private void Awake()
         {
             mailIndexPrev = 0;
-            cTS = new();
-            token = cTS.Token;
         }
 
-        public void CloseStage()
+        public async UniTask CloseScene(CancellationToken token)
         {
-            frontView.PlayAnim("Close", 0.25f);
+            frontView.PlayAnim("Close", viewData.CloseAnimSeconds);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneDelaySeconds), cancellationToken: token);
         }
 
-        public void OpenStage()
+        public async UniTask CloseSceneToTitle(CancellationToken token)
         {
-            frontView.PlayAnim("Open", 0.25f);
+            frontView.PlayAnim("InBlack", viewData.InBlackAnimSeconds);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneWithBlackDelaySeconds), cancellationToken: token);
+        }
+
+        public void OpenSceneNotFromTitle()
+        {
+            frontView.PlayAnim("Open", viewData.OpenAnimSeconds);
+            frontView.Initialize(frontOpenInitSprite);
+        }
+
+        public void OpenSceneFromTitle()
+        {
+            frontView.PlayAnim("OutBlack", viewData.OutBlackAnimSeconds);
+            frontView.Initialize(frontOpenFromTitleInitSprite);
         }
 
         public void InitializeMail(int stageIndex)
@@ -51,7 +65,7 @@ namespace Assets.Scripts.Map.View
             UpdateMailText(stageIndex);
         }
 
-        public async UniTask SelectRight(int stageIndex)
+        public async UniTask SelectRight(int stageIndex, CancellationToken token)
         {
             if (stageIndex == mailTextList.Count - 1 && mailIndexPrev == mailTextList.Count - 1)
                 return;
@@ -69,7 +83,7 @@ namespace Assets.Scripts.Map.View
             rightArrowView.PlayAnim("Empty");
         }
 
-        public async UniTask SelectLeft(int stageIndex)
+        public async UniTask SelectLeft(int stageIndex, CancellationToken token)
         {
             if (stageIndex == 0 && mailIndexPrev == 0)
                 return;
@@ -90,11 +104,6 @@ namespace Assets.Scripts.Map.View
         private void UpdateMailText(int stageIndex)
         {
             mailText.text = mailTextList[stageIndex].GetText(mailText.fontSize);
-        }
-
-        public void OnDestroy()
-        {
-            cTS?.Cancel();
         }
     }
 

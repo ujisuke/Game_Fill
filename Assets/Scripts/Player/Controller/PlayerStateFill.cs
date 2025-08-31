@@ -51,9 +51,15 @@ namespace Assets.Scripts.Player.Controller
 
 
             if (Input.GetMouseButton(1))
+            {
                 pM.Deceleration();
+                pC.PlayAnim("FillSlow");
+            }
             else
+            {
                 pM.Acceleration();
+                pC.PlayAnim("Fill");
+            }
 
             if (StageModel.Instance.IsPlayerHittingWall(pM.HurtBox) || !StageModel.Instance.IsPlayerOnBlock(pM.Pos) || StageModel.Instance.TimeLimit <= 0)
                 pSM.ChangeState(new PlayerStateDead(pM, pC, pSM));

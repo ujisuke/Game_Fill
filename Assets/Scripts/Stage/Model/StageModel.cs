@@ -123,7 +123,6 @@ namespace Assets.Scripts.Stage.Model
         {
             foreach (BlockModel block in blockMap)
                 block?.OnDestroy();
-            stageController.OnDestroy();
         }
 
         public void PlaySlowEffect()

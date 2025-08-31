@@ -1,14 +1,14 @@
 using Assets.Scripts.Stage.Model;
 using Assets.Scripts.Stage.View;
-using Assets.Scripts.Stage.Data;
 using UnityEngine;
+using Assets.Scripts.Common.Data;
 
 namespace Assets.Scripts.Stage.Controller
 {
     public class BlockController : MonoBehaviour
     {
         [SerializeField] private BlockView blockView;
-        [SerializeField] private BlockData blockData;
+        [SerializeField] private ViewData viewData;
 
         private BlockModel blockModel;
         public BlockModel BlockModel => blockModel;
@@ -18,7 +18,7 @@ namespace Assets.Scripts.Stage.Controller
             bool isWallInitial = blockView.IsWallInitial;
             bool canBeFilled = blockView.CanBeFilled;
             bool isExit = blockView.IsExit;
-            blockModel = new BlockModel(this, transform.position, transform.localScale, isWallInitial, canBeFilled, isExit, blockData);
+            blockModel = new BlockModel(this, transform.position, transform.localScale, isWallInitial, canBeFilled, isExit, viewData);
             blockView.InstantiateHitBox(blockModel.HitBox);
             blockView.SetHitBoxActive(isWallInitial);
             blockView.SetInitialAnim();

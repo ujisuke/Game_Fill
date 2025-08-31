@@ -1,9 +1,12 @@
+using Cysharp.Threading.Tasks;
+
 namespace Assets.Scripts.Map.Controller
 {
     public class MapStateInitial : IMapState
     {
         private readonly MapStateMachine mSM;
         private readonly MapController mC;
+        private static bool isFromTitle;
 
         public MapStateInitial(MapStateMachine stateMachine, MapController mC)
         {
@@ -14,7 +17,11 @@ namespace Assets.Scripts.Map.Controller
         public void OnStateEnter()
         {
             mC.InitializeMail();
-            mC.OpenStage();
+            if (isFromTitle)
+                mC.OpenSceneFromTitle();
+            else
+                mC.OpenSceneNotFromTitle();
+            isFromTitle = false;
         }
 
         public void HandleInput()
@@ -25,6 +32,11 @@ namespace Assets.Scripts.Map.Controller
         public void OnStateExit()
         {
 
+        }
+
+        public static void OpenFromTitle()
+        {
+            isFromTitle = true;
         }
     }
 }

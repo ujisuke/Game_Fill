@@ -4,14 +4,14 @@ using Assets.Scripts.Stage.Controller;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
-using Assets.Scripts.Stage.Data;
+using Assets.Scripts.Common.Data;
 
 namespace Assets.Scripts.Stage.Model
 {
     public class BlockModel
     {
         private readonly BlockController blockController;
-        private readonly BlockData blockData;
+        private readonly ViewData viewData;
         private Vector2 pos;
         private readonly HitBox hitBox;
         private bool isWall;
@@ -25,9 +25,9 @@ namespace Assets.Scripts.Stage.Model
         public bool CanBeFilled => canBeFilled;
         public bool IsExit => isExit;
 
-        public BlockModel(BlockController blockController, Vector2 pos, Vector2 scale, bool isWall, bool canBeFilled, bool isExit, BlockData blockData)
+        public BlockModel(BlockController blockController, Vector2 pos, Vector2 scale, bool isWall, bool canBeFilled, bool isExit, ViewData viewData)
         {
-            this.blockData = blockData;
+            this.viewData = viewData;
             this.blockController = blockController;
             this.pos = pos;
             hitBox = new HitBox(pos, scale);
@@ -42,8 +42,8 @@ namespace Assets.Scripts.Stage.Model
         {
             canBeFilled = false;
             blockController.PlayAnim("Filling");
-            float wallDeltaSeconds = blockData.BecomeWallSeconds * 0.01f;
-            float filledAnimSeconds = blockData.FilledAnimSeconds;
+            float wallDeltaSeconds = viewData.BlockBecomeWallSeconds * 0.01f;
+            float filledAnimSeconds = viewData.BlockFilledAnimSeconds;
             for (int i = 0; i < 100; i++)
             {
                 if (PlayerModel.Instance == null)

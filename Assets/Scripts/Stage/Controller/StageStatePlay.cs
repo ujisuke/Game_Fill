@@ -25,9 +25,9 @@ namespace Assets.Scripts.Stage.Controller
         public void HandleInput()
         {
             if (PlayerModel.Instance != null && StageModel.Instance.IsAllBlockFilled() && PlayerModel.Instance.IsOnExit)
-                sSM.ChangeState(new StageStateClear(sSM, sC));
+                sSM.ChangeState(new StageStateClear(sC));
             else if (PlayerModel.Instance == null)
-                sSM.ChangeState(new StageStateDead(sSM, sC));
+                sSM.ChangeState(new StageStateDead(sC));
             else if (CustomInputSystem.Instance.GetPauseKeyWithCooldown())
                 sSM.ChangeState(new StageStatePause(sSM, sC));
         }

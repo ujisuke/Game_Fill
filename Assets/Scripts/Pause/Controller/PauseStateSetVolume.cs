@@ -1,6 +1,9 @@
 using Assets.Scripts.Common.Controller;
+using Assets.Scripts.Pause.Controller;
+using Assets.Scripts.Volume.Controller;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Pause.Controller
 {
@@ -8,7 +11,7 @@ namespace Assets.Scripts.Pause.Controller
     {
         private readonly PauseController pC;
         private readonly PauseStateMachine pSM;
-        private int selectedIndex;
+
 
         public PauseStateSetVolume(PauseController pC, PauseStateMachine pSM)
         {
@@ -18,32 +21,20 @@ namespace Assets.Scripts.Pause.Controller
 
         public void OnStateEnter()
         {
-            selectedIndex = 0;
-            pC.SetActiveVolumePage(true);
-            pC.UpdateVolumeButtonSelection(selectedIndex);
+            SceneManager.LoadScene(pC.VolumeSceneName, LoadSceneMode.Additive);
+            pC.SetActiveButtons(false);
         }
 
         public void HandleInput()
         {
-            if (CustomInputSystem.Instance.GetLeftKeyWithCooldown())
-            {
-                selectedIndex = math.max(0, selectedIndex - 1);
-                pC.UpdateVolumeButtonSelection(selectedIndex);
-            }
-            else if (CustomInputSystem.Instance.GetRightKeyWithCooldown())
-            {
-                selectedIndex = math.min(3, selectedIndex + 1);
-                pC.UpdateVolumeButtonSelection(selectedIndex);
-            }
-
-            if (CustomInputSystem.Instance.GetPauseKeyWithCooldown()
-            || (CustomInputSystem.Instance.DoesSelectKeyUp() && selectedIndex == 3))
+            if (VolumeStateExitPage.DoesExit)
                 pSM.ChangeState(new PauseStateInitial(pC, pSM));
         }
 
         public void OnStateExit()
         {
-            pC.SetActiveVolumePage(false);
+            VolumeStateExitPage.ResetFlag();
+            SceneManager.UnloadSceneAsync(pC.VolumeSceneName);
         }
     }
 }
