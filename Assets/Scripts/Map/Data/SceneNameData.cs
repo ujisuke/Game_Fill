@@ -8,13 +8,18 @@ namespace Assets.Scripts.Map.Data
     [CreateAssetMenu(fileName = "SceneNameData", menuName = "ScriptableObjects/SceneNameData")]
     public class SceneNameData : ScriptableObject
     {
+        [SerializeField] private string titleSceneName;
         [SerializeField] private string mapSceneName;
         [SerializeField] private string pauseSceneName;
+        [SerializeField] private string volumeSceneName;
         [SerializeField] private List<string> stageNameList;
         public static int CurrentStageIndex = 0;
+
+        public string TitleSceneName => titleSceneName;
         public string MapSceneName => mapSceneName;
         public string PauseSceneName => pauseSceneName;
         public string CurrentStageName => stageNameList[CurrentStageIndex];
+        public string VolumeSceneName => volumeSceneName;
 
         public void UpdateCurrentStageName(int additionIndex)
         {

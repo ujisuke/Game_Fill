@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts.Map.Controller
+namespace Assets.Scripts.Title.Controller
 {
-    public class MapStateExitGame : IMapState
+    public class TitleStateExitGame : ITitleState
     {
-        public MapStateExitGame()
+
+        public TitleStateExitGame()
         {
 
         }

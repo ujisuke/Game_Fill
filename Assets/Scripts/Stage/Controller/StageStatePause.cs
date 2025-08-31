@@ -26,7 +26,7 @@ namespace Assets.Scripts.Stage.Controller
             if (PauseStateInitial.IsBack)
                 sSM.ChangeState(new StageStatePlay(sSM, sC));
             else if (PauseStateInitial.DoesSelectStage)
-                sSM.ChangeState(new StageStateSelectStage(sSM, sC));
+                sSM.ChangeState(new StageStateMap(sC));
             else if (PauseStateInitial.DoesExitGame)
                 sSM.ChangeState(new StageStateExitGame());
         }

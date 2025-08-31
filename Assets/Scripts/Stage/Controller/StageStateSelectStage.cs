@@ -7,14 +7,12 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Stage.Controller
 {
-    public class StageStateSelectStage : IStageState
+    public class StageStateMap : IStageState
     {
-        private readonly StageStateMachine sSM;
         private readonly StageController sC;
 
-        public StageStateSelectStage(StageStateMachine sSM, StageController sC)
+        public StageStateMap(StageController sC)
         {
-            this.sSM = sSM;
             this.sC = sC;
         }
 

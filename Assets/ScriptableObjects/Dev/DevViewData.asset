@@ -23,6 +23,11 @@ MonoBehaviour:
   clearTextAnimSeconds: 0.3
   clearFinalAnimDelaySeconds: 0.8
   closeAnimDelaySeconds: 1.5
-  closeAnimSeconds: 0.25
-  loadSceneDelaySeconds: 1
-  openAnimSeconds: 0.25
+  closeAnimSeconds: 0.2
+  closeWithTitleAnimSeconds: 0.4
+  loadSceneDelaySeconds: 0.4
+  loadSceneWithTitleDelaySeconds: 0.5
+  openAnimSeconds: 0.2
+  openWithTitleAnimSeconds: 0.4
+  pauseBackColor: {r: 0, g: 0, b: 0, a: 0.92941177}
+  slowEffectColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}

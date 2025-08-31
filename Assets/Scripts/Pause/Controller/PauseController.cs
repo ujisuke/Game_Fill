@@ -1,4 +1,5 @@
 using Assets.Scripts.Common.Controller;
+using Assets.Scripts.Map.Data;
 using Assets.Scripts.Pause.View;
 using Assets.Scripts.Stage.Controller;
 using UnityEngine;
@@ -9,7 +10,9 @@ namespace Assets.Scripts.Pause.Controller
     public class PauseController : MonoBehaviour
     {
         [SerializeField] private PauseView pauseView;
+        [SerializeField] private SceneNameData sceneNameData;
         private PauseStateMachine pSM;
+        public string VolumeSceneName => sceneNameData.VolumeSceneName;
 
         private void Awake()
         {
@@ -26,14 +29,9 @@ namespace Assets.Scripts.Pause.Controller
             pauseView.UpdateInitButtonSelection(index);
         }
 
-        public void UpdateVolumeButtonSelection(int index)
+        public void SetActiveButtons(bool isActive)
         {
-            pauseView.UpdateVolumeButtonSelection(index);
-        }
-
-        public void SetActiveVolumePage(bool isActive)
-        {
-            pauseView.SetActiveVolumePage(isActive);
+            pauseView.SetActiveButtons(isActive);
         }
     }
 }

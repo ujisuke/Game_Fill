@@ -1,20 +1,24 @@
 using System.Collections.Generic;
+using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Pause.View
 {
     public class PauseView : MonoBehaviour
     {
         [SerializeField] private List<ImageView> initButtonList;
-        [SerializeField] private List<ImageView> volumeButtonList;
-        [SerializeField] private Canvas volumeCanvas;
+        [SerializeField] private Image back;
+        [SerializeField] private ViewData viewData;
 
         private void Awake()
         {
             initButtonList[0].PlayAnim("Selected");
             for (int i = 1; i < initButtonList.Count; i++)
                 initButtonList[i].PlayAnim("DeSelected");
+
+            back.color = viewData.PauseBackColor;
         }
 
         public void UpdateInitButtonSelection(int index)
@@ -28,20 +32,10 @@ namespace Assets.Scripts.Pause.View
             }
         }
 
-        public void UpdateVolumeButtonSelection(int index)
+        public void SetActiveButtons(bool isActive)
         {
-            for (int i = 0; i < volumeButtonList.Count; i++)
-            {
-                if (i == index)
-                    volumeButtonList[i].PlayAnim("Selected");
-                else
-                    volumeButtonList[i].PlayAnim("DeSelected");
-            }
-        }
-
-        public void SetActiveVolumePage(bool isActive)
-        {
-            volumeCanvas.gameObject.SetActive(isActive);
+            foreach (var button in initButtonList)
+                button.gameObject.SetActive(isActive);
         }
     }
 }

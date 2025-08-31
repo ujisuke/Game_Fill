@@ -13180,7 +13180,8 @@ MonoBehaviour:
   screenView: {fileID: 1207957295}
   GoodView: {fileID: 1655102373}
   timeLimitText: {fileID: 736935422}
-  frontOpenRellInitSprite: {fileID: -3354758309202222504, guid: 672c0e5b256cd594aa85263f3622080c, type: 3}
+  frontOpenRellInitSprite: {fileID: -7409484540508226828, guid: 672c0e5b256cd594aa85263f3622080c, type: 3}
+  frontOpenInitSprite: {fileID: -485440478616671248, guid: 672c0e5b256cd594aa85263f3622080c, type: 3}
   stageViewData: {fileID: 11400000, guid: 6cb140ad01fab364e9f65aedfe59657b, type: 2}
 --- !u!114 &2068900230
 MonoBehaviour:

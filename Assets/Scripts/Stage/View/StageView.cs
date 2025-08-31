@@ -22,6 +22,7 @@ namespace Assets.Scripts.Stage.View
         [SerializeField] private ImageView GoodView;
         [SerializeField] private Text timeLimitText;
         [SerializeField] private Sprite frontOpenRellInitSprite;
+        [SerializeField] private Sprite frontOpenInitSprite;
         [SerializeField] private ViewData stageViewData;
         private static bool isRetry = false;
         private BlockView[,] blockMap;
@@ -30,6 +31,7 @@ namespace Assets.Scripts.Stage.View
 
         private void Awake()
         {
+            slowEffectView.SetColor(stageViewData.SlowEffectColor);
             cTS = new();
             token = cTS.Token;
         }
@@ -136,11 +138,14 @@ namespace Assets.Scripts.Stage.View
         {
             if (isRetry)
             {
-                frontView.SetSprite(frontOpenRellInitSprite);
+                frontView.Initialize(frontOpenRellInitSprite);
                 frontView.PlayAnim("OpenRell", stageViewData.OpenAnimSeconds);
             }
             else
+            {
+                frontView.Initialize(frontOpenInitSprite);
                 frontView.PlayAnim("Open", stageViewData.OpenAnimSeconds);
+            }
         }
 
         public void SetTimeLimit(int timeLimit)

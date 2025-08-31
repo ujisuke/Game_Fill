@@ -34,9 +34,9 @@ namespace Assets.Scripts.Map.Controller
             }
 
             if (CustomInputSystem.Instance.DoesSelectKeyUp())
-                mSM.ChangeState(new MapStateLoadScene(mSM, mC));
+                mSM.ChangeState(new MapStateLoadStage(mC));
             else if (CustomInputSystem.Instance.GetPauseKeyWithCooldown())
-                mSM.ChangeState(new MapStatePause(mSM, mC));
+                mSM.ChangeState(new MapStateLoadTitle(mC));
         }
 
         public void OnStateExit()

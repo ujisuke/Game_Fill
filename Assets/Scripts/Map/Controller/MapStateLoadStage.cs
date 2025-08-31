@@ -5,14 +5,12 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Map.Controller
 {
-    public class MapStateLoadScene : IMapState
+    public class MapStateLoadStage : IMapState
     {
-        private readonly MapStateMachine mSM;
         private readonly MapController mC;
 
-        public MapStateLoadScene(MapStateMachine stateMachine, MapController mC)
+        public MapStateLoadStage(MapController mC)
         {
-            mSM = stateMachine;
             this.mC = mC;
         }
 
@@ -23,8 +21,7 @@ namespace Assets.Scripts.Map.Controller
 
         private async UniTask LoadScene()
         {
-            mC.CloseStage();
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            await mC.CloseScene();
             SceneManager.LoadScene(mC.CurrentStageName);
         }
         public void HandleInput()

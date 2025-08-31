@@ -13,6 +13,7 @@ namespace Assets.Scripts.Map.Controller
 
         public string CurrentStageName => sceneNameData.CurrentStageName;
         public string PauseSceneName => sceneNameData.PauseSceneName;
+        public string TitleSceneName => sceneNameData.TitleSceneName;
 
         private void Awake()
         {
@@ -39,14 +40,24 @@ namespace Assets.Scripts.Map.Controller
             mapView.SelectLeft(stageIndex).Forget();
         }
 
-        public void CloseStage()
+        public async UniTask CloseScene()
         {
-            mapView.CloseStage();
+            await mapView.CloseScene();
         }
 
-        public void OpenStage()
+        public async UniTask CloseSceneToTitle()
         {
-            mapView.OpenStage();
+            await mapView.CloseSceneToTitle();
+        }
+
+        public void OpenSceneFromStage()
+        {
+            mapView.OpenSceneFromStage();
+        }
+
+        public void OpenSceneFromTitle()
+        {
+            mapView.OpenSceneFromTitle();
         }
 
         public void UpdateCurrentStageName(int direction)

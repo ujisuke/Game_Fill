@@ -30,20 +30,22 @@ namespace Assets.Scripts.Common.View
             objectAnimation.Play(animName, animSeconds);
         }
 
-        public void SetAnimSpeed(float seconds)
-        {
-            objectAnimation.SetSpeed(seconds);
-        }
-
         public void SetSprite(Sprite sprite)
         {
             image.sprite = sprite;
             dummySpriteRenderer.sprite = sprite;
         }
 
-        public void FlipX(bool isLeft)
+        public void SetColor(Color color)
         {
-            objectAnimation.FlipX(isLeft);
+            image.color = color;
+        }
+
+        public void Initialize(Sprite sprite)
+        {
+            dummySpriteRenderer.enabled = true;
+            image.enabled = true;
+            SetSprite(sprite);
         }
     }
 }

@@ -15,6 +15,8 @@ namespace Assets.Scripts.Map.View
 {
     public class MapView : MonoBehaviour
     {
+        [SerializeField] private Sprite frontOpenInitSprite;
+        [SerializeField] private Sprite frontOpenFromTitleInitSprite;
         [SerializeField] private ViewData viewData;
         [SerializeField] private ImageView frontView;
         [SerializeField] private ImageView rightArrowView;
@@ -33,14 +35,28 @@ namespace Assets.Scripts.Map.View
             token = cTS.Token;
         }
 
-        public void CloseStage()
+        public async UniTask CloseScene()
         {
             frontView.PlayAnim("Close", viewData.CloseAnimSeconds);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneDelaySeconds), cancellationToken: token);
         }
 
-        public void OpenStage()
+        public async UniTask CloseSceneToTitle()
+        {
+            frontView.PlayAnim("CloseWithTitle", viewData.CloseWithTitleAnimSeconds);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneWithTitleDelaySeconds), cancellationToken: token);
+        }
+
+        public void OpenSceneFromStage()
         {
             frontView.PlayAnim("Open", viewData.OpenAnimSeconds);
+            frontView.Initialize(frontOpenInitSprite);
+        }
+
+        public void OpenSceneFromTitle()
+        {
+            frontView.PlayAnim("OpenWithTitle", viewData.OpenWithTitleAnimSeconds);
+            frontView.Initialize(frontOpenFromTitleInitSprite);
         }
 
         public void InitializeMail(int stageIndex)

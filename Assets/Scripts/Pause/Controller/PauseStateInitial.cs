@@ -1,7 +1,5 @@
 using Assets.Scripts.Common.Controller;
-using Assets.Scripts.Pause.Controller;
 using Unity.Mathematics;
-using UnityEngine;
 
 namespace Assets.Scripts.Pause.Controller
 {
@@ -25,7 +23,9 @@ namespace Assets.Scripts.Pause.Controller
 
         public void OnStateEnter()
         {
-            pC.SetActiveVolumePage(false);
+            selectedIndex = 0;
+            pC.SetActiveButtons(true);
+            pC.UpdateInitButtonSelection(selectedIndex);
         }
 
         public void HandleInput()
@@ -56,6 +56,7 @@ namespace Assets.Scripts.Pause.Controller
                         break;
                     case 1:
                         pSM.ChangeState(new PauseStateSetVolume(pC, pSM));
+                        pC.SetActiveButtons(false);
                         break;
                     case 2:
                         doesSelectStage = true;
