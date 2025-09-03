@@ -13,6 +13,7 @@ namespace Assets.Scripts.Pause.Controller
         [SerializeField] private SceneNameData sceneNameData;
         private PauseStateMachine pSM;
         public string VolumeSceneName => sceneNameData.VolumeSceneName;
+        public string PauseSceneName => sceneNameData.PauseSceneName;
 
         private void Awake()
         {
@@ -24,14 +25,14 @@ namespace Assets.Scripts.Pause.Controller
             pSM.HandleInput();
         }
 
+        public void Initialize()
+        {
+            pauseView.Initialize();
+        }
+
         public void UpdateInitButtonSelection(int index)
         {
             pauseView.UpdateInitButtonSelection(index);
-        }
-
-        public void SetActiveButtons(bool isActive)
-        {
-            pauseView.SetActiveButtons(isActive);
         }
     }
 }

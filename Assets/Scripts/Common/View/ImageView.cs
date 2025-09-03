@@ -7,7 +7,7 @@ namespace Assets.Scripts.Common.View
     public class ImageView : MonoBehaviour
     {
         [SerializeField] private Animator animator;
-        [SerializeField] private SpriteRenderer dummySpriteRenderer;
+        [SerializeField] protected SpriteRenderer dummySpriteRenderer;
         [SerializeField] private Image image;
         private ObjectAnimation objectAnimation;
 
@@ -16,7 +16,7 @@ namespace Assets.Scripts.Common.View
             objectAnimation = new ObjectAnimation(animator, dummySpriteRenderer);
         }
 
-        private void Update()
+        protected void Update()
         {
             image.enabled = dummySpriteRenderer.enabled;
             image.sprite = dummySpriteRenderer.sprite;

@@ -21,6 +21,7 @@ namespace Assets.Scripts.Map.View
         [SerializeField] private ImageView frontView;
         [SerializeField] private ImageView rightArrowView;
         [SerializeField] private ImageView leftArrowView;
+        [SerializeField] private ImageView entrustView;
         [SerializeField] private ImageView mailView;
         [SerializeField] private Text mailText;
         [SerializeField] private List<MailText> mailTextList;
@@ -58,10 +59,10 @@ namespace Assets.Scripts.Map.View
         public void InitializeMail(int stageIndex)
         {
             mailIndexPrev = stageIndex;
-            if (stageIndex >= mailTextList.Count - 1)
-                rightArrowView.PlayAnim("Empty");
-            if (stageIndex <= 0)
-                leftArrowView.PlayAnim("Empty");
+            if (stageIndex < mailTextList.Count - 1)
+                rightArrowView.PlayAnim("Awake");
+            if (stageIndex > 0)
+                leftArrowView.PlayAnim("Awake");
             UpdateMailText(stageIndex);
         }
 
@@ -72,7 +73,7 @@ namespace Assets.Scripts.Map.View
             rightArrowView.PlayAnim("Awake");
             mailView.PlayAnim("Awake");
             await UniTask.DelayFrame(1, cancellationToken: token);
-            rightArrowView.PlayAnim("Select");
+            rightArrowView.PlayAnim("Selected");
             leftArrowView.PlayAnim("Awake");
             mailView.PlayAnim("ChangeText");
             UpdateMailText(stageIndex);
@@ -90,7 +91,7 @@ namespace Assets.Scripts.Map.View
             leftArrowView.PlayAnim("Awake");
             mailView.PlayAnim("Awake");
             await UniTask.DelayFrame(1, cancellationToken: token);
-            leftArrowView.PlayAnim("Select");
+            leftArrowView.PlayAnim("Selected");
             rightArrowView.PlayAnim("Awake");
             mailView.PlayAnim("ChangeText");
             UpdateMailText(stageIndex);
@@ -99,6 +100,11 @@ namespace Assets.Scripts.Map.View
                 return;
             await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: token);
             leftArrowView.PlayAnim("Empty");
+        }
+
+        public void Entrust()
+        {
+            entrustView.PlayAnim("Selected");
         }
 
         private void UpdateMailText(int stageIndex)

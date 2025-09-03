@@ -35,7 +35,6 @@ namespace Assets.Scripts.Stage.Controller
         {
             PauseStateInitial.ResetFlags();
             Time.timeScale = 1;
-            SceneManager.UnloadSceneAsync(sC.PauseSceneName);
         }
     }
 }

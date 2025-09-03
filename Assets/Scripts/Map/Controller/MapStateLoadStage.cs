@@ -21,6 +21,7 @@ namespace Assets.Scripts.Map.Controller
 
         public void OnStateEnter()
         {
+            mC.Entrust();
             LoadScene().Forget();
         }
 

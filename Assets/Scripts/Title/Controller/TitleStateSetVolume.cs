@@ -34,7 +34,6 @@ namespace Assets.Scripts.Title.Controller
         public void OnStateExit()
         {
             VolumeStateExitPage.ResetFlag();
-            SceneManager.UnloadSceneAsync(tC.VolumeSceneName);
         }
     }
 }

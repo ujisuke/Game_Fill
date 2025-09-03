@@ -11,32 +11,30 @@ namespace Assets.Scripts.Title.View
 {
     public class TitleView : MonoBehaviour
     {
-        [SerializeField] private List<ImageView> initButtonList;
+        [SerializeField] private List<ButtonView> buttonList;
         [SerializeField] private ViewData viewData;
         [SerializeField] private ImageView frontView;
         [SerializeField] private Sprite frontOpenFromMapInitSprite;
+        private int currentIndex;
 
         private void Awake()
         {
-            initButtonList[0].PlayAnim("Selected");
-            for (int i = 1; i < initButtonList.Count; i++)
-                initButtonList[i].PlayAnim("DeSelected");
+            currentIndex = 0;
+            buttonList[currentIndex].PlaySelectedAnim();
         }
 
         public void UpdateInitButtonSelection(int index)
         {
-            for (int i = 0; i < initButtonList.Count; i++)
-            {
-                if (i == index)
-                    initButtonList[i].PlayAnim("Selected");
-                else
-                    initButtonList[i].PlayAnim("DeSelected");
-            }
+            if (currentIndex == index) return;
+
+            buttonList[currentIndex].PlayDeselectedAnim();
+            currentIndex = index;
+            buttonList[currentIndex].PlaySelectedAnim();
         }
 
         public void SetActiveButtons(bool isActive)
         {
-            foreach (var button in initButtonList)
+            foreach (var button in buttonList)
                 button.gameObject.SetActive(isActive);
         }
 
