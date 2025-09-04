@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Production/Title.unity
+    guid: 46b54a58f2c302849b83812ba5c0c71f
+  - enabled: 1
     path: Assets/Scenes/Dev/DevTitle.unity
     guid: 6d686d4cab6e5fc4fb6d0e4a47fd5e48
   - enabled: 1
@@ -23,6 +26,33 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dev/DevFarce.unity
     guid: 5140b7c601a517345b7c4f659d0fdc35
+  - enabled: 1
+    path: Assets/Scenes/Production/Farce.unity
+    guid: bff661739f427364bb59d1df744c49f7
+  - enabled: 1
+    path: Assets/Scenes/Production/Map.unity
+    guid: 68c3ed035e2bc614c93bc5a11dfb15f0
+  - enabled: 1
+    path: Assets/Scenes/Production/Pause.unity
+    guid: 05652ec006c7ef342af6bed57f4c5f00
+  - enabled: 1
+    path: Assets/Scenes/Production/Stage1/1-1.unity
+    guid: 877e169d222805a4b9a9e04bf4ea0aa0
+  - enabled: 1
+    path: Assets/Scenes/Production/Volume.unity
+    guid: 7e3c14b72cf1b2542b21cd585fadb5e0
+  - enabled: 1
+    path: Assets/Scenes/Production/Tutorial/0-1.unity
+    guid: 1ce55c5d105379a47867a5efa6ebba0e
+  - enabled: 1
+    path: Assets/Scenes/Production/Tutorial/0-2.unity
+    guid: 5096c52f3eea5ff4dbda146f1b5db629
+  - enabled: 1
+    path: Assets/Scenes/Production/Tutorial/0-3.unity
+    guid: ab23bf7a695c56b4e861a0ca48656a43
+  - enabled: 1
+    path: Assets/Scenes/Production/Tutorial/0-4.unity
+    guid: 9c68ca0efa4e5e54ca76efbce6400a6c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
