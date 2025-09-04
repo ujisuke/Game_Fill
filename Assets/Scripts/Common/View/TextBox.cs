@@ -27,7 +27,8 @@ namespace Assets.Scripts.Common.View
                 string currentText = string.Empty;
                 int colorCount = 0;
                 float showCharSeconds = viewData.ShowCharSeconds;
-                for (int i = 0; i <= showText[k].Length; i++)
+                float showSentenceSeconds = viewData.ShowSentenceSeconds;
+                for (int i = 0; i < showText[k].Length; i++)
                 {
                     currentText += showText[k][i];
                     if (showText[k][i] == '<' || showText[k][i] == '>')
@@ -44,6 +45,7 @@ namespace Assets.Scripts.Common.View
                         await UniTask.Delay(TimeSpan.FromSeconds(showCharSeconds), cancellationToken: token);
                     }
                 }
+                await UniTask.Delay(TimeSpan.FromSeconds(showSentenceSeconds), cancellationToken: token);
             }
         }
     }

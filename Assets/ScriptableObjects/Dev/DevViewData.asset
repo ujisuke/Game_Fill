@@ -29,5 +29,6 @@ MonoBehaviour:
   loadSceneWithBlackDelaySeconds: 0.4
   openAnimSeconds: 0.15
   outBlackAnimSeconds: 0.3
-  pauseBackColor: {r: 0, g: 0, b: 0, a: 0.92941177}
+  showCharSeconds: 0.05
+  showSentenceSeconds: 1
   slowEffectColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}

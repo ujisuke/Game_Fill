@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
@@ -24,6 +25,7 @@ namespace Assets.Scripts.Stage.View
         [SerializeField] private Sprite frontOpenRellInitSprite;
         [SerializeField] private Sprite frontOpenInitSprite;
         [SerializeField] private ViewData stageViewData;
+        [SerializeField] private List<GameObject> additionalObjectList;
         private static bool isRetry = false;
         private BlockView[,] blockMap;
 
@@ -100,6 +102,8 @@ namespace Assets.Scripts.Stage.View
             screenView.PlayAnim("Play");
             GoodView.PlayAnim("Empty");
             timeLimitText.enabled = false;
+            for (int i = 0; i < additionalObjectList.Count; i++)
+                Destroy(additionalObjectList[i]);
             fillEffectView.PlayAnim("Clear", stageViewData.ClearAnimSeconds);
             await PaintStage(token);
             await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ClearTextDelaySeconds), cancellationToken: token);

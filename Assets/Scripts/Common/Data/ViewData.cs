@@ -23,6 +23,7 @@ namespace Assets.Scripts.Common.Data
         [SerializeField] private float openAnimSeconds;
         [SerializeField] private float outBlackAnimSeconds;
         [SerializeField] private float showCharSeconds;
+        [SerializeField] private float showSentenceSeconds;
 
         public float BlockBecomeWallSeconds => blockBecomeWallSeconds;
         public float BlockFilledAnimSeconds => blockFilledAnimSeconds;
@@ -42,6 +43,7 @@ namespace Assets.Scripts.Common.Data
         public float OpenAnimSeconds => openAnimSeconds;
         public float OutBlackAnimSeconds => outBlackAnimSeconds;
         public float ShowCharSeconds => showCharSeconds;
+        public float ShowSentenceSeconds => showSentenceSeconds;
 
         [SerializeField] private Color slowEffectColor;
 
