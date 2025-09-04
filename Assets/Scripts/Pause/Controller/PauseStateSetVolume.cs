@@ -10,31 +10,34 @@ namespace Assets.Scripts.Pause.Controller
     public class PauseStateSetVolume : IPauseState
     {
         private readonly PauseController pC;
-        private readonly PauseStateMachine pSM;
+        private static bool fromPause = false;
+        public static bool FromPause => fromPause;
 
-
-        public PauseStateSetVolume(PauseController pC, PauseStateMachine pSM)
+        public PauseStateSetVolume(PauseController pC)
         {
             this.pC = pC;
-            this.pSM = pSM;
+            fromPause = true;
         }
 
         public void OnStateEnter()
         {
             SceneManager.LoadScene(pC.VolumeSceneName, LoadSceneMode.Additive);
-            pC.SetActiveButtons(false);
+            SceneManager.UnloadSceneAsync(pC.PauseSceneName);
         }
 
         public void HandleInput()
         {
-            if (VolumeStateExitPage.DoesExit)
-                pSM.ChangeState(new PauseStateInitial(pC, pSM));
+
         }
 
         public void OnStateExit()
         {
-            VolumeStateExitPage.ResetFlag();
-            SceneManager.UnloadSceneAsync(pC.VolumeSceneName);
+            
+        }
+
+        public static void ResetFlag()
+        {
+            fromPause = false;
         }
     }
 }

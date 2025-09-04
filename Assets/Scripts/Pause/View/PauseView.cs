@@ -8,34 +8,27 @@ namespace Assets.Scripts.Pause.View
 {
     public class PauseView : MonoBehaviour
     {
-        [SerializeField] private List<ImageView> initButtonList;
-        [SerializeField] private Image back;
-        [SerializeField] private ViewData viewData;
+        [SerializeField] private List<ButtonView> buttonList;
+        private int currentIndex;
 
         private void Awake()
         {
-            initButtonList[0].PlayAnim("Selected");
-            for (int i = 1; i < initButtonList.Count; i++)
-                initButtonList[i].PlayAnim("DeSelected");
+            Initialize();
+        }
 
-            back.color = viewData.PauseBackColor;
+        public void Initialize()
+        {
+            currentIndex = 0;
+            buttonList[currentIndex].PlaySelectedAnim();
         }
 
         public void UpdateInitButtonSelection(int index)
         {
-            for (int i = 0; i < initButtonList.Count; i++)
-            {
-                if (i == index)
-                    initButtonList[i].PlayAnim("Selected");
-                else
-                    initButtonList[i].PlayAnim("DeSelected");
-            }
-        }
+            if (currentIndex == index) return;
 
-        public void SetActiveButtons(bool isActive)
-        {
-            foreach (var button in initButtonList)
-                button.gameObject.SetActive(isActive);
+            buttonList[currentIndex].PlayDeselectedAnim();
+            currentIndex = index;
+            buttonList[currentIndex].PlaySelectedAnim();
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Threading;
 using Assets.Scripts.Common.Controller;
 using Unity.Mathematics;
 using UnityEngine;
@@ -8,12 +9,16 @@ namespace Assets.Scripts.Volume.Controller
     {
         private readonly VolumeController vC;
         private readonly VolumeStateMachine vSM;
+        private readonly CancellationTokenSource cTS;
+        private readonly CancellationToken token;
         private int selectedIndex;
 
         public VolumeStateInitial(VolumeController vC, VolumeStateMachine vSM)
         {
             this.vC = vC;
             this.vSM = vSM;
+            cTS = new();
+            token = cTS.Token;
         }
 
         public void OnStateEnter()
@@ -24,25 +29,30 @@ namespace Assets.Scripts.Volume.Controller
 
         public void HandleInput()
         {
-            if (CustomInputSystem.Instance.GetLeftKeyWithCooldown())
+            if (CustomInputSystem.Instance.GetUpKeyWithCooldown())
             {
                 selectedIndex = math.max(0, selectedIndex - 1);
                 vC.UpdateVolumeButtonSelection(selectedIndex);
             }
-            else if (CustomInputSystem.Instance.GetRightKeyWithCooldown())
+            else if (CustomInputSystem.Instance.GetDownKeyWithCooldown())
             {
                 selectedIndex = math.min(3, selectedIndex + 1);
                 vC.UpdateVolumeButtonSelection(selectedIndex);
             }
+            else if (CustomInputSystem.Instance.GetRightKeyWithCooldown() && selectedIndex != 3)
+                vC.SelectRight(selectedIndex, token);
+            else if (CustomInputSystem.Instance.GetLeftKeyWithCooldown() && selectedIndex != 3)
+                vC.SelectLeft(selectedIndex, token);
 
             if (CustomInputSystem.Instance.GetPauseKeyWithCooldown()
             || (CustomInputSystem.Instance.DoesSelectKeyUp() && selectedIndex == 3))
-                vSM.ChangeState(new VolumeStateExitPage());
+                vSM.ChangeState(new VolumeStateExitPage(vC));
         }
 
         public void OnStateExit()
         {
-
+            cTS.Cancel();
+            cTS.Dispose();
         }
     }
 }

@@ -35,7 +35,6 @@ namespace Assets.Scripts.Farce.Controller
         {
             PauseStateInitial.ResetFlags();
             Time.timeScale = 1;
-            SceneManager.UnloadSceneAsync(fC.PauseSceneName);
         }
     }
 }

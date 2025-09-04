@@ -31,12 +31,12 @@ namespace Assets.Scripts.Title.Controller
 
         public void HandleInput()
         {
-            if (CustomInputSystem.Instance.GetLeftKeyWithCooldown())
+            if (CustomInputSystem.Instance.GetUpKeyWithCooldown())
             {
                 selectedIndex = math.max(0, selectedIndex - 1);
                 tC.UpdateInitButtonSelection(selectedIndex);
             }
-            else if (CustomInputSystem.Instance.GetRightKeyWithCooldown())
+            else if (CustomInputSystem.Instance.GetDownKeyWithCooldown())
             {
                 selectedIndex = math.min(2, selectedIndex + 1);
                 tC.UpdateInitButtonSelection(selectedIndex);

@@ -1,4 +1,5 @@
 using Assets.Scripts.Common.Controller;
+using Assets.Scripts.Volume.Controller;
 using Unity.Mathematics;
 
 namespace Assets.Scripts.Pause.Controller
@@ -24,18 +25,18 @@ namespace Assets.Scripts.Pause.Controller
         public void OnStateEnter()
         {
             selectedIndex = 0;
-            pC.SetActiveButtons(true);
-            pC.UpdateInitButtonSelection(selectedIndex);
+            pC.Initialize();
+            VolumeStateExitPage.ResetFlag();
         }
 
         public void HandleInput()
         {
-            if (CustomInputSystem.Instance.GetLeftKeyWithCooldown())
+            if (CustomInputSystem.Instance.GetUpKeyWithCooldown())
             {
                 selectedIndex = math.max(0, selectedIndex - 1);
                 pC.UpdateInitButtonSelection(selectedIndex);
             }
-            else if (CustomInputSystem.Instance.GetRightKeyWithCooldown())
+            else if (CustomInputSystem.Instance.GetDownKeyWithCooldown())
             {
                 selectedIndex = math.min(3, selectedIndex + 1);
                 pC.UpdateInitButtonSelection(selectedIndex);
@@ -44,7 +45,7 @@ namespace Assets.Scripts.Pause.Controller
             if (CustomInputSystem.Instance.GetPauseKeyWithCooldown())
             {
                 isBack = true;
-                pSM.ChangeState(new PauseStateSelected());
+                pSM.ChangeState(new PauseStateSelected(pC));
             }
             else if (CustomInputSystem.Instance.DoesSelectKeyUp())
             {
@@ -52,19 +53,18 @@ namespace Assets.Scripts.Pause.Controller
                 {
                     case 0:
                         isBack = true;
-                        pSM.ChangeState(new PauseStateSelected());
+                        pSM.ChangeState(new PauseStateSelected(pC));
                         break;
                     case 1:
-                        pSM.ChangeState(new PauseStateSetVolume(pC, pSM));
-                        pC.SetActiveButtons(false);
+                        pSM.ChangeState(new PauseStateSetVolume(pC));
                         break;
                     case 2:
                         doesSelectStage = true;
-                        pSM.ChangeState(new PauseStateSelected());
+                        pSM.ChangeState(new PauseStateSelected(pC));
                         break;
                     case 3:
                         doesExitGame = true;
-                        pSM.ChangeState(new PauseStateSelected());
+                        pSM.ChangeState(new PauseStateSelected(pC));
                         break;
                 }
             }

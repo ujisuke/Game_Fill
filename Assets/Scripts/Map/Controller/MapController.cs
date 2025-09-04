@@ -41,6 +41,11 @@ namespace Assets.Scripts.Map.Controller
             mapView.SelectLeft(stageIndex, token).Forget();
         }
 
+        public void Entrust()
+        {
+            mapView.Entrust();
+        }
+
         public async UniTask CloseScene(CancellationToken token)
         {
             await mapView.CloseScene(token);
