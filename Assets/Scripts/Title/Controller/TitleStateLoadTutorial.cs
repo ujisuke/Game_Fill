@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Title.Controller
 {
-    public class TitleStateLoadMap : ITitleState
+    public class TitleStateLoadTutorial : ITitleState
     {
         private readonly TitleController tC;
         private readonly CancellationTokenSource cTS;
         private readonly CancellationToken token;
 
-        public TitleStateLoadMap(TitleController tC)
+        public TitleStateLoadTutorial(TitleController tC)
         {
             this.tC = tC;
             cTS = new();
@@ -21,14 +21,13 @@ namespace Assets.Scripts.Title.Controller
 
         public void OnStateEnter()
         {
-            MapStateInitial.OpenFromTitle();
             LoadScene().Forget();
         }
 
         private async UniTask LoadScene()
         {
-            await tC.CloseSceneWithBlack(token);
-            SceneManager.LoadScene(tC.MapSceneName);
+            await tC.CloseSceneToTutorial(token);
+            SceneManager.LoadScene(tC.TutorialSceneName);
         }
 
         public void HandleInput()

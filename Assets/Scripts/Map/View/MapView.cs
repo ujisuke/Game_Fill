@@ -6,6 +6,7 @@ using Assets.Scripts.Common.View;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Controller;
 using Cysharp.Threading.Tasks;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
@@ -28,6 +29,7 @@ namespace Assets.Scripts.Map.View
         [SerializeField] private Text hardText;
         [SerializeField] private Animator NiLLAnimator;
         [SerializeField] private Animator BoLLAnimator;
+        [SerializeField] private SpriteRenderer hardIcon;
         private int mailIndexPrev;
 
         private void Awake()
@@ -59,19 +61,22 @@ namespace Assets.Scripts.Map.View
             frontView.Initialize(frontOpenFromTitleInitSprite);
         }
 
-        public void InitializeMail(int stageIndex)
+        public void InitializeMailAndIcon(int stageIndex)
         {
+            int listUpper = math.min(ES3.Load("ClearedStageIndex", 0) + 1, mailTextList.Count - 1);
             mailIndexPrev = stageIndex;
-            if (stageIndex < mailTextList.Count - 1)
+            if (stageIndex < listUpper)
                 rightArrowView.PlayAnim("Awake");
             if (stageIndex > 0)
                 leftArrowView.PlayAnim("Awake");
             UpdateMailText(stageIndex);
+            UpdateHardIcon(stageIndex);
         }
 
         public async UniTask SelectRight(int stageIndex, CancellationToken token)
         {
-            if (stageIndex == mailTextList.Count - 1 && mailIndexPrev == mailTextList.Count - 1)
+            int listUpper = math.min(ES3.Load("ClearedStageIndex", 0) + 1, mailTextList.Count - 1);
+            if (stageIndex == listUpper && mailIndexPrev == listUpper)
                 return;
             rightArrowView.PlayAnim("Awake");
             mailView.PlayAnim("Awake");
@@ -80,8 +85,9 @@ namespace Assets.Scripts.Map.View
             leftArrowView.PlayAnim("Awake");
             mailView.PlayAnim("ChangeText");
             UpdateMailText(stageIndex);
+            UpdateHardIcon(stageIndex);
             mailIndexPrev = stageIndex;
-            if (stageIndex < mailTextList.Count - 1)
+            if (stageIndex < listUpper)
                 return;
             await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: token);
             rightArrowView.PlayAnim("Empty");
@@ -98,6 +104,7 @@ namespace Assets.Scripts.Map.View
             rightArrowView.PlayAnim("Awake");
             mailView.PlayAnim("ChangeText");
             UpdateMailText(stageIndex);
+            UpdateHardIcon(stageIndex);
             mailIndexPrev = stageIndex;
             if (stageIndex > 0)
                 return;
@@ -108,6 +115,11 @@ namespace Assets.Scripts.Map.View
         private void UpdateMailText(int stageIndex)
         {
             mailText.text = mailTextList[stageIndex].GetText(mailTitleSize);
+        }
+
+        private void UpdateHardIcon(int stageIndex)
+        {
+            hardIcon.enabled = ES3.Load("Hard" + stageIndex, false);
         }
 
         public async UniTask SetDifficulty(bool isHard, CancellationToken token)

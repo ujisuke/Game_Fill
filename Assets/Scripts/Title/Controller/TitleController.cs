@@ -16,7 +16,8 @@ namespace Assets.Scripts.Title.Controller
         [SerializeField] private SceneNameData sceneNameData;
         private TitleStateMachine tSM;
         public string VolumeSceneName => sceneNameData.VolumeSceneName;
-        public string SelectStageSceneName => sceneNameData.MapSceneName;
+        public string MapSceneName => sceneNameData.MapSceneName;
+        public string TutorialSceneName => sceneNameData.TutorialSceneName;
 
         private void Awake()
         {
@@ -43,9 +44,14 @@ namespace Assets.Scripts.Title.Controller
             titleView.Open();
         }
 
-        public async UniTask CloseScene(CancellationToken token)
+        public async UniTask CloseSceneWithBlack(CancellationToken token)
         {
-            await titleView.Close(token);
+            await titleView.CloseWithBlack(token);
+        }
+
+        public async UniTask CloseSceneToTutorial(CancellationToken token)
+        {
+            await titleView.CloseToTutorial(token);
         }
     }
 }

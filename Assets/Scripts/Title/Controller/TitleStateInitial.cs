@@ -10,10 +10,6 @@ namespace Assets.Scripts.Title.Controller
         private readonly TitleController tC;
         private readonly TitleStateMachine tSM;
         private int selectedIndex;
-        private static bool doesSelectStage;
-        private static bool doesExitGame;
-        public static bool DoesSelectStage => doesSelectStage;
-        public static bool DoesExitGame => doesExitGame;
 
         public TitleStateInitial(TitleController tC, TitleStateMachine tSM)
         {
@@ -47,15 +43,16 @@ namespace Assets.Scripts.Title.Controller
                 switch (selectedIndex)
                 {
                     case 0:
-                        doesSelectStage = true;
-                        tSM.ChangeState(new TitleStateLoadMap(tC));
+                        if (ES3.Load("ClearedStageIndex", -1) == -1)
+                            tSM.ChangeState(new TitleStateLoadTutorial(tC));
+                        else
+                            tSM.ChangeState(new TitleStateLoadMap(tC));
                         break;
                     case 1:
                         tSM.ChangeState(new TitleStateSetVolume(tC, tSM));
                         tC.SetActiveButtons(false);
                         break;
                     case 2:
-                        doesExitGame = true;
                         tSM.ChangeState(new TitleStateExitGame());
                         break;
                 }
@@ -65,12 +62,6 @@ namespace Assets.Scripts.Title.Controller
         public void OnStateExit()
         {
 
-        }
-
-        public static void ResetFlags()
-        {
-            doesSelectStage = false;
-            doesExitGame = false;
         }
     }
 }

@@ -21,6 +21,7 @@ namespace Assets.Scripts.Map.Data
         public string VolumeSceneName => volumeSceneName;
         public string EndingSceneName => endingSceneName;
         public int StageCount => stageNameList.Count;
+        public string TutorialSceneName => stageNameList[0];
 
         public string GetCurrentStageName(int index)
         {

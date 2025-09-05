@@ -20,10 +20,11 @@ namespace Assets.Scripts.Map.Model
 
         public void UpdateStageIndex(int additionalIndex)
         {
-            currentStageIndex = math.clamp(currentStageIndex + additionalIndex, 0, sceneNameData.StageCount - 1);
+            int listUpper = math.min(ES3.Load("ClearedStageIndex", 0) + 1, sceneNameData.StageCount - 1);
+            currentStageIndex = math.clamp(currentStageIndex + additionalIndex, 0, listUpper);
         }
 
-        public void SetDifficulty(bool isHard)
+        public static void SetDifficulty(bool isHard)
         {
             isHardMode = isHard;
         }

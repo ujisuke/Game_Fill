@@ -30,7 +30,7 @@ namespace Assets.Scripts.Map.Controller
 
         public void InitializeMail()
         {
-            mapView.InitializeMail(MapModel.CurrentStageIndex);
+            mapView.InitializeMailAndIcon(MapModel.CurrentStageIndex);
         }
 
         public void SelectRight(CancellationToken token)
@@ -45,7 +45,7 @@ namespace Assets.Scripts.Map.Controller
 
         public async UniTask SetDifficulty(bool isHard, CancellationToken token)
         {
-            mapModel.SetDifficulty(isHard);
+            MapModel.SetDifficulty(isHard);
             await mapView.SetDifficulty(isHard, token);
         }
 

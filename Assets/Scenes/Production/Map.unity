@@ -769,6 +769,7 @@ MonoBehaviour:
   hardText: {fileID: 127249960}
   NiLLAnimator: {fileID: 663478397}
   BoLLAnimator: {fileID: 935012233}
+  hardIcon: {fileID: 2139880742}
 --- !u!114 &615151344
 MonoBehaviour:
   m_ObjectHideFlags: 0
