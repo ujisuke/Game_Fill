@@ -25,6 +25,9 @@ namespace Assets.Scripts.Map.View
         [SerializeField] private Text mailText;
         [SerializeField] private int mailTitleSize;
         [SerializeField] private List<MailText> mailTextList;
+        [SerializeField] private Text hardText;
+        [SerializeField] private Animator NiLLAnimator;
+        [SerializeField] private Animator BoLLAnimator;
         private int mailIndexPrev;
 
         private void Awake()
@@ -105,6 +108,24 @@ namespace Assets.Scripts.Map.View
         private void UpdateMailText(int stageIndex)
         {
             mailText.text = mailTextList[stageIndex].GetText(mailTitleSize);
+        }
+
+        public async UniTask SetDifficulty(bool isHard, CancellationToken token)
+        {
+            mailView.PlayAnim("Awake");
+            await UniTask.DelayFrame(1, cancellationToken: token);
+            hardText.enabled = isHard;
+            if (isHard)
+            {
+                mailView.PlayAnim("GetHard");
+                NiLLAnimator.Play("IdleHard");
+                BoLLAnimator.Play("IdleHard");
+            }
+            else
+            {
+                NiLLAnimator.Play("Idle");
+                BoLLAnimator.Play("Idle");
+            }
         }
     }
 

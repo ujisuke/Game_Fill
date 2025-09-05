@@ -6012,11 +6012,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5000527993764406926, guid: 9a85b32a38a8f0d47b9a99ee333aa905, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.08
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 5000527993764406926, guid: 9a85b32a38a8f0d47b9a99ee333aa905, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.06
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 5000527993764406926, guid: 9a85b32a38a8f0d47b9a99ee333aa905, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7937,7 +7937,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1441032657}
   stageView: {fileID: 2068900229}
-  timeLimit: 18
+  timeLimitNormal: 18
+  timeLimitHard: 13
   isFinalStage: 0
   isEndingStage: 0
   nextSceneName: 4-5

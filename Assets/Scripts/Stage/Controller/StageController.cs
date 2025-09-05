@@ -1,5 +1,6 @@
 using System.Threading;
 using Assets.Scripts.Map.Data;
+using Assets.Scripts.Map.Model;
 using Assets.Scripts.Stage.Model;
 using Assets.Scripts.Stage.View;
 using Cysharp.Threading.Tasks;
@@ -13,7 +14,8 @@ namespace Assets.Scripts.Stage.Controller
         [SerializeField] private Tilemap tilemap;
         private StageModel stageModel;
         [SerializeField] private StageView stageView;
-        [SerializeField] private int timeLimit;
+        [SerializeField] private int timeLimitNormal;
+        [SerializeField] private int timeLimitHard;
         private StageStateMachine stageStateMachine;
         [SerializeField] private bool isFinalStage;
         [SerializeField] private bool isEndingStage;
@@ -29,6 +31,7 @@ namespace Assets.Scripts.Stage.Controller
 
         private void Awake()
         {
+            int timeLimit = MapModel.IsHardMode ? timeLimitHard : timeLimitNormal;
             stageModel = new StageModel(tilemap, this, timeLimit);
             stageStateMachine = new(this);
             stageView.SetBlockMap(tilemap);

@@ -34187,10 +34187,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1441032657}
   stageView: {fileID: 2068900229}
-  timeLimit: 99
+  timeLimitNormal: 99
+  timeLimitHard: 8
   isFinalStage: 0
   isEndingStage: 1
-  nextStageName: 
+  nextSceneName: 
   sceneNameData: {fileID: 11400000, guid: 814a9456882d9a140a714a302e8cdfbf, type: 2}
 --- !u!4 &2068900231
 Transform:

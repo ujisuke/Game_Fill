@@ -14,18 +14,17 @@ namespace Assets.Scripts.Map.Data
         [SerializeField] private string volumeSceneName;
         [SerializeField] private string endingSceneName;
         [SerializeField] private List<string> stageNameList;
-        public static int CurrentStageIndex = 0;
 
         public string TitleSceneName => titleSceneName;
         public string MapSceneName => mapSceneName;
         public string PauseSceneName => pauseSceneName;
-        public string CurrentStageName => stageNameList[CurrentStageIndex];
         public string VolumeSceneName => volumeSceneName;
         public string EndingSceneName => endingSceneName;
+        public int StageCount => stageNameList.Count;
 
-        public void UpdateCurrentStageName(int additionIndex)
+        public string GetCurrentStageName(int index)
         {
-            CurrentStageIndex = math.clamp(CurrentStageIndex + additionIndex, 0, stageNameList.Count - 1);
+            return stageNameList[index];
         }
     }
 }

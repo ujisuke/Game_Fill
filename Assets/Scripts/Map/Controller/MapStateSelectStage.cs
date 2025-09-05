@@ -1,6 +1,7 @@
 using System.Threading;
 using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Map.Data;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Map.Controller
@@ -29,13 +30,21 @@ namespace Assets.Scripts.Map.Controller
         {
             if (CustomInputSystem.Instance.GetRightKeyWithCooldown())
             {
-                mC.UpdateCurrentStageName(1);
-                mC.SelectRight(SceneNameData.CurrentStageIndex, token);
+                mC.UpdateStageIndex(1);
+                mC.SelectRight(token);
             }
             else if (CustomInputSystem.Instance.GetLeftKeyWithCooldown())
             {
-                mC.UpdateCurrentStageName(-1);
-                mC.SelectLeft(SceneNameData.CurrentStageIndex, token);
+                mC.UpdateStageIndex(-1);
+                mC.SelectLeft(token);
+            }
+            else if (CustomInputSystem.Instance.GetUpKeyWithCooldown())
+            {
+                mC.SetDifficulty(true, token).Forget();
+            }
+            else if (CustomInputSystem.Instance.GetDownKeyWithCooldown())
+            {
+                mC.SetDifficulty(false, token).Forget();
             }
 
             if (CustomInputSystem.Instance.DoesSelectKeyUp())
