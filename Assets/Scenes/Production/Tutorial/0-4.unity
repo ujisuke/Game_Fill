@@ -9415,6 +9415,8 @@ MonoBehaviour:
   additionalObjectList:
   - {fileID: 1430229128}
   - {fileID: 768263792}
+  endingHouse: {fileID: 0}
+  endingThanks: {fileID: 0}
 --- !u!114 &2068900230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9429,9 +9431,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1441032657}
   stageView: {fileID: 2068900229}
-  timeLimit: 4
+  timeLimit: 5
   isFinalStage: 1
-  nextStageName: 
+  isEndingStage: 0
+  nextSceneName: 0-F
   sceneNameData: {fileID: 11400000, guid: 814a9456882d9a140a714a302e8cdfbf, type: 2}
 --- !u!4 &2068900231
 Transform:

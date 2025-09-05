@@ -5233,6 +5233,8 @@ MonoBehaviour:
   frontOpenInitSprite: {fileID: -485440478616671248, guid: 672c0e5b256cd594aa85263f3622080c, type: 3}
   stageViewData: {fileID: 11400000, guid: 1c0d6dbcc16fa8d43b8cc2ee5f6ec8ec, type: 2}
   additionalObjectList: []
+  endingHouse: {fileID: 0}
+  endingThanks: {fileID: 0}
 --- !u!114 &2068900230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5249,7 +5251,8 @@ MonoBehaviour:
   stageView: {fileID: 2068900229}
   timeLimit: 5
   isFinalStage: 0
-  nextStageName: 1-3
+  isEndingStage: 0
+  nextSceneName: 1-3
   sceneNameData: {fileID: 11400000, guid: 814a9456882d9a140a714a302e8cdfbf, type: 2}
 --- !u!4 &2068900231
 Transform:

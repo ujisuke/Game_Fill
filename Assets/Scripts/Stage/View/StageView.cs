@@ -26,6 +26,8 @@ namespace Assets.Scripts.Stage.View
         [SerializeField] private Sprite frontOpenInitSprite;
         [SerializeField] private ViewData stageViewData;
         [SerializeField] private List<GameObject> additionalObjectList;
+        [SerializeField] private HouseView endingHouse;
+        [SerializeField] private TextBox endingThanks;
         private static bool isRetry = false;
         private BlockView[,] blockMap;
 
@@ -83,13 +85,25 @@ namespace Assets.Scripts.Stage.View
 
         public async UniTask PlayClearFinalEffect(CancellationToken token)
         {
+            isRetry = false;
             await PlayGoodAndText(token);
             await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ClearFinalAnimDelaySeconds), cancellationToken: token);
             fillEffectView.PlayAnim("ClearFinal", stageViewData.ClearAnimSeconds);
             await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.CloseAnimDelaySeconds), cancellationToken: token);
             frontView.PlayAnim("InBlack", stageViewData.InBlackAnimSeconds);
-            isRetry = false;
             await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneWithBlackDelaySeconds), cancellationToken: token);
+        }
+
+        public async UniTask PlayEndingEffect(CancellationToken token)
+        {
+            isRetry = false;
+            timeLimitText.enabled = false;
+            endingHouse.Break();
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.HouseIlluminateDelaySeconds), cancellationToken: token);
+            endingHouse.Illuminate();
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ThanksDelaySeconds), cancellationToken: token);
+            endingThanks.ShowAndPlay();
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadTitleOnEndingDelaySeconds), cancellationToken: token);
         }
 
         private async UniTask PlayGoodAndText(CancellationToken token)
@@ -147,6 +161,13 @@ namespace Assets.Scripts.Stage.View
             frontView.PlayAnim("CloseRell", stageViewData.CloseAnimSeconds);
             isRetry = true;
             await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneDelaySeconds), cancellationToken: token);
+        }
+
+        public async UniTask CloseStageWithBlack(CancellationToken token)
+        {
+            frontView.PlayAnim("InBlack", stageViewData.InBlackAnimSeconds);
+            isRetry = false;
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneWithBlackDelaySeconds), cancellationToken: token);
         }
 
         public void OpenStage()

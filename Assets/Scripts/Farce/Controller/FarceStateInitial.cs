@@ -26,7 +26,12 @@ namespace Assets.Scripts.Farce.Controller
             if (CustomInputSystem.Instance.GetPauseKeyWithCooldown())
                 fSM.ChangeState(new FarceStatePause(fSM, fC));
             else if (CustomInputSystem.Instance.DoesSelectKeyUp())
-                fSM.ChangeState(new FarceStateLoadMap(fC));
+            {
+                if (fC.IsEnding)
+                    fSM.ChangeState(new FarceStateLoadEnding(fC));
+                else
+                    fSM.ChangeState(new FarceStateLoadMap(fC));
+            }
         }
 
         public void OnStateExit()

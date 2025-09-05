@@ -16,7 +16,7 @@ MonoBehaviour:
   mapSceneName: Map
   pauseSceneName: Pause
   volumeSceneName: Volume
-  farceSceneName: Farce
+  endingSceneName: 5-E
   stageNameList:
   - 0-1
   - 1-1

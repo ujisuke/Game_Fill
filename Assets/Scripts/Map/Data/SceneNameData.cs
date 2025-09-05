@@ -12,7 +12,7 @@ namespace Assets.Scripts.Map.Data
         [SerializeField] private string mapSceneName;
         [SerializeField] private string pauseSceneName;
         [SerializeField] private string volumeSceneName;
-        [SerializeField] private string farceSceneName;
+        [SerializeField] private string endingSceneName;
         [SerializeField] private List<string> stageNameList;
         public static int CurrentStageIndex = 0;
 
@@ -21,7 +21,7 @@ namespace Assets.Scripts.Map.Data
         public string PauseSceneName => pauseSceneName;
         public string CurrentStageName => stageNameList[CurrentStageIndex];
         public string VolumeSceneName => volumeSceneName;
-        public string FarceSceneName => farceSceneName;
+        public string EndingSceneName => endingSceneName;
 
         public void UpdateCurrentStageName(int additionIndex)
         {

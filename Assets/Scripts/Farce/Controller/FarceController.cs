@@ -15,10 +15,13 @@ namespace Assets.Scripts.Farce.Controller
     {
         [SerializeField] private FarceView farceView;
         [SerializeField] private SceneNameData sceneNameData;
+        [SerializeField] private bool isEnding;
         private FarceStateMachine fSM;
+        public bool IsEnding => isEnding;
         public string VolumeSceneName => sceneNameData.VolumeSceneName;
         public string SelectStageSceneName => sceneNameData.MapSceneName;
         public string PauseSceneName => sceneNameData.PauseSceneName;
+        public string EndingSceneName => sceneNameData.EndingSceneName;
 
         private void Awake()
         {

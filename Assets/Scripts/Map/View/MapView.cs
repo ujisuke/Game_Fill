@@ -21,9 +21,9 @@ namespace Assets.Scripts.Map.View
         [SerializeField] private ImageView frontView;
         [SerializeField] private ImageView rightArrowView;
         [SerializeField] private ImageView leftArrowView;
-        [SerializeField] private ImageView entrustView;
         [SerializeField] private ImageView mailView;
         [SerializeField] private Text mailText;
+        [SerializeField] private int mailTitleSize;
         [SerializeField] private List<MailText> mailTextList;
         private int mailIndexPrev;
 
@@ -102,26 +102,20 @@ namespace Assets.Scripts.Map.View
             leftArrowView.PlayAnim("Empty");
         }
 
-        public void Entrust()
-        {
-            entrustView.PlayAnim("Selected");
-        }
-
         private void UpdateMailText(int stageIndex)
         {
-            mailText.text = mailTextList[stageIndex].GetText(mailText.fontSize);
+            mailText.text = mailTextList[stageIndex].GetText(mailTitleSize);
         }
     }
 
     [Serializable]
     class MailText
     {
-        [SerializeField] private string title;
+        [SerializeField, TextArea] private string title;
         [SerializeField, TextArea(3, 10)] private string mainText;
 
-        public string GetText(int mainTextSize)
+        public string GetText(int titleSize)
         {
-            int titleSize = mainTextSize * 2;
             string titleString = $"<size={titleSize}>{title}</size>\n\n";
             return titleString + mainText;
         }

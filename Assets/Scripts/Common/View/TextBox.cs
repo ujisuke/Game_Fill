@@ -48,5 +48,11 @@ namespace Assets.Scripts.Common.View
                 await UniTask.Delay(TimeSpan.FromSeconds(showSentenceSeconds), cancellationToken: token);
             }
         }
+
+        public void ShowAndPlay()
+        {
+            text.enabled = true;
+            Play().Forget();
+        }
     }
 }

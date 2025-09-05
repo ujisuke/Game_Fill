@@ -16,14 +16,16 @@ namespace Assets.Scripts.Stage.Controller
         [SerializeField] private int timeLimit;
         private StageStateMachine stageStateMachine;
         [SerializeField] private bool isFinalStage;
-        [SerializeField] private string nextStageName;
+        [SerializeField] private bool isEndingStage;
+        [SerializeField] private string nextSceneName;
         [SerializeField] private SceneNameData sceneNameData;
 
         public bool IsFinalStage => isFinalStage;
-        public string NextStageName => nextStageName;
+        public bool IsEndingStage => isEndingStage;
+        public string NextSceneName => nextSceneName;
         public string MapSceneName => sceneNameData.MapSceneName;
         public string PauseSceneName => sceneNameData.PauseSceneName;
-        public string FarceSceneName => sceneNameData.FarceSceneName;
+        public string TitleSceneName => sceneNameData.TitleSceneName;
 
         private void Awake()
         {
@@ -58,12 +60,22 @@ namespace Assets.Scripts.Stage.Controller
             await stageView.PlayClearFinalEffect(token);
         }
 
+        public async UniTask PlayEndingEffect(CancellationToken token)
+        {
+            await stageView.PlayEndingEffect(token);
+        }
+
         public async UniTask CloseStage(bool isRetry, CancellationToken token)
         {
             if (isRetry)
                 await stageView.CloseStageRetry(token);
             else
                 await stageView.CloseStage(token);
+        }
+
+        public async UniTask CloseStageWithBlack(CancellationToken token)
+        {
+            await stageView.CloseStageWithBlack(token);
         }
 
         public void OpenStage()

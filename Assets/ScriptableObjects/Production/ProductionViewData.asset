@@ -31,4 +31,7 @@ MonoBehaviour:
   outBlackAnimSeconds: 0.3
   showCharSeconds: 0.05
   showSentenceSeconds: 1
+  houseIlluminateDelaySeconds: 2
+  thanksDelaySeconds: 2
+  loadTitleOnEndingDelaySeconds: 3
   slowEffectColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}

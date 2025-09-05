@@ -681,6 +681,7 @@ GameObject:
   m_Component:
   - component: {fileID: 139980335}
   - component: {fileID: 139980334}
+  - component: {fileID: 139980336}
   m_Layer: 0
   m_Name: Frame_1
   m_TagString: Untagged
@@ -732,7 +733,7 @@ SpriteRenderer:
   m_SortingLayerID: 507893173
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3869517344256968726, guid: c14ec874ae9430742a33173faea4ffab, type: 3}
+  m_Sprite: {fileID: -3869517344256968726, guid: 7f4d1c85a9a6cee40b986db075c60189, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -758,6 +759,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &139980336
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139980333}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: -1441891496490174993, guid: 7f4d1c85a9a6cee40b986db075c60189, type: 3}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &142735347 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5000527993764406926, guid: f4c00a66403d4074b95b1b4a90efdb38, type: 3}
@@ -3158,6 +3181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 941846064}
   - component: {fileID: 941846063}
+  - component: {fileID: 941846065}
   m_Layer: 0
   m_Name: Frame_0
   m_TagString: Untagged
@@ -3235,6 +3259,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &941846065
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941846062}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: -7708163485137532774, guid: c14ec874ae9430742a33173faea4ffab, type: 3}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &942219323 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5000527993764406926, guid: f4c00a66403d4074b95b1b4a90efdb38, type: 3}
@@ -7378,6 +7424,8 @@ MonoBehaviour:
   - {fileID: 768263792}
   - {fileID: 941846062}
   - {fileID: 139980333}
+  endingHouse: {fileID: 0}
+  endingThanks: {fileID: 0}
 --- !u!114 &2068900230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7394,7 +7442,8 @@ MonoBehaviour:
   stageView: {fileID: 2068900229}
   timeLimit: 99
   isFinalStage: 0
-  nextStageName: 0-2
+  isEndingStage: 0
+  nextSceneName: 0-2
   sceneNameData: {fileID: 11400000, guid: 814a9456882d9a140a714a302e8cdfbf, type: 2}
 --- !u!4 &2068900231
 Transform:

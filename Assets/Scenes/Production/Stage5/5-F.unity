@@ -582,7 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8478f0aad80c9324b881151d2cbfd5c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewData: {fileID: 11400000, guid: 6cb140ad01fab364e9f65aedfe59657b, type: 2}
+  viewData: {fileID: 11400000, guid: 1c0d6dbcc16fa8d43b8cc2ee5f6ec8ec, type: 2}
   frontView: {fileID: 324257976}
   frontOutBlackInitSprite: {fileID: -8515752919138621418, guid: 672c0e5b256cd594aa85263f3622080c, type: 3}
 --- !u!114 &1063073870
@@ -598,7 +598,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   farceView: {fileID: 1063073869}
-  sceneNameData: {fileID: 11400000, guid: 153f935e99b39cb468f1a33e575aa590, type: 2}
+  sceneNameData: {fileID: 11400000, guid: 814a9456882d9a140a714a302e8cdfbf, type: 2}
+  isEnding: 1
 --- !u!1 &1440347590
 GameObject:
   m_ObjectHideFlags: 0
