@@ -3052,7 +3052,7 @@ MonoBehaviour:
   viewData: {fileID: 11400000, guid: 1c0d6dbcc16fa8d43b8cc2ee5f6ec8ec, type: 2}
   text: {fileID: 768263795}
   showText:
-  - "\u9593\u9055\u3063\u3066\u3082<color=#56FEEA>Fillmina</color>\u306B\u89E6\u308B\u306A\u3088\u3002\n\u907F\u3051\u306A\u304C\u3089\u6B69\u3044\u305F\u307B\u3046\u304C\u5065\u5EB7\u306B\u3044\u3044\u3002"
+  - "\u9593\u9055\u3063\u3066\u3082<color=#56FEEA>Fillmina</color>\u306B\u89E6\u308B\u306A\u3088\n\u907F\u3051\u306A\u304C\u3089\u6B69\u3044\u305F\u307B\u3046\u304C\u5065\u5EB7\u306B\u3044\u3044"
 --- !u!114 &768263795
 MonoBehaviour:
   m_ObjectHideFlags: 0
