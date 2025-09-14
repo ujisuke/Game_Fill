@@ -15,7 +15,7 @@ MonoBehaviour:
   blockBecomeWallSeconds: 0.2
   blockFilledAnimSeconds: 1
   slowInAnimSeconds: 0.3
-  goodAnimSeconds: 1
+  goodAnimSeconds: 0.3
   clearAnimDelaySeconds: 1
   clearAnimSeconds: 0.3
   paintStageDelaySeconds: 0.3

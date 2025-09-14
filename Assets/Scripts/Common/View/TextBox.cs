@@ -13,6 +13,7 @@ namespace Assets.Scripts.Common.View
         [SerializeField] private ViewData viewData;
         [SerializeField] private Text text;
         [SerializeField, TextArea(3, 10)] private List<string> showText;
+        [SerializeField] private float showDelaySeconds = 0f;
 
         private void Awake()
         {
@@ -22,28 +23,39 @@ namespace Assets.Scripts.Common.View
         private async UniTask Play()
         {
             var token = this.GetCancellationTokenOnDestroy();
+            await UniTask.Delay(TimeSpan.FromSeconds(showDelaySeconds), cancellationToken: token);
             for (int k = 0; k < showText.Count; k++)
             {
                 string currentText = string.Empty;
-                int colorCount = 0;
                 float showCharSeconds = viewData.ShowCharSeconds;
                 float showSentenceSeconds = viewData.ShowSentenceSeconds;
-                for (int i = 0; i < showText[k].Length; i++)
+                string colorTextL = string.Empty;
+                string colorTextR = string.Empty;
+                int i = 0;
+                while (i < showText[k].Length)
                 {
-                    currentText += showText[k][i];
-                    if (showText[k][i] == '<' || showText[k][i] == '>')
-                        colorCount++;
-                    if (colorCount == 0)
+                    if (showText[k][i] == '<' && colorTextL == string.Empty)
                     {
-                        text.text = currentText;
-                        await UniTask.Delay(TimeSpan.FromSeconds(showCharSeconds), cancellationToken: token);
+                        colorTextL = showText[k].Substring(i, 15);
+                        colorTextR = "</color>";
+                        i += 15;
+                        continue;
                     }
-                    else if (colorCount == 4)
+                    else if (showText[k][i] == '<' && colorTextL != string.Empty)
                     {
-                        text.text = currentText;
-                        colorCount = 0;
-                        await UniTask.Delay(TimeSpan.FromSeconds(showCharSeconds), cancellationToken: token);
+                        colorTextL = string.Empty;
+                        colorTextR = string.Empty;
+                        i += 8;
+                        continue;
                     }
+
+                    currentText += colorTextL + showText[k][i] + colorTextR;
+                    text.text = currentText;
+                    if (showText[k][i] == '\n')
+                        await UniTask.Delay(TimeSpan.FromSeconds(showCharSeconds * 10), cancellationToken: token);
+                    else
+                        await UniTask.Delay(TimeSpan.FromSeconds(showCharSeconds), cancellationToken: token);
+                    i++;
                 }
                 await UniTask.Delay(TimeSpan.FromSeconds(showSentenceSeconds), cancellationToken: token);
             }

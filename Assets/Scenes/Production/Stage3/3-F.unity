@@ -304,11 +304,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -583,8 +583,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: ae2b2b529b02db24ca2f2317fe4d1ce8, type: 3}
-    m_FontSize: 60
+    m_Font: {fileID: 12800000, guid: 433d3fcd2f28fcb43be5af1b968f44ac, type: 3}
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -594,8 +594,8 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "\u30B7\u30B4\u30C8\u3092\u7D42\u3048\u308B\n(SPACE)"
+    m_LineSpacing: 0.6
+  m_Text: "\u30B7\u30B4\u30C8\u3092\u7D42\u3048\u308B\n- SPACE -"
 --- !u!222 &335535833
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -904,11 +904,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -1015,6 +1015,7 @@ MonoBehaviour:
   text: {fileID: 1940798201}
   showText:
   - "\u63D0\u6848\u3060\n        \n\u30B7\u30B4\u30C8\u3067\u4F7F\u3063\u3066\u308B\u30AD\u30AB\u30A4\u3042\u308B\u3060\u308D\uFF1F\u305D\u306E\u5024\u6BB5\u3076\u3093\u3060\u3051\n\u50CD\u3044\u305F\u3089\u7D66\u6599\u306E\u4EE3\u308F\u308A\u306B\u8B72\u3063\u3066\u3084\u308B\n\u305D\u308C\u306A\u3089Fillmina\u8CB7\u308F\u306A\u304F\u3066\u6E08\u3080\u3060\u308D\n\u6C7A\u307E\u308A\u3067\u3044\u3044\u306A\uFF1F\u7CBE\u51FA\u3057\u3066\u50CD\u304F\u3053\u3068\u3060\u306A"
+  showDelaySeconds: 0
 --- !u!114 &1940798201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1036,7 +1037,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: ae2b2b529b02db24ca2f2317fe4d1ce8, type: 3}
+    m_Font: {fileID: 12800000, guid: 433d3fcd2f28fcb43be5af1b968f44ac, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -1047,8 +1048,8 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1.2
-  m_Text: "\u63D0\u6848\u3060\n        \n\u30B7\u30B4\u30C8\u3067\u4F7F\u3063\u3066\u308B\u30AD\u30AB\u30A4\u3042\u308B\u3060\u308D\uFF1F\u305D\u306E\u5024\u6BB5\u3076\u3093\u3060\u3051\n\u50CD\u3044\u305F\u3089\u7D66\u6599\u306E\u4EE3\u308F\u308A\u306B\u8B72\u3063\u3066\u3084\u308B\n\u305D\u308C\u306A\u3089Fillmina\u8CB7\u308F\u306A\u304F\u3066\u6E08\u3080\u3060\u308D\n\u6C7A\u307E\u308A\u3067\u3044\u3044\u306A\uFF1F\u7CBE\u51FA\u3057\u3066\u50CD\u304F\u3053\u3068\u3060\u306A"
+    m_LineSpacing: 0.8
+  m_Text: "\u30B7\u30B4\u30C8\u3067\u4F7F\u3063\u3066\u308B\u30AD\u30AB\u30A4\u3042\u308B\u3060\u308D\uFF1F\n\u305D\u306E\u5024\u6BB5\u3076\u3093\u3060\u3051\u50CD\u3044\u305F\u3089\u7D66\u6599\u306E\u4EE3\u308F\u308A\u306B\u8B72\u3063\u3066\u3084\u308B\n\u305D\u308C\u306A\u3089Fillmina\u8CB7\u308F\u306A\u304F\u3066\u6E08\u3080\u3060\u308D\n\n\u6C7A\u307E\u308A\u3067\u3044\u3044\u306A\uFF1F\u7CBE\u51FA\u3057\u3066\u50CD\u3051\u3088"
 --- !u!222 &1940798202
 CanvasRenderer:
   m_ObjectHideFlags: 0
