@@ -44,10 +44,16 @@ namespace Assets.Scripts.Title.View
             frontView.Initialize(frontOpenFromMapInitSprite);
         }
 
-        public async UniTask Close(CancellationToken token)
+        public async UniTask CloseWithBlack(CancellationToken token)
         {
             frontView.PlayAnim("InBlack", viewData.InBlackAnimSeconds);
             await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneWithBlackDelaySeconds), cancellationToken: token);
+        }
+
+        public async UniTask CloseToTutorial(CancellationToken token)
+        {
+            frontView.PlayAnim("Close", viewData.CloseAnimSeconds);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadTutorialDelaySeconds), cancellationToken: token);
         }
     }
 }

@@ -8,12 +8,14 @@ namespace Assets.Scripts.Stage.Controller
     public class StageStateClear : IStageState
     {
         private readonly StageController sC;
+        private readonly StageStateMachine sSM;
         private readonly CancellationTokenSource cTS;
         private readonly CancellationToken token;
 
-        public StageStateClear(StageController sC)
+        public StageStateClear(StageController sC, StageStateMachine sSM)
         {
             this.sC = sC;
+            this.sSM = sSM;
             cTS = new();
             token = cTS.Token;
         }
@@ -28,12 +30,14 @@ namespace Assets.Scripts.Stage.Controller
             if (sC.IsFinalStage)
             {
                 await sC.PlayClearFinalEffect(token);
-                SceneManager.LoadScene(sC.FarceSceneName);
+                SceneManager.LoadScene(sC.NextSceneName);
             }
+            else if (sC.IsEndingStage)
+                sSM.ChangeState(new StageStateEnding(sC, sSM));
             else
             {
                 await sC.PlayClearEffect(token);
-                SceneManager.LoadScene(sC.NextStageName);
+                SceneManager.LoadScene(sC.NextSceneName);
             }
         }
 

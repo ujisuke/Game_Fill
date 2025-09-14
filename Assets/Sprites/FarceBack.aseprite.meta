@@ -144,6 +144,27 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
+  - name: Frame_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.80898875}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 156
+      width: 256
+      height: 89
+    spriteID: b27e190abe11548499eb32fa8e84ad0f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 156}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -153,7 +174,7 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: FarceBack
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -162,6 +183,15 @@ ScriptedImporter:
         width: 256
         height: 144
       spriteId: 363af345a4aec7e4ab31012a4f27981a
+    - name: Frame_1
+      frameIndex: 1
+      additiveSortOrder: 0
+      cellRect:
+        x: 0
+        y: 0
+        width: 256
+        height: 89
+      spriteId: b27e190abe11548499eb32fa8e84ad0f
     linkedCells: []
     parentIndex: -1
   platformSettings:

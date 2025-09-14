@@ -1,4 +1,5 @@
 using Assets.Scripts.Common.Controller;
+using Assets.Scripts.Farce.Model;
 using Cysharp.Threading.Tasks;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -19,6 +20,7 @@ namespace Assets.Scripts.Farce.Controller
         public void OnStateEnter()
         {
             fC.OpenScene();
+            FarceModel.SaveClearStage();
         }
 
         public void HandleInput()
@@ -26,7 +28,12 @@ namespace Assets.Scripts.Farce.Controller
             if (CustomInputSystem.Instance.GetPauseKeyWithCooldown())
                 fSM.ChangeState(new FarceStatePause(fSM, fC));
             else if (CustomInputSystem.Instance.DoesSelectKeyUp())
-                fSM.ChangeState(new FarceStateLoadMap(fC));
+            {
+                if (fC.IsEnding)
+                    fSM.ChangeState(new FarceStateLoadEnding(fC));
+                else
+                    fSM.ChangeState(new FarceStateLoadMap(fC));
+            }
         }
 
         public void OnStateExit()

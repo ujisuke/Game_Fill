@@ -1,5 +1,6 @@
 using System.Threading;
 using Assets.Scripts.Map.Data;
+using Assets.Scripts.Map.Model;
 using Assets.Scripts.Map.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -11,14 +12,15 @@ namespace Assets.Scripts.Map.Controller
         [SerializeField] private MapView mapView;
         [SerializeField] private SceneNameData sceneNameData;
         private MapStateMachine mapStateMachine;
+        private MapModel mapModel;
 
-        public string CurrentStageName => sceneNameData.CurrentStageName;
-        public string PauseSceneName => sceneNameData.PauseSceneName;
+        public string CurrentStageName => mapModel.CurrentStageName;
         public string TitleSceneName => sceneNameData.TitleSceneName;
 
         private void Awake()
         {
             mapStateMachine = new MapStateMachine(this);
+            mapModel = new MapModel(sceneNameData);
         }
 
         private void Update()
@@ -28,22 +30,23 @@ namespace Assets.Scripts.Map.Controller
 
         public void InitializeMail()
         {
-            mapView.InitializeMail(SceneNameData.CurrentStageIndex);
+            mapView.InitializeMailAndIcon(MapModel.CurrentStageIndex);
         }
 
-        public void SelectRight(int stageIndex, CancellationToken token)
+        public void SelectRight(CancellationToken token)
         {
-            mapView.SelectRight(stageIndex, token).Forget();
+            mapView.SelectRight(MapModel.CurrentStageIndex, token).Forget();
         }
 
-        public void SelectLeft(int stageIndex, CancellationToken token)
+        public void SelectLeft(CancellationToken token)
         {
-            mapView.SelectLeft(stageIndex, token).Forget();
+            mapView.SelectLeft(MapModel.CurrentStageIndex, token).Forget();
         }
 
-        public void Entrust()
+        public async UniTask SetDifficulty(bool isHard, CancellationToken token)
         {
-            mapView.Entrust();
+            MapModel.SetDifficulty(isHard);
+            await mapView.SetDifficulty(isHard, token);
         }
 
         public async UniTask CloseScene(CancellationToken token)
@@ -66,9 +69,9 @@ namespace Assets.Scripts.Map.Controller
             mapView.OpenSceneFromTitle();
         }
 
-        public void UpdateCurrentStageName(int direction)
+        public void UpdateStageIndex(int additionalIndex)
         {
-            sceneNameData.UpdateCurrentStageName(direction);
+            mapModel.UpdateStageIndex(additionalIndex);
         }
     }
 }

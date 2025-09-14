@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db25e19a04db6254f8738558f2fdc70e, type: 3}
+  m_Name: ProductionStageNameData
+  m_EditorClassIdentifier: 
+  titleSceneName: Title
+  mapSceneName: Map
+  pauseSceneName: Pause
+  volumeSceneName: Volume
+  endingSceneName: 5-E
+  stageNameList:
+  - 0-1
+  - 1-1
+  - 2-1
+  - 3-1
+  - 4-1
+  - 5-1

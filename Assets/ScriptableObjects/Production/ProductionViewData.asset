@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13936346720b1ff4cadaf5a8f4fdc9e0, type: 3}
+  m_Name: ProductionViewData
+  m_EditorClassIdentifier: 
+  blockBecomeWallSeconds: 0.2
+  blockFilledAnimSeconds: 1
+  slowInAnimSeconds: 0.3
+  goodAnimSeconds: 0.3
+  clearAnimDelaySeconds: 1
+  clearAnimSeconds: 0.3
+  paintStageDelaySeconds: 0.3
+  clearTextDelaySeconds: 0.3
+  clearTextAnimSeconds: 0.3
+  clearFinalAnimDelaySeconds: 0.8
+  closeAnimDelaySeconds: 1.5
+  closeAnimSeconds: 0.15
+  inBlackAnimSeconds: 0.3
+  loadSceneDelaySeconds: 0.2
+  loadSceneWithBlackDelaySeconds: 0.4
+  openAnimSeconds: 0.15
+  outBlackAnimSeconds: 0.3
+  showCharSeconds: 0.05
+  showSentenceSeconds: 3
+  houseIlluminateDelaySeconds: 2
+  thanksDelaySeconds: 2
+  loadTitleOnEndingDelaySeconds: 3
+  loadTutorialDelaySeconds: 2
+  slowEffectColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}

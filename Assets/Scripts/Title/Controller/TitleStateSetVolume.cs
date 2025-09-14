@@ -23,6 +23,7 @@ namespace Assets.Scripts.Title.Controller
         {
             SceneManager.LoadScene(tC.VolumeSceneName, LoadSceneMode.Additive);
             tC.SetActiveButtons(false);
+            Time.timeScale = 0f;
         }
 
         public void HandleInput()
@@ -34,6 +35,7 @@ namespace Assets.Scripts.Title.Controller
         public void OnStateExit()
         {
             VolumeStateExitPage.ResetFlag();
+            Time.timeScale = 1f;
         }
     }
 }

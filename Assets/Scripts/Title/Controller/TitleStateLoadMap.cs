@@ -27,8 +27,8 @@ namespace Assets.Scripts.Title.Controller
 
         private async UniTask LoadScene()
         {
-            await tC.CloseScene(token);
-            SceneManager.LoadScene(tC.SelectStageSceneName);
+            await tC.CloseSceneWithBlack(token);
+            SceneManager.LoadScene(tC.MapSceneName);
         }
 
         public void HandleInput()
