@@ -12180,7 +12180,7 @@ MonoBehaviour:
   timeLimitHard: 8
   isFinalStage: 1
   isEndingStage: 0
-  nextSceneName: 3-5
+  nextSceneName: 3-F
   sceneNameData: {fileID: 11400000, guid: 814a9456882d9a140a714a302e8cdfbf, type: 2}
 --- !u!4 &2068900231
 Transform:
