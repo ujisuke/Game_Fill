@@ -9,7 +9,7 @@ namespace Assets.Scripts.Farce.Model
         {
             int currentStageIndex = MapModel.CurrentStageIndex;
             int clearedStageIndex = ES3.Load("ClearedStageIndex", 0);
-            if (currentStageIndex > clearedStageIndex)
+            if (currentStageIndex >= clearedStageIndex)
                 ES3.Save("ClearedStageIndex", currentStageIndex);
 
             if (MapModel.IsHardMode)

@@ -91,7 +91,7 @@ namespace Assets.Scripts.Stage.View
             fillEffectView.PlayAnim("ClearFinal", stageViewData.ClearAnimSeconds);
             await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.CloseAnimDelaySeconds), cancellationToken: token);
             frontView.PlayAnim("InBlack", stageViewData.InBlackAnimSeconds);
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneWithBlackDelaySeconds), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadFarceDelaySeconds), cancellationToken: token);
         }
 
         public async UniTask PlayEndingEffect(CancellationToken token)

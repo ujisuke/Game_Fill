@@ -23,11 +23,11 @@ MonoBehaviour:
   clearTextAnimSeconds: 0.3
   clearFinalAnimDelaySeconds: 0.8
   closeAnimDelaySeconds: 1.5
-  closeAnimSeconds: 0.15
+  closeAnimSeconds: 0.2
   inBlackAnimSeconds: 0.3
-  loadSceneDelaySeconds: 0.2
+  loadSceneDelaySeconds: 0.3
   loadSceneWithBlackDelaySeconds: 0.4
-  openAnimSeconds: 0.15
+  openAnimSeconds: 0.2
   outBlackAnimSeconds: 0.3
   showCharSeconds: 0.05
   showSentenceSeconds: 3
@@ -35,4 +35,5 @@ MonoBehaviour:
   thanksDelaySeconds: 2
   loadTitleOnEndingDelaySeconds: 3
   loadTutorialDelaySeconds: 2
+  loadFarceDelaySeconds: 1
   slowEffectColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}

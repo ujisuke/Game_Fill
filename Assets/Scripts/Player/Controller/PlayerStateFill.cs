@@ -1,3 +1,4 @@
+using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Model;
 using UnityEngine;
@@ -28,27 +29,20 @@ namespace Assets.Scripts.Player.Controller
 
         public void HandleInput()
         {
-            if (isDirKeyPushed)
-                pM.MoveStraight();
+            if (CustomInputSystem.Instance.GetUpKeyDown())
+                pM.MoveTurn(Vector2.up);
+            else if (CustomInputSystem.Instance.GetDownKeyDown())
+                pM.MoveTurn(Vector2.down);
+            else if (CustomInputSystem.Instance.GetLeftKeyDown())
+                pM.MoveTurn(Vector2.left);
+            else if (CustomInputSystem.Instance.GetRightKeyDown())
+                pM.MoveTurn(Vector2.right);
             else
-            {
-                if (Input.GetKey(KeyCode.W))
-                    pM.MoveTurn(Vector2.up);
-                else if (Input.GetKey(KeyCode.S))
-                    pM.MoveTurn(Vector2.down);
-                else if (Input.GetKey(KeyCode.A))
-                    pM.MoveTurn(Vector2.left);
-                else if (Input.GetKey(KeyCode.D))
-                    pM.MoveTurn(Vector2.right);
-                else
-                    pM.MoveStraight();
-                isLookingLeft = Input.GetKey(KeyCode.A) || (isLookingLeft && !Input.GetKey(KeyCode.D));
-                pC.FlipX(isLookingLeft);
-            }
+                pM.MoveStraight();
+            isLookingLeft = CustomInputSystem.Instance.GetLeftKey() || (isLookingLeft && !CustomInputSystem.Instance.GetRightKey());
+            pC.FlipX(isLookingLeft);
+            
             StageModel.Instance.FillBlock(pM.HurtBox);
-
-            isDirKeyPushed = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
-
 
             if (Input.GetMouseButton(1))
             {
