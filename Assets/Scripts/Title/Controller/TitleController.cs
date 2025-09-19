@@ -1,4 +1,5 @@
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Map.Data;
 using Assets.Scripts.Pause.View;
@@ -22,6 +23,7 @@ namespace Assets.Scripts.Title.Controller
         private void Awake()
         {
             tSM = new TitleStateMachine(this);
+            AudioSourceView.Instance.PlayTitleBGM();
         }
 
         private void Update()

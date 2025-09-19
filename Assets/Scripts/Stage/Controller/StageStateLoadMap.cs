@@ -1,4 +1,5 @@
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Model;
@@ -23,6 +24,7 @@ namespace Assets.Scripts.Stage.Controller
 
         public void OnStateEnter()
         {
+            AudioSourceView.Instance.FadeOutBGM().Forget();
             Load().Forget();
         }
 

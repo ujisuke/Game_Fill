@@ -1,4 +1,5 @@
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Model;
@@ -28,6 +29,7 @@ namespace Assets.Scripts.Stage.Controller
 
         private async UniTask Load()
         {
+            AudioSourceView.Instance.FadeOutBGM().Forget();
             await sC.CloseStageWithBlack(token);
             SceneManager.LoadScene(sC.TitleSceneName);
         }

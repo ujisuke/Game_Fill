@@ -1,4 +1,5 @@
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Map.Data;
 using Assets.Scripts.Map.Model;
 using Assets.Scripts.Stage.Model;
@@ -36,6 +37,8 @@ namespace Assets.Scripts.Stage.Controller
             stageStateMachine = new(this);
             stageView.SetBlockMap(tilemap);
             stageView.SetTimeLimit(timeLimit);
+            if(!isEndingStage)
+                AudioSourceView.Instance.PlayStageBGM(MapModel.CurrentStageIndex);
         }
 
         private void Update()

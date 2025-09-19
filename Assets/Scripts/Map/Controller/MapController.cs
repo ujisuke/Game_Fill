@@ -1,4 +1,5 @@
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Map.Data;
 using Assets.Scripts.Map.Model;
 using Assets.Scripts.Map.View;
@@ -21,6 +22,7 @@ namespace Assets.Scripts.Map.Controller
         {
             mapStateMachine = new MapStateMachine(this);
             mapModel = new MapModel(sceneNameData);
+            AudioSourceView.Instance.PlayMapBGM();
         }
 
         private void Update()

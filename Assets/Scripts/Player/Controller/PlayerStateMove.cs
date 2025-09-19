@@ -18,8 +18,18 @@ namespace Assets.Scripts.Player.Controller
             this.pC = pC;
             this.pSM = pSM;
             this.isLookingLeft = isLookingLeft;
-            if (isInitial)
-                HandleInput();
+
+
+            if (!isInitial)
+                return;
+            if (CustomInputSystem.Instance.GetUpKey())
+                pM.MoveTurn(Vector2.up);
+            else if (CustomInputSystem.Instance.GetDownKey())
+                pM.MoveTurn(Vector2.down);
+            else if (CustomInputSystem.Instance.GetLeftKey())
+                pM.MoveTurn(Vector2.left);
+            else if (CustomInputSystem.Instance.GetRightKey())
+                pM.MoveTurn(Vector2.right);
         }
 
         public void OnStateEnter()

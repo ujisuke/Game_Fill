@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Controller;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
@@ -32,6 +33,7 @@ namespace Assets.Scripts.Stage.Controller
         {
             await sC.PlayEndingEffect(token);
             isAbleToLoadTitle = true;
+            AudioSourceView.Instance.PlayEndingBGM();
         }
 
         public void HandleInput()

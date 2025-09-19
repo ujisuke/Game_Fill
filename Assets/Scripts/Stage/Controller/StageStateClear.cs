@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
@@ -36,6 +37,8 @@ namespace Assets.Scripts.Stage.Controller
                 sSM.ChangeState(new StageStateEnding(sC, sSM));
             else
             {
+                if(sC.NextSceneName[^1] == 'F')
+                    AudioSourceView.Instance.FadeOutBGM().Forget();
                 await sC.PlayClearEffect(token);
                 SceneManager.LoadScene(sC.NextSceneName);
             }

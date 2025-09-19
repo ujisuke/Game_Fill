@@ -1,4 +1,5 @@
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Farce.View;
 using Assets.Scripts.Map.Data;
@@ -26,6 +27,7 @@ namespace Assets.Scripts.Farce.Controller
         private void Awake()
         {
             fSM = new FarceStateMachine(this);
+            AudioSourceView.Instance.PlayFarceBGM();
         }
 
         private void Update()
