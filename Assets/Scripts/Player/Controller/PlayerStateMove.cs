@@ -12,12 +12,14 @@ namespace Assets.Scripts.Player.Controller
         private readonly PlayerStateMachine pSM;
         private bool isLookingLeft;
 
-        public PlayerStateMove(PlayerModel pM, PlayerController pC, PlayerStateMachine pSM, bool isLookingLeft = false)
+        public PlayerStateMove(PlayerModel pM, PlayerController pC, PlayerStateMachine pSM, bool isLookingLeft = false, bool isInitial = false)
         {
             this.pM = pM;
             this.pC = pC;
             this.pSM = pSM;
             this.isLookingLeft = isLookingLeft;
+            if (isInitial)
+                HandleInput();
         }
 
         public void OnStateEnter()

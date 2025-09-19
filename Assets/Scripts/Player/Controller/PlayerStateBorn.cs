@@ -28,7 +28,7 @@ namespace Assets.Scripts.Player.Controller
         public void HandleInput()
         {
             if (CustomInputSystem.Instance.GetLeftKey() || CustomInputSystem.Instance.GetRightKey() || CustomInputSystem.Instance.GetUpKey() || CustomInputSystem.Instance.GetDownKey())
-                pSM.ChangeState(new PlayerStateMove(pM, pC, pSM));
+                pSM.ChangeState(new PlayerStateMove(pM, pC, pSM, isInitial: true));
         }
 
         public void OnStateExit()
