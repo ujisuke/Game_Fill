@@ -3144,7 +3144,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -490.9, y: -185}
+  m_AnchoredPosition: {x: -480.5, y: -185}
   m_SizeDelta: {x: 222.09, y: 122}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &736935421
@@ -12180,7 +12180,7 @@ MonoBehaviour:
   timeLimitHard: 8
   isFinalStage: 1
   isEndingStage: 0
-  nextSceneName: 3-5
+  nextSceneName: 3-F
   sceneNameData: {fileID: 11400000, guid: 814a9456882d9a140a714a302e8cdfbf, type: 2}
 --- !u!4 &2068900231
 Transform:

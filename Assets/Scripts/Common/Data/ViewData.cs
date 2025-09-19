@@ -28,6 +28,7 @@ namespace Assets.Scripts.Common.Data
         [SerializeField] private float thanksDelaySeconds;
         [SerializeField] private float loadTitleOnEndingDelaySeconds;
         [SerializeField] private float loadTutorialDelaySeconds;
+        [SerializeField] private float loadFarceDelaySeconds;
 
         public float BlockBecomeWallSeconds => blockBecomeWallSeconds;
         public float BlockFilledAnimSeconds => blockFilledAnimSeconds;
@@ -52,6 +53,7 @@ namespace Assets.Scripts.Common.Data
         public float ThanksDelaySeconds => thanksDelaySeconds;
         public float LoadTitleOnEndingDelaySeconds => loadTitleOnEndingDelaySeconds;
         public float LoadTutorialDelaySeconds => loadTutorialDelaySeconds;
+        public float LoadFarceDelaySeconds => loadFarceDelaySeconds;
 
         [SerializeField] private Color slowEffectColor;
 

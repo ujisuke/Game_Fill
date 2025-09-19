@@ -1,3 +1,4 @@
+using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Controller;
 using Assets.Scripts.Stage.Model;
@@ -26,7 +27,7 @@ namespace Assets.Scripts.Player.Controller
 
         public void HandleInput()
         {
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+            if (CustomInputSystem.Instance.GetLeftKey() || CustomInputSystem.Instance.GetRightKey() || CustomInputSystem.Instance.GetUpKey() || CustomInputSystem.Instance.GetDownKey())
                 pSM.ChangeState(new PlayerStateMove(pM, pC, pSM, isInitial: true));
         }
 

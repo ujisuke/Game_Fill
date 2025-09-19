@@ -24,5 +24,10 @@ namespace Assets.Scripts.Common.View
             text.enabled = false;
             PlayAnim("Deselected");
         }
+
+        public void SetVolumeText(string newText)
+        {
+            text.text = newText;
+        }
     }
 }

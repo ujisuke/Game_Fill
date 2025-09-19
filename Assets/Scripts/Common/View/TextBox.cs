@@ -23,6 +23,7 @@ namespace Assets.Scripts.Common.View
         private async UniTask Play()
         {
             var token = this.GetCancellationTokenOnDestroy();
+            text.text = string.Empty;
             await UniTask.Delay(TimeSpan.FromSeconds(showDelaySeconds), cancellationToken: token);
             for (int k = 0; k < showText.Count; k++)
             {

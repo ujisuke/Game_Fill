@@ -30,7 +30,7 @@ namespace Assets.Scripts.Stage.View
         {
             objectAnimation ??= new ObjectAnimation(animator, spriteRenderer);
             objectAnimation.Play(animName, animSeconds);
-            if (animName == "Filled" || animName == "Filling")
+            if (animName == "Filled" || animName == "Filling" || animName == "Enter" || animName == "Exit")
                 light2D.enabled = true;
         }
 

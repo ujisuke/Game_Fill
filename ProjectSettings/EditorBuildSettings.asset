@@ -49,7 +49,7 @@ EditorBuildSettings:
     guid: 9c68ca0efa4e5e54ca76efbce6400a6c
   - enabled: 1
     path: Assets/Scenes/Production/Tutorial/0-F.unity
-    guid: a5863c09cd45e7048949582c8aff3d23
+    guid: cc50c21c0d19cbe4d80ef2a5faea97e1
   - enabled: 1
     path: Assets/Scenes/Production/Stage1/1-1.unity
     guid: 38d20d39ad8d40541916e7bb4b3cefca
@@ -67,7 +67,7 @@ EditorBuildSettings:
     guid: 60e44ae658c6acf4abc281a3f21c281c
   - enabled: 1
     path: Assets/Scenes/Production/Stage1/1-F.unity
-    guid: ddede59ca8a610e4e8d4e7b1379e2b53
+    guid: f721ac43f58958944998cf64a02908aa
   - enabled: 1
     path: Assets/Scenes/Production/Stage2/2-1.unity
     guid: 9c596d41e01d6fd4185855e69d2d075f
@@ -85,7 +85,7 @@ EditorBuildSettings:
     guid: cd6cd3ea1c507e040b6b5dfdfffa4b36
   - enabled: 1
     path: Assets/Scenes/Production/Stage2/2-F.unity
-    guid: 37cee5546fca9c842bbe600a371fed07
+    guid: 608eb4660eff5614f8c31a950cd1240b
   - enabled: 1
     path: Assets/Scenes/Production/Stage3/3-1.unity
     guid: 46645383e63888b44999bb7165e03d38
@@ -96,11 +96,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Production/Stage3/3-3.unity
     guid: ff334f81325b6684abaf60463f15d028
   - enabled: 1
+    path: Assets/Scenes/Production/Stage3/3-4.unity
+    guid: 98a151ba57fa4a2428fb2cfcff03e594
+  - enabled: 1
     path: Assets/Scenes/Production/Stage3/3-5.unity
     guid: 299f9128938b21e4983fd6e2515bde04
   - enabled: 1
     path: Assets/Scenes/Production/Stage3/3-F.unity
-    guid: 6d15d123d20031b4b86f3ec51c93c785
+    guid: a3cce91c6eca09341b4fd398587bd756
   - enabled: 1
     path: Assets/Scenes/Production/Stage4/4-1.unity
     guid: 5f47a685ca6c9d24196c3aeb3134a95b
@@ -118,7 +121,7 @@ EditorBuildSettings:
     guid: f0277b792b6448f4aa46b6da8c0516ef
   - enabled: 1
     path: Assets/Scenes/Production/Stage4/4-F.unity
-    guid: 3765d0b73462c8443afd6240d0f58599
+    guid: 29c66114d51654143bd53881ed053aac
   - enabled: 1
     path: Assets/Scenes/Production/Stage5/5-1.unity
     guid: c7b7918051e51464cbef74cbe12b4dfc
@@ -136,7 +139,7 @@ EditorBuildSettings:
     guid: c26198e1e526cf949b513b4bb8ddf34f
   - enabled: 1
     path: Assets/Scenes/Production/Stage5/5-F.unity
-    guid: a845eedce4831e147a87f836cc3562fb
+    guid: 44045dd3cf8b9b646aa18bea8b99c727
   - enabled: 1
     path: Assets/Scenes/Production/Stage5/5-E.unity
     guid: 3a23c1124f19e5748a001cb768a0b0d7

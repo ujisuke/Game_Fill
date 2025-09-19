@@ -13,6 +13,10 @@ namespace Assets.Scripts.Common.Controller
         private bool isOnCooldownUp;
         private bool isOnCooldownDown;
         private bool isOnCooldownPause;
+        private bool isPushingLeft;
+        private bool isPushingRight;
+        private bool isPushingUp;
+        private bool isPushingDown;
         private readonly float cooldownSeconds = 0.3f;
         private static CustomInputSystem instance;
         public static CustomInputSystem Instance => instance ??= new CustomInputSystem();
@@ -24,6 +28,12 @@ namespace Assets.Scripts.Common.Controller
             isOnCooldownLeft = false;
             isOnCooldownRight = false;
             isOnCooldownPause = false;
+            isOnCooldownUp = false;
+            isOnCooldownDown = false;
+            isPushingLeft = false;
+            isPushingRight = false;
+            isPushingUp = false;
+            isPushingDown = false;
         }
 
         public bool DoesSelectKeyUp()
@@ -66,6 +76,78 @@ namespace Assets.Scripts.Common.Controller
 
         public bool GetPauseKey() => Input.GetKey(KeyCode.Escape);
 
+        public bool GetLeftKeyDown()
+        {
+            if (isPushingLeft && GetLeftKey())
+                return false;
+            else if (isPushingLeft && !GetLeftKey())
+            {
+                isPushingLeft = false;
+                return false;
+            }
+            else if (!isPushingLeft && GetLeftKey())
+            {
+                isPushingLeft = true;
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public bool GetRightKeyDown()
+        {
+            if (isPushingRight && GetRightKey())
+                return false;
+            else if (isPushingRight && !GetRightKey())
+            {
+                isPushingRight = false;
+                return false;
+            }
+            else if (!isPushingRight && GetRightKey())
+            {
+                isPushingRight = true;
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public bool GetUpKeyDown()
+        {
+            if (isPushingUp && GetUpKey())
+                return false;
+            else if (isPushingUp && !GetUpKey())
+            {
+                isPushingUp = false;
+                return false;
+            }
+            else if (!isPushingUp && GetUpKey())
+            {
+                isPushingUp = true;
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public bool GetDownKeyDown()
+        {
+            if (isPushingDown && GetDownKey())
+                return false;
+            else if (isPushingDown && !GetDownKey())
+            {
+                isPushingDown = false;
+                return false;
+            }
+            else if (!isPushingDown && GetDownKey())
+            {
+                isPushingDown = true;
+                return true;
+            }
+            else
+                return false;
+        }
+        
         private async UniTask CooldownLeft()
         {
             float cooldownSecondsDelta = cooldownSeconds * 0.1f;
