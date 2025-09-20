@@ -38,21 +38,26 @@ namespace Assets.Scripts.Map.Controller
 
         public void SelectRight(CancellationToken token)
         {
-            if (stageIndexPrev == MapModel.CurrentStageIndex) return;
+            if (stageIndexPrev == MapModel.CurrentStageIndex)
+                return;
             AudioSourceView.Instance.PlaySelectSE();
             mapView.SelectRight(MapModel.CurrentStageIndex, token).Forget();
         }
 
         public void SelectLeft(CancellationToken token)
         {
-            if (stageIndexPrev == MapModel.CurrentStageIndex) return;
+            if (stageIndexPrev == MapModel.CurrentStageIndex)
+                return;
             AudioSourceView.Instance.PlaySelectSE();
             mapView.SelectLeft(MapModel.CurrentStageIndex, token).Forget();
         }
 
         public async UniTask SetDifficulty(bool isHard, CancellationToken token)
         {
+            if (MapModel.IsHardMode == isHard)
+                return;
             MapModel.SetDifficulty(isHard);
+            AudioSourceView.Instance.PlayChooseSE();
             await mapView.SetDifficulty(isHard, token);
         }
 

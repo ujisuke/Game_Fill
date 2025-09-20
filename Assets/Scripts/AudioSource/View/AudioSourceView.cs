@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Assets.Scripts.AudioSource.View
 {
     public class AudioSourceView : MonoBehaviour
     {
         private static AudioSourceView instance;
+        [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private UnityEngine.AudioSource bgmSource;
         [SerializeField] private AudioClip titleBGM;
         [SerializeField] private AudioClip mapBGM;
@@ -15,21 +18,22 @@ namespace Assets.Scripts.AudioSource.View
         [SerializeField] private AudioClip endingBGM;
         [SerializeField] private List<AudioClip> stageBGMList;
         [SerializeField] private float fadeSeconds;
-        [SerializeField] private GameObject closeSESource;
+        [SerializeField] private UnityEngine.AudioSource closeSESource;
         [SerializeField] private UnityEngine.AudioSource fillSESource;
-        [SerializeField] private GameObject deadSESource;
-        [SerializeField] private GameObject goodSESource;
-        [SerializeField] private GameObject clearSESource;
-        [SerializeField] private GameObject timeLimitSESource;
-        [SerializeField] private GameObject slowSESource;
-        [SerializeField] private GameObject turnSESource;
-        [SerializeField] private GameObject selectSESource;
-        [SerializeField] private GameObject chooseSESource;
-        [SerializeField] private GameObject textSESource;
-
+        [SerializeField] private UnityEngine.AudioSource deadSESource;
+        [SerializeField] private UnityEngine.AudioSource goodSESource;
+        [SerializeField] private UnityEngine.AudioSource clearSESource;
+        [SerializeField] private UnityEngine.AudioSource timeLimitSESource;
+        [SerializeField] private UnityEngine.AudioSource slowSESource;
+        [SerializeField] private UnityEngine.AudioSource turnSESource;
+        [SerializeField] private UnityEngine.AudioSource selectSESource;
+        [SerializeField] private UnityEngine.AudioSource chooseSESource;
+        [SerializeField] private UnityEngine.AudioSource textSESource;
+        private readonly List<string> volumeNameList = new() { "MASTER", "BGM", "SE" };
         private int currentStageNumber;
 
         public static AudioSourceView Instance => instance;
+        public List<string> VolumeNameList => volumeNameList;
 
         private void Awake()
         {
@@ -42,6 +46,33 @@ namespace Assets.Scripts.AudioSource.View
 
             instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+
+        private void Start()
+        {
+            for (int i = 0; i < volumeNameList.Count; i++)
+                UpdateVolume(i, 0, out _);
+        }
+
+        public int GetVolumeLinear(int index)
+        {
+            return ES3.Load(volumeNameList[index], 50);
+        }
+
+        private float ConvertLinearToDecibel(int linear)
+        {
+            if (linear == 0)
+                return -80;
+            return 20 * Mathf.Log10(linear * 0.01f * 2);
+        }
+
+        public void UpdateVolume(int index, int addValue, out int updatedVolumeLinear)
+        {
+            int volumeLinear = ES3.Load(volumeNameList[index], 50);
+            volumeLinear = math.clamp(volumeLinear + addValue, 0, 100);
+            audioMixer.SetFloat(volumeNameList[index], ConvertLinearToDecibel(volumeLinear));
+            ES3.Save(volumeNameList[index], volumeLinear);
+            updatedVolumeLinear = volumeLinear;
         }
 
         public void PlayStageBGM(int stageNumber)
@@ -97,12 +128,11 @@ namespace Assets.Scripts.AudioSource.View
             if (bgmSource.clip == initClip)
                 bgmSource.Stop();
             bgmSource.volume = initVolume;
-            currentStageNumber = -1;
         }
 
         public void PlayCloseSE()
         {
-            Instantiate(closeSESource);
+            closeSESource.PlayOneShot(closeSESource.clip);
         }
 
         public void PlayFillSE()
@@ -117,47 +147,47 @@ namespace Assets.Scripts.AudioSource.View
 
         public void PlayDeadSE()
         {
-            Instantiate(deadSESource);
+            deadSESource.PlayOneShot(deadSESource.clip);
         }
 
         public void PlayGoodSE()
         {
-            Instantiate(goodSESource);
+            goodSESource.PlayOneShot(goodSESource.clip);
         }
 
         public void PlayClearSE()
         {
-            Instantiate(clearSESource);
+            clearSESource.PlayOneShot(clearSESource.clip);
         }
 
         public void PlayTimeLimitSE()
         {
-            Instantiate(timeLimitSESource);
+            timeLimitSESource.PlayOneShot(timeLimitSESource.clip);
         }
 
         public void PlaySlowSE()
         {
-            Instantiate(slowSESource);
+            slowSESource.PlayOneShot(slowSESource.clip);
         }
 
         public void PlayTurnSE()
         {
-            Instantiate(turnSESource);
+            turnSESource.PlayOneShot(turnSESource.clip);
         }
 
         public void PlaySelectSE()
         {
-            Instantiate(selectSESource);
+            selectSESource.PlayOneShot(selectSESource.clip);
         }
 
         public void PlayChooseSE()
         {
-            Instantiate(chooseSESource);
+            chooseSESource.PlayOneShot(chooseSESource.clip);
         }
 
         public void PlayTextSE()
         {
-            Instantiate(textSESource);
+            textSESource.PlayOneShot(textSESource.clip);
         }
     }
 }

@@ -33,7 +33,7 @@ AudioMixerController:
   - guid: e39fd585d1e4806429d440fdcb98d7c0
     name: BGM
   - guid: ce960f007f1572c4dbb31aa1ee9cb710
-    name: Master
+    name: MASTER
   - guid: 8b0db0189b4579143b2a08423cc84142
     name: SE
   m_AudioMixerGroupViews:

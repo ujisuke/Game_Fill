@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Map.Data;
@@ -35,12 +36,18 @@ namespace Assets.Scripts.Volume.Controller
 
         public void SelectRight(int index, CancellationToken token)
         {
+            int volumeLinear = AudioSourceView.Instance.GetVolumeLinear(index);
+            if (volumeLinear >= 100)
+                return;
             AudioSourceView.Instance.PlaySelectSE();
             volumeView.SelectRight(index, token).Forget();
         }
 
         public void SelectLeft(int index, CancellationToken token)
         {
+            int volumeLinear = AudioSourceView.Instance.GetVolumeLinear(index);
+            if (volumeLinear <= 0)
+                return;
             AudioSourceView.Instance.PlaySelectSE();
             volumeView.SelectLeft(index, token).Forget();
         }

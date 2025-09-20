@@ -58,7 +58,9 @@ namespace Assets.Scripts.Common.Data
         public float LoadFarceDelaySeconds => loadFarceDelaySeconds;
 
         [SerializeField] private Color slowEffectColor;
+        [SerializeField] private Color hardModeColor;
 
         public Color SlowEffectColor => slowEffectColor;
+        public Color HardModeColor => hardModeColor;
     }
 }

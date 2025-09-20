@@ -20,7 +20,7 @@ namespace Assets.Scripts.Title.Controller
         public string MapSceneName => sceneNameData.MapSceneName;
         public string TutorialSceneName => sceneNameData.TutorialSceneName;
 
-        private void Awake()
+        private void Start()
         {
             tSM = new TitleStateMachine(this);
             AudioSourceView.Instance.PlayTitleBGM();

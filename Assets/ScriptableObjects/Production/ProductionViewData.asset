@@ -38,3 +38,4 @@ MonoBehaviour:
   loadTutorialDelaySeconds: 2
   loadFarceDelaySeconds: 1
   slowEffectColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
+  hardModeColor: {r: 0.3372549, g: 0.9960785, b: 0.9176471, a: 1}

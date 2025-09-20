@@ -5368,7 +5368,7 @@ MonoBehaviour:
   timeLimitText: {fileID: 736935422}
   frontOpenRellInitSprite: {fileID: -7409484540508226828, guid: 672c0e5b256cd594aa85263f3622080c, type: 3}
   frontOpenInitSprite: {fileID: -485440478616671248, guid: 672c0e5b256cd594aa85263f3622080c, type: 3}
-  stageViewData: {fileID: 11400000, guid: 1c0d6dbcc16fa8d43b8cc2ee5f6ec8ec, type: 2}
+  viewData: {fileID: 11400000, guid: 1c0d6dbcc16fa8d43b8cc2ee5f6ec8ec, type: 2}
   additionalObjectList:
   - {fileID: 1439101347}
   endingHouse: {fileID: 0}
