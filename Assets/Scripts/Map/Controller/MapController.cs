@@ -14,6 +14,7 @@ namespace Assets.Scripts.Map.Controller
         [SerializeField] private SceneNameData sceneNameData;
         private MapStateMachine mapStateMachine;
         private MapModel mapModel;
+        private int stageIndexPrev;
 
         public string CurrentStageName => mapModel.CurrentStageName;
         public string TitleSceneName => sceneNameData.TitleSceneName;
@@ -37,11 +38,15 @@ namespace Assets.Scripts.Map.Controller
 
         public void SelectRight(CancellationToken token)
         {
+            if (stageIndexPrev == MapModel.CurrentStageIndex) return;
+            AudioSourceView.Instance.PlaySelectSE();
             mapView.SelectRight(MapModel.CurrentStageIndex, token).Forget();
         }
 
         public void SelectLeft(CancellationToken token)
         {
+            if (stageIndexPrev == MapModel.CurrentStageIndex) return;
+            AudioSourceView.Instance.PlaySelectSE();
             mapView.SelectLeft(MapModel.CurrentStageIndex, token).Forget();
         }
 
@@ -73,6 +78,7 @@ namespace Assets.Scripts.Map.Controller
 
         public void UpdateStageIndex(int additionalIndex)
         {
+            stageIndexPrev = MapModel.CurrentStageIndex;
             mapModel.UpdateStageIndex(additionalIndex);
         }
     }

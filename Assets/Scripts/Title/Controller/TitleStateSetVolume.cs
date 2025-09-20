@@ -29,7 +29,7 @@ namespace Assets.Scripts.Title.Controller
         public void HandleInput()
         {
             if (VolumeStateExitPage.DoesExit)
-                tSM.ChangeState(new TitleStateInitial(tC, tSM));
+                tSM.ChangeState(new TitleStateInitial(tC, tSM, true));
         }
 
         public void OnStateExit()

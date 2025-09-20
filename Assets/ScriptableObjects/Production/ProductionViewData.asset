@@ -26,6 +26,7 @@ MonoBehaviour:
   closeAnimSeconds: 0.2
   inBlackAnimSeconds: 0.3
   loadSceneDelaySeconds: 0.3
+  playCloseSEDelaySeconds: 0.1
   loadSceneWithBlackDelaySeconds: 0.4
   openAnimSeconds: 0.2
   outBlackAnimSeconds: 0.3

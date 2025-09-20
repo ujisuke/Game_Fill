@@ -1,4 +1,5 @@
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Map.Data;
 using Assets.Scripts.Volume.View;
 using Cysharp.Threading.Tasks;
@@ -24,18 +25,23 @@ namespace Assets.Scripts.Volume.Controller
             vSM.HandleInput();
         }
 
-        public void UpdateVolumeButtonSelection(int index)
+        public void UpdateVolumeButtonSelection(int indexNew, int indexPrev, bool isInit = false)
         {
-            volumeView.UpdateVolumeButtonSelection(index);
+            if (indexNew == indexPrev && !isInit)
+                return;
+            AudioSourceView.Instance.PlaySelectSE();
+            volumeView.UpdateVolumeButtonSelection(indexNew, indexPrev);
         }
 
         public void SelectRight(int index, CancellationToken token)
         {
+            AudioSourceView.Instance.PlaySelectSE();
             volumeView.SelectRight(index, token).Forget();
         }
 
         public void SelectLeft(int index, CancellationToken token)
         {
+            AudioSourceView.Instance.PlaySelectSE();
             volumeView.SelectLeft(index, token).Forget();
         }
     }

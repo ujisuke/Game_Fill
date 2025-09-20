@@ -38,7 +38,7 @@ namespace Assets.Scripts.Stage.Controller
 
         public void HandleInput()
         {
-            if (CustomInputSystem.Instance.DoesSelectKeyUp() && isAbleToLoadTitle)
+            if (CustomInputSystem.Instance.GetSelectKeyUp() && isAbleToLoadTitle)
                 sSM.ChangeState(new StageStateLoadTitle(sC));
         }
 

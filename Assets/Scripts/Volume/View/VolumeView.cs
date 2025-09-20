@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using Assets.Scripts.Common.Data;
@@ -18,12 +19,8 @@ namespace Assets.Scripts.Volume.View
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private List<string> volumeNames;
 
-
-        private int currentIndex;
-
         private void Awake()
         {
-            currentIndex = 0;
             buttonList[0].PlayAnim("Selected");
             rightArrowList[0].PlayAnim("Awake");
             leftArrowList[0].PlayAnim("Awake");
@@ -34,36 +31,31 @@ namespace Assets.Scripts.Volume.View
             }
         }
 
-        public void UpdateVolumeButtonSelection(int index)
+        public void UpdateVolumeButtonSelection(int indexNew, int indexPrev)
         {
-            if (index == currentIndex)
-                return;
-
-            if (index == buttonList.Count - 1)
+            if (indexNew == buttonList.Count - 1)
             {
-                buttonList[currentIndex].PlayAnim("Deselected");
-                rightArrowList[currentIndex].PlayAnim("Empty");
-                leftArrowList[currentIndex].PlayAnim("Empty");
-                buttonList[index].PlaySelectedAnim();
+                buttonList[indexPrev].PlayAnim("Deselected");
+                rightArrowList[indexPrev].PlayAnim("Empty");
+                leftArrowList[indexPrev].PlayAnim("Empty");
+                buttonList[indexNew].PlaySelectedAnim();
             }
-            else if (currentIndex == buttonList.Count - 1)
+            else if (indexPrev == buttonList.Count - 1)
             {
-                buttonList[currentIndex].PlayDeselectedAnim();
-                buttonList[index].PlayAnim("Selected");
-                rightArrowList[index].PlayAnim("Awake");
-                leftArrowList[index].PlayAnim("Awake");
+                buttonList[indexPrev].PlayAnim("Deselected");
+                buttonList[indexNew].PlayAnim("Selected");
+                rightArrowList[indexNew].PlayAnim("Awake");
+                leftArrowList[indexNew].PlayAnim("Awake");
             }
             else
             {
-                rightArrowList[currentIndex].PlayAnim("Empty");
-                leftArrowList[currentIndex].PlayAnim("Empty");
-                buttonList[currentIndex].PlayAnim("Deselected");
-                buttonList[index].PlayAnim("Selected");
-                rightArrowList[index].PlayAnim("Awake");
-                leftArrowList[index].PlayAnim("Awake");
+                rightArrowList[indexPrev].PlayAnim("Empty");
+                leftArrowList[indexPrev].PlayAnim("Empty");
+                buttonList[indexPrev].PlayAnim("Deselected");
+                buttonList[indexNew].PlayAnim("Selected");
+                rightArrowList[indexNew].PlayAnim("Awake");
+                leftArrowList[indexNew].PlayAnim("Awake");
             }
-
-            currentIndex = index;
         }
 
         public async UniTask SelectRight(int index, CancellationToken token)

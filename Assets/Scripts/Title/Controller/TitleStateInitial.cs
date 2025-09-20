@@ -1,3 +1,4 @@
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Controller;
 using Cysharp.Threading.Tasks;
 using Unity.Mathematics;
@@ -10,18 +11,20 @@ namespace Assets.Scripts.Title.Controller
         private readonly TitleController tC;
         private readonly TitleStateMachine tSM;
         private int selectedIndex;
+        private readonly bool isFromSetVolume;
 
-        public TitleStateInitial(TitleController tC, TitleStateMachine tSM)
+        public TitleStateInitial(TitleController tC, TitleStateMachine tSM, bool isFromSetVolume = false)
         {
             this.tC = tC;
             this.tSM = tSM;
+            this.isFromSetVolume = isFromSetVolume;
+            this.selectedIndex = isFromSetVolume ? 1 : 0;
         }
 
         public void OnStateEnter()
         {
-            selectedIndex = 0;
             tC.SetActiveButtons(true);
-            tC.UpdateInitButtonSelection(selectedIndex);
+            tC.UpdateInitButtonSelection(selectedIndex, selectedIndex, isFromSetVolume);
             tC.OpenScene();
         }
 
@@ -29,17 +32,20 @@ namespace Assets.Scripts.Title.Controller
         {
             if (CustomInputSystem.Instance.GetUpKeyWithCooldown())
             {
-                selectedIndex = math.max(0, selectedIndex - 1);
-                tC.UpdateInitButtonSelection(selectedIndex);
+                int selectedIndexNew = math.max(0, selectedIndex - 1);
+                tC.UpdateInitButtonSelection(selectedIndexNew, selectedIndex);
+                selectedIndex = selectedIndexNew;
             }
             else if (CustomInputSystem.Instance.GetDownKeyWithCooldown())
             {
-                selectedIndex = math.min(2, selectedIndex + 1);
-                tC.UpdateInitButtonSelection(selectedIndex);
+                int selectedIndexNew = math.min(2, selectedIndex + 1);
+                tC.UpdateInitButtonSelection(selectedIndexNew, selectedIndex);
+                selectedIndex = selectedIndexNew;
             }
 
-            else if (CustomInputSystem.Instance.DoesSelectKeyUp())
+            else if (CustomInputSystem.Instance.GetSelectKeyUp())
             {
+                AudioSourceView.Instance.PlayChooseSE();
                 switch (selectedIndex)
                 {
                     case 0:

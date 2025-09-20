@@ -31,9 +31,12 @@ namespace Assets.Scripts.Title.Controller
             tSM.HandleInput();
         }
 
-        public void UpdateInitButtonSelection(int index)
+        public void UpdateInitButtonSelection(int indexNew, int indexPrev, bool isInit = false)
         {
-            titleView.UpdateInitButtonSelection(index);
+            if (indexPrev == indexNew && !isInit)
+                return;
+            AudioSourceView.Instance.PlaySelectSE();
+            titleView.UpdateInitButtonSelection(indexNew, indexPrev);
         }
 
         public void SetActiveButtons(bool isActive)

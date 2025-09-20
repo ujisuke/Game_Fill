@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
 using Assets.Scripts.Player.Model;
@@ -112,6 +113,7 @@ namespace Assets.Scripts.Stage.View
             screenView.PlayAnim("Stop");
             GoodView.transform.position = PlayerModel.Instance.Pos + Vector2.up;
             GoodView.PlayAnim("Good", stageViewData.GoodAnimSeconds);
+            AudioSourceView.Instance.PlayGoodSE();
             await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ClearAnimDelaySeconds), cancellationToken: token);
             screenView.PlayAnim("Play");
             GoodView.PlayAnim("Empty");
@@ -122,6 +124,7 @@ namespace Assets.Scripts.Stage.View
             await PaintStage(token);
             await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ClearTextDelaySeconds), cancellationToken: token);
             clearTextView.PlayAnim("Awake", stageViewData.ClearTextAnimSeconds);
+            AudioSourceView.Instance.PlayClearSE();
         }
 
         private async UniTask PaintStage(CancellationToken token)
@@ -153,14 +156,18 @@ namespace Assets.Scripts.Stage.View
         {
             frontView.PlayAnim("Close", stageViewData.CloseAnimSeconds);
             isRetry = false;
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneDelaySeconds), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneDelaySeconds - stageViewData.PlayCloseSEDelaySeconds), cancellationToken: token);
+            AudioSourceView.Instance.PlayCloseSE();
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.PlayCloseSEDelaySeconds), cancellationToken: token);
         }
 
         public async UniTask CloseStageRetry(CancellationToken token)
         {
             frontView.PlayAnim("CloseRell", stageViewData.CloseAnimSeconds);
             isRetry = true;
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneDelaySeconds), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneDelaySeconds - stageViewData.PlayCloseSEDelaySeconds), cancellationToken: token);
+            AudioSourceView.Instance.PlayCloseSE();
+            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.PlayCloseSEDelaySeconds), cancellationToken: token);
         }
 
         public async UniTask CloseStageWithBlack(CancellationToken token)

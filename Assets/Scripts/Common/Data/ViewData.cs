@@ -19,6 +19,7 @@ namespace Assets.Scripts.Common.Data
         [SerializeField] private float closeAnimSeconds;
         [SerializeField] private float inBlackAnimSeconds;
         [SerializeField] private float loadSceneDelaySeconds;
+        [SerializeField] private float playCloseSEDelaySeconds;
         [SerializeField] private float loadSceneWithBlackDelaySeconds;
         [SerializeField] private float openAnimSeconds;
         [SerializeField] private float outBlackAnimSeconds;
@@ -44,6 +45,7 @@ namespace Assets.Scripts.Common.Data
         public float CloseAnimSeconds => closeAnimSeconds;
         public float InBlackAnimSeconds => inBlackAnimSeconds;
         public float LoadSceneDelaySeconds => loadSceneDelaySeconds;
+        public float PlayCloseSEDelaySeconds => playCloseSEDelaySeconds;
         public float LoadSceneWithBlackDelaySeconds => loadSceneWithBlackDelaySeconds;
         public float OpenAnimSeconds => openAnimSeconds;
         public float OutBlackAnimSeconds => outBlackAnimSeconds;

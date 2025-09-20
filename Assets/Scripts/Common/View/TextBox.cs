@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Data;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -52,6 +53,7 @@ namespace Assets.Scripts.Common.View
 
                     currentText += colorTextL + showText[k][i] + colorTextR;
                     text.text = currentText;
+                    AudioSourceView.Instance.PlayTextSE();
                     if (showText[k][i] == '\n')
                         await UniTask.Delay(TimeSpan.FromSeconds(showCharSeconds * 10), cancellationToken: token);
                     else

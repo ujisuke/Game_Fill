@@ -1,3 +1,4 @@
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Model;
@@ -40,19 +41,33 @@ namespace Assets.Scripts.Player.Controller
         public void HandleInput()
         {
             if (CustomInputSystem.Instance.GetUpKeyDown())
+            {
+                AudioSourceView.Instance.PlayTurnSE();
                 pM.MoveTurn(Vector2.up);
+            }
             else if (CustomInputSystem.Instance.GetDownKeyDown())
+            {
+                AudioSourceView.Instance.PlayTurnSE();
                 pM.MoveTurn(Vector2.down);
+            }
             else if (CustomInputSystem.Instance.GetLeftKeyDown())
+            {
+                AudioSourceView.Instance.PlayTurnSE();
                 pM.MoveTurn(Vector2.left);
+            }
             else if (CustomInputSystem.Instance.GetRightKeyDown())
+            {
+                AudioSourceView.Instance.PlayTurnSE();
                 pM.MoveTurn(Vector2.right);
+            }
             else
                 pM.MoveStraight();
             isLookingLeft = CustomInputSystem.Instance.GetLeftKey() || (isLookingLeft && !CustomInputSystem.Instance.GetRightKey());
             pC.FlipX(isLookingLeft);
-            
-            if (Input.GetMouseButton(1))
+
+            if (CustomInputSystem.Instance.GetSlowKeyDown())
+                AudioSourceView.Instance.PlaySlowSE();
+            if (CustomInputSystem.Instance.GetSlowKey())
             {
                 pM.Deceleration();
                 pC.PlayAnim("MoveSlow");

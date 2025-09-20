@@ -22,6 +22,7 @@ namespace Assets.Scripts.Map.Controller
 
         public void OnStateEnter()
         {
+            AudioSourceView.Instance.PlayChooseSE();
             AudioSourceView.Instance.FadeOutBGM().Forget();
             LoadScene().Forget();
         }

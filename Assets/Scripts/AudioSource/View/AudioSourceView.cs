@@ -15,6 +15,18 @@ namespace Assets.Scripts.AudioSource.View
         [SerializeField] private AudioClip endingBGM;
         [SerializeField] private List<AudioClip> stageBGMList;
         [SerializeField] private float fadeSeconds;
+        [SerializeField] private GameObject closeSESource;
+        [SerializeField] private UnityEngine.AudioSource fillSESource;
+        [SerializeField] private GameObject deadSESource;
+        [SerializeField] private GameObject goodSESource;
+        [SerializeField] private GameObject clearSESource;
+        [SerializeField] private GameObject timeLimitSESource;
+        [SerializeField] private GameObject slowSESource;
+        [SerializeField] private GameObject turnSESource;
+        [SerializeField] private GameObject selectSESource;
+        [SerializeField] private GameObject chooseSESource;
+        [SerializeField] private GameObject textSESource;
+
         private int currentStageNumber;
 
         public static AudioSourceView Instance => instance;
@@ -22,13 +34,14 @@ namespace Assets.Scripts.AudioSource.View
         private void Awake()
         {
             currentStageNumber = -1;
-            if (instance == null)
+            if (instance != null)
             {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
                 Destroy(gameObject);
+                return;
+            }
+
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         public void PlayStageBGM(int stageNumber)
@@ -85,6 +98,66 @@ namespace Assets.Scripts.AudioSource.View
                 bgmSource.Stop();
             bgmSource.volume = initVolume;
             currentStageNumber = -1;
+        }
+
+        public void PlayCloseSE()
+        {
+            Instantiate(closeSESource);
+        }
+
+        public void PlayFillSE()
+        {
+            fillSESource.Play();
+        }
+
+        public void StopFillSE()
+        {
+            fillSESource.Stop();
+        }
+
+        public void PlayDeadSE()
+        {
+            Instantiate(deadSESource);
+        }
+
+        public void PlayGoodSE()
+        {
+            Instantiate(goodSESource);
+        }
+
+        public void PlayClearSE()
+        {
+            Instantiate(clearSESource);
+        }
+
+        public void PlayTimeLimitSE()
+        {
+            Instantiate(timeLimitSESource);
+        }
+
+        public void PlaySlowSE()
+        {
+            Instantiate(slowSESource);
+        }
+
+        public void PlayTurnSE()
+        {
+            Instantiate(turnSESource);
+        }
+
+        public void PlaySelectSE()
+        {
+            Instantiate(selectSESource);
+        }
+
+        public void PlayChooseSE()
+        {
+            Instantiate(chooseSESource);
+        }
+
+        public void PlayTextSE()
+        {
+            Instantiate(textSESource);
         }
     }
 }

@@ -9,26 +9,11 @@ namespace Assets.Scripts.Pause.View
     public class PauseView : MonoBehaviour
     {
         [SerializeField] private List<ButtonView> buttonList;
-        private int currentIndex;
 
-        private void Awake()
+        public void UpdateInitButtonSelection(int indexNew, int indexPrev)
         {
-            Initialize();
-        }
-
-        public void Initialize()
-        {
-            currentIndex = 0;
-            buttonList[currentIndex].PlaySelectedAnim();
-        }
-
-        public void UpdateInitButtonSelection(int index)
-        {
-            if (currentIndex == index) return;
-
-            buttonList[currentIndex].PlayDeselectedAnim();
-            currentIndex = index;
-            buttonList[currentIndex].PlaySelectedAnim();
+            buttonList[indexPrev].PlayDeselectedAnim();
+            buttonList[indexNew].PlaySelectedAnim();
         }
     }
 }

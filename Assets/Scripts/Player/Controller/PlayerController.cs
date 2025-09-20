@@ -1,6 +1,9 @@
+using System.Threading;
 using Assets.Scripts.Player.Data;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Player.View;
+using Cysharp.Threading.Tasks;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.Controller
@@ -11,6 +14,8 @@ namespace Assets.Scripts.Player.Controller
         [SerializeField] private PlayerView playerView;
         private PlayerModel playerModel;
         private PlayerStateMachine pSM;
+        private CancellationToken token;
+        public CancellationToken Token => token;
 
         private void Awake()
         {
@@ -18,6 +23,7 @@ namespace Assets.Scripts.Player.Controller
             playerView.SetPos(playerModel.Pos);
             playerView.InstantiateHurtBox(playerModel.HurtBox);
             pSM = new PlayerStateMachine(playerModel, this);
+            token = this.GetCancellationTokenOnDestroy();
         }
 
         private void Update()

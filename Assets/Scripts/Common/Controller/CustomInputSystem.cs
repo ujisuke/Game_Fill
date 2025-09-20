@@ -6,6 +6,7 @@ namespace Assets.Scripts.Common.Controller
 {
     public class CustomInputSystem
     {
+        private bool isPushingSlow;
         private bool isPushingSelect;
         private bool isPushingBack;
         private bool isOnCooldownLeft;
@@ -23,6 +24,7 @@ namespace Assets.Scripts.Common.Controller
 
         private CustomInputSystem()
         {
+            isPushingSlow = false;
             isPushingSelect = false;
             isPushingBack = false;
             isOnCooldownLeft = false;
@@ -36,7 +38,27 @@ namespace Assets.Scripts.Common.Controller
             isPushingDown = false;
         }
 
-        public bool DoesSelectKeyUp()
+        public bool GetSlowKeyDown()
+        {
+            if (isPushingSlow && GetSlowKey())
+                return false;
+            else if (isPushingSlow && !GetSlowKey())
+            {
+                isPushingSlow = false;
+                return false;
+            }
+            else if (!isPushingSlow && GetSlowKey())
+            {
+                isPushingSlow = true;
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public bool GetSlowKey() => Input.GetMouseButton(1);
+
+        public bool GetSelectKeyUp()
         {
             if (Input.GetKey(KeyCode.Space))
             {
@@ -51,7 +73,7 @@ namespace Assets.Scripts.Common.Controller
             return false;
         }
 
-        public bool DoesBackKeyUp()
+        public bool GetBackKeyUp()
         {
             if (Input.GetKey(KeyCode.Escape))
             {

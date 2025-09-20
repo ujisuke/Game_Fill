@@ -1,3 +1,4 @@
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Map.Data;
 using Assets.Scripts.Pause.View;
@@ -17,6 +18,7 @@ namespace Assets.Scripts.Pause.Controller
 
         private void Awake()
         {
+            AudioSourceView.Instance.PlaySelectSE();
             pSM = new PauseStateMachine(this);
         }
 
@@ -25,14 +27,13 @@ namespace Assets.Scripts.Pause.Controller
             pSM.HandleInput();
         }
 
-        public void Initialize()
+        public void UpdateInitButtonSelection(int indexNew, int indexPrev, bool isFromSetVolume = false)
         {
-            pauseView.Initialize();
-        }
-
-        public void UpdateInitButtonSelection(int index)
-        {
-            pauseView.UpdateInitButtonSelection(index);
+            if (indexNew == indexPrev && !isFromSetVolume)
+                return;
+            if (!isFromSetVolume)
+                AudioSourceView.Instance.PlaySelectSE();
+            pauseView.UpdateInitButtonSelection(indexNew, indexPrev);
         }
     }
 }

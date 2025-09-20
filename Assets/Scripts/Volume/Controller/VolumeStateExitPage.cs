@@ -1,3 +1,4 @@
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Pause.Controller;
 using Unity.Mathematics;
@@ -19,12 +20,10 @@ namespace Assets.Scripts.Volume.Controller
 
         public void OnStateEnter()
         {
+            AudioSourceView.Instance.PlayChooseSE();
             doesExit = true;
             if (PauseStateSetVolume.FromPause)
-            {
-                PauseStateSetVolume.ResetFlag();
                 SceneManager.LoadScene(vC.PauseSceneName, LoadSceneMode.Additive);
-            }
             SceneManager.UnloadSceneAsync(vC.VolumeSceneName);
         }
 

@@ -24,8 +24,12 @@ namespace Assets.Scripts.Pause.Controller
 
         public void OnStateEnter()
         {
-            selectedIndex = 0;
-            pC.Initialize();
+            if (PauseStateSetVolume.FromPause)
+                selectedIndex = 1;
+            else
+                selectedIndex = 0;
+            PauseStateSetVolume.ResetFlag();
+            pC.UpdateInitButtonSelection(selectedIndex, selectedIndex, true);
             VolumeStateExitPage.ResetFlag();
         }
 
@@ -33,13 +37,15 @@ namespace Assets.Scripts.Pause.Controller
         {
             if (CustomInputSystem.Instance.GetUpKeyWithCooldown())
             {
-                selectedIndex = math.max(0, selectedIndex - 1);
-                pC.UpdateInitButtonSelection(selectedIndex);
+                int selectedIndexNew = math.max(0, selectedIndex - 1);
+                pC.UpdateInitButtonSelection(selectedIndexNew, selectedIndex);
+                selectedIndex = selectedIndexNew;
             }
             else if (CustomInputSystem.Instance.GetDownKeyWithCooldown())
             {
-                selectedIndex = math.min(3, selectedIndex + 1);
-                pC.UpdateInitButtonSelection(selectedIndex);
+                int selectedIndexNew = math.min(3, selectedIndex + 1);
+                pC.UpdateInitButtonSelection(selectedIndexNew, selectedIndex);
+                selectedIndex = selectedIndexNew;
             }
 
             if (CustomInputSystem.Instance.GetPauseKeyWithCooldown())
@@ -47,7 +53,7 @@ namespace Assets.Scripts.Pause.Controller
                 isBack = true;
                 pSM.ChangeState(new PauseStateSelected(pC));
             }
-            else if (CustomInputSystem.Instance.DoesSelectKeyUp())
+            else if (CustomInputSystem.Instance.GetSelectKeyUp())
             {
                 switch (selectedIndex)
                 {

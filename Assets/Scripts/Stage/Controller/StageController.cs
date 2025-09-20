@@ -92,6 +92,8 @@ namespace Assets.Scripts.Stage.Controller
         public void SetTimeLimit(int timeLimit)
         {
             stageView.SetTimeLimit(timeLimit);
+            if (timeLimit <= 5 && timeLimit > 0)
+                AudioSourceView.Instance.PlayTimeLimitSE();
         }
     }
 }

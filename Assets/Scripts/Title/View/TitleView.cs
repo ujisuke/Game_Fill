@@ -15,21 +15,16 @@ namespace Assets.Scripts.Title.View
         [SerializeField] private ViewData viewData;
         [SerializeField] private ImageView frontView;
         [SerializeField] private Sprite frontOpenFromMapInitSprite;
-        private int currentIndex;
 
         private void Awake()
         {
-            currentIndex = 0;
-            buttonList[currentIndex].PlaySelectedAnim();
+            buttonList[0].PlaySelectedAnim();
         }
 
-        public void UpdateInitButtonSelection(int index)
+        public void UpdateInitButtonSelection(int indexNew, int indexPrev)
         {
-            if (currentIndex == index) return;
-
-            buttonList[currentIndex].PlayDeselectedAnim();
-            currentIndex = index;
-            buttonList[currentIndex].PlaySelectedAnim();
+            buttonList[indexPrev].PlayDeselectedAnim();
+            buttonList[indexNew].PlaySelectedAnim();
         }
 
         public void SetActiveButtons(bool isActive)
