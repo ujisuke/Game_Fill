@@ -1,4 +1,5 @@
 using Assets.Scripts.Common.Controller;
+using Assets.Scripts.Stage.Controller;
 using Assets.Scripts.Volume.Controller;
 using Unity.Mathematics;
 
@@ -11,9 +12,11 @@ namespace Assets.Scripts.Pause.Controller
         private int selectedIndex;
         private static bool isBack;
         private static bool doesSelectStage;
+        private static bool doesBackGallery;
         private static bool doesExitGame;
         public static bool IsBack => isBack;
         public static bool DoesSelectStage => doesSelectStage;
+        public static bool DoesBackGallery => doesBackGallery;
         public static bool DoesExitGame => doesExitGame;
 
         public PauseStateInitial(PauseController pC, PauseStateMachine pSM)
@@ -65,7 +68,10 @@ namespace Assets.Scripts.Pause.Controller
                         pSM.ChangeState(new PauseStateSetVolume(pC));
                         break;
                     case 2:
-                        doesSelectStage = true;
+                        if(StageController.IsInGallery)
+                            doesBackGallery = true;
+                        else 
+                            doesSelectStage = true;
                         pSM.ChangeState(new PauseStateSelected(pC));
                         break;
                     case 3:
@@ -84,6 +90,7 @@ namespace Assets.Scripts.Pause.Controller
         public static void ResetFlags()
         {
             isBack = false;
+            doesBackGallery = false;
             doesSelectStage = false;
             doesExitGame = false;
         }

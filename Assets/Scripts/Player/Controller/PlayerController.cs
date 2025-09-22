@@ -16,6 +16,7 @@ namespace Assets.Scripts.Player.Controller
         private PlayerStateMachine pSM;
         private CancellationToken token;
         public CancellationToken Token => token;
+        public float StopSeconds => playerData.StopSeconds;
 
         private void Awake()
         {
@@ -46,6 +47,11 @@ namespace Assets.Scripts.Player.Controller
         public void FlipX(bool isLeft)
         {
             playerView.FlipX(isLeft);
+        }
+
+        public void Compress(bool isCompress)
+        {
+            playerView.Compress(isCompress);
         }
 
         public void OnDestroy()

@@ -119,6 +119,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 9007690671505843389}
   animator: {fileID: 8181265995871293541}
   hurtBoxPrefab: {fileID: 6126964767519016552, guid: 44a9e94eb416c8045ae44b04eec0c270, type: 3}
+  playerData: {fileID: 11400000, guid: 6f1b2e525c4e281419eeb7dc26d9f054, type: 2}
 --- !u!95 &8181265995871293541
 Animator:
   serializedVersion: 7

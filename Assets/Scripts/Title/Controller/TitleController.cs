@@ -19,6 +19,7 @@ namespace Assets.Scripts.Title.Controller
         public string VolumeSceneName => sceneNameData.VolumeSceneName;
         public string MapSceneName => sceneNameData.MapSceneName;
         public string TutorialSceneName => sceneNameData.TutorialSceneName;
+        public string GallerySceneName => sceneNameData.GallerySceneName;
 
         private void Start()
         {

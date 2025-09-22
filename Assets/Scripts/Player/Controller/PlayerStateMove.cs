@@ -1,7 +1,10 @@
+using System;
+using System.Threading;
 using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Model;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.Controller
@@ -12,6 +15,9 @@ namespace Assets.Scripts.Player.Controller
         private readonly PlayerController pC;
         private readonly PlayerStateMachine pSM;
         private bool isLookingLeft;
+        private CancellationTokenSource cTS;
+        private CancellationToken token;
+        private bool isStopping;
 
         public PlayerStateMove(PlayerModel pM, PlayerController pC, PlayerStateMachine pSM, bool isLookingLeft = false, bool isInitial = false)
         {
@@ -20,17 +26,32 @@ namespace Assets.Scripts.Player.Controller
             this.pSM = pSM;
             this.isLookingLeft = isLookingLeft;
 
+            cTS = new CancellationTokenSource();
+            token = cTS.Token;
+            isStopping = false;
 
             if (!isInitial)
                 return;
             if (CustomInputSystem.Instance.GetUpKey())
+            {
                 pM.MoveTurn(Vector2.up);
+                pC.Compress(true);
+            }
             else if (CustomInputSystem.Instance.GetDownKey())
+            {
                 pM.MoveTurn(Vector2.down);
+                pC.Compress(true);
+            }
             else if (CustomInputSystem.Instance.GetLeftKey())
+            {
                 pM.MoveTurn(Vector2.left);
+                pC.Compress(true);
+            }
             else if (CustomInputSystem.Instance.GetRightKey())
+            {
                 pM.MoveTurn(Vector2.right);
+                pC.Compress(true);
+            }
         }
 
         public void OnStateEnter()
@@ -40,28 +61,43 @@ namespace Assets.Scripts.Player.Controller
 
         public void HandleInput()
         {
-            if (CustomInputSystem.Instance.GetUpKeyDown())
+            if (!isStopping)
             {
-                AudioSourceView.Instance.PlayTurnSE();
-                pM.MoveTurn(Vector2.up);
+                if (CustomInputSystem.Instance.GetUpKeyDown())
+                {
+                    AudioSourceView.Instance.PlayTurnSE();
+                    pM.MoveTurn(Vector2.up);
+                    pC.Compress(true);
+                    StopAndGo().Forget();
+                }
+                else if (CustomInputSystem.Instance.GetDownKeyDown())
+                {
+                    AudioSourceView.Instance.PlayTurnSE();
+                    pM.MoveTurn(Vector2.down);
+                    pC.Compress(true);
+                    StopAndGo().Forget();
+                }
+                else if (CustomInputSystem.Instance.GetLeftKeyDown())
+                {
+                    AudioSourceView.Instance.PlayTurnSE();
+                    pM.MoveTurn(Vector2.left);
+                    pC.Compress(true);
+                    StopAndGo().Forget();
+                }
+                else if (CustomInputSystem.Instance.GetRightKeyDown())
+                {
+                    AudioSourceView.Instance.PlayTurnSE();
+                    pM.MoveTurn(Vector2.right);
+                    pC.Compress(true);
+                    StopAndGo().Forget();
+                }
+                else
+                {
+                    pM.MoveStraight();
+                    pC.Compress(false);
+                }
             }
-            else if (CustomInputSystem.Instance.GetDownKeyDown())
-            {
-                AudioSourceView.Instance.PlayTurnSE();
-                pM.MoveTurn(Vector2.down);
-            }
-            else if (CustomInputSystem.Instance.GetLeftKeyDown())
-            {
-                AudioSourceView.Instance.PlayTurnSE();
-                pM.MoveTurn(Vector2.left);
-            }
-            else if (CustomInputSystem.Instance.GetRightKeyDown())
-            {
-                AudioSourceView.Instance.PlayTurnSE();
-                pM.MoveTurn(Vector2.right);
-            }
-            else
-                pM.MoveStraight();
+
             isLookingLeft = CustomInputSystem.Instance.GetLeftKey() || (isLookingLeft && !CustomInputSystem.Instance.GetRightKey());
             pC.FlipX(isLookingLeft);
 
@@ -71,24 +107,34 @@ namespace Assets.Scripts.Player.Controller
             {
                 pM.Deceleration();
                 pC.PlayAnim("MoveSlow");
+                AudioSourceView.Instance.CutOffBGM();
             }
             else
             {
                 pM.Acceleration();
                 pC.PlayAnim("Move");
+                AudioSourceView.Instance.RestoreBGM();
             }
 
             if (StageModel.Instance.IsPlayerHittingWall(pM.HurtBox) || !StageModel.Instance.IsPlayerOnBlock(pM.Pos) || StageModel.Instance.TimeLimit <= 0)
-                    pSM.ChangeState(new PlayerStateDead(pM, pC, pSM));
-                else if (pM.IsOnExit)
-                    pSM.ChangeState(new PlayerStateExit(pM, pC, pSM));
-                else if (Input.GetMouseButton(0))
-                    pSM.ChangeState(new PlayerStateFill(pM, pC, pSM, isLookingLeft));
+                pSM.ChangeState(new PlayerStateDead(pM, pC, pSM));
+            else if (pM.IsOnExit)
+                pSM.ChangeState(new PlayerStateExit(pM, pC, pSM));
+            else if (Input.GetMouseButton(0) && !isStopping)
+                pSM.ChangeState(new PlayerStateFill(pM, pC, pSM, isLookingLeft));
         }
 
         public void OnStateExit()
         {
+            cTS.Cancel();
+            cTS.Dispose();
+        }
 
+        private async UniTask StopAndGo()
+        {
+            isStopping = true;
+            await UniTask.Delay(TimeSpan.FromSeconds(pC.StopSeconds), cancellationToken: token);
+            isStopping = false;
         }
     }
 }

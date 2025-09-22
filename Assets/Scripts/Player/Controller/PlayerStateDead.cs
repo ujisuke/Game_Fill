@@ -21,6 +21,7 @@ namespace Assets.Scripts.Player.Controller
 
         public void OnStateEnter()
         {
+            AudioSourceView.Instance.RestoreBGM();
             AudioSourceView.Instance.PlayDeadSE();
             Dead().Forget();
         }

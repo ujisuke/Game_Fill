@@ -15,6 +15,7 @@ namespace Assets.Scripts.Common.View
         [SerializeField] private Text text;
         [SerializeField, TextArea(3, 10)] private List<string> showText;
         [SerializeField] private float showDelaySeconds = 0f;
+        [SerializeField] private bool doesPlaySE = true;
 
         private void Awake()
         {
@@ -53,7 +54,8 @@ namespace Assets.Scripts.Common.View
 
                     currentText += colorTextL + showText[k][i] + colorTextR;
                     text.text = currentText;
-                    AudioSourceView.Instance.PlayTextSE();
+                    if (showText[k][i] != '\n' && showText[k][i] != ' ' && doesPlaySE)
+                        AudioSourceView.Instance.PlayTextSE();
                     if (showText[k][i] == '\n')
                         await UniTask.Delay(TimeSpan.FromSeconds(showCharSeconds * 10), cancellationToken: token);
                     else

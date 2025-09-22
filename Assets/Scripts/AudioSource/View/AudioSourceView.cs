@@ -29,8 +29,12 @@ namespace Assets.Scripts.AudioSource.View
         [SerializeField] private UnityEngine.AudioSource selectSESource;
         [SerializeField] private UnityEngine.AudioSource chooseSESource;
         [SerializeField] private UnityEngine.AudioSource textSESource;
+        [SerializeField] private AudioLowPassFilter lowPassFilter;
         private readonly List<string> volumeNameList = new() { "MASTER", "BGM", "SE" };
         private int currentStageNumber;
+        private bool isFilling;
+        float fillVolumeInit;
+
 
         public static AudioSourceView Instance => instance;
         public List<string> VolumeNameList => volumeNameList;
@@ -46,6 +50,9 @@ namespace Assets.Scripts.AudioSource.View
 
             instance = this;
             DontDestroyOnLoad(gameObject);
+            RestoreBGM();
+            isFilling = false;
+            fillVolumeInit = fillSESource.volume;
         }
 
         private void Start()
@@ -130,6 +137,16 @@ namespace Assets.Scripts.AudioSource.View
             bgmSource.volume = initVolume;
         }
 
+        public void CutOffBGM()
+        {
+            lowPassFilter.enabled = true;
+        }
+
+        public void RestoreBGM()
+        {
+            lowPassFilter.enabled = false;
+        }
+
         public void PlayCloseSE()
         {
             closeSESource.PlayOneShot(closeSESource.clip);
@@ -137,12 +154,23 @@ namespace Assets.Scripts.AudioSource.View
 
         public void PlayFillSE()
         {
+            isFilling = true;
+            fillSESource.volume = fillVolumeInit;
             fillSESource.Play();
         }
 
-        public void StopFillSE()
+        public async UniTask FadeOutFillSE()
         {
-            fillSESource.Stop();
+            isFilling = false;
+            var token = this.GetCancellationTokenOnDestroy();
+
+            for (int i = 0; i < 100; i++)
+            {
+                if (isFilling)
+                    return;
+                fillSESource.volume = Mathf.Lerp(fillVolumeInit, 0, i * 0.01f);
+                await UniTask.Delay(TimeSpan.FromSeconds(fadeSeconds * 0.01f), cancellationToken: token);
+            }
         }
 
         public void PlayDeadSE()

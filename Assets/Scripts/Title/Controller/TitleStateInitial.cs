@@ -38,7 +38,7 @@ namespace Assets.Scripts.Title.Controller
             }
             else if (CustomInputSystem.Instance.GetDownKeyWithCooldown())
             {
-                int selectedIndexNew = math.min(2, selectedIndex + 1);
+                int selectedIndexNew = math.min(3, selectedIndex + 1);
                 tC.UpdateInitButtonSelection(selectedIndexNew, selectedIndex);
                 selectedIndex = selectedIndexNew;
             }
@@ -59,6 +59,9 @@ namespace Assets.Scripts.Title.Controller
                         tC.SetActiveButtons(false);
                         break;
                     case 2:
+                        tSM.ChangeState(new TitleStateLoadGallery(tC));
+                        break;
+                    case 3:
                         tSM.ChangeState(new TitleStateExitGame());
                         break;
                 }

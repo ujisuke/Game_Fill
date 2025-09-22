@@ -14,15 +14,14 @@ namespace Assets.Scripts.Map.Controller
         [SerializeField] private SceneNameData sceneNameData;
         private MapStateMachine mapStateMachine;
         private MapModel mapModel;
-        private int stageIndexPrev;
 
         public string CurrentStageName => mapModel.CurrentStageName;
         public string TitleSceneName => sceneNameData.TitleSceneName;
 
         private void Awake()
         {
-            mapStateMachine = new MapStateMachine(this);
             mapModel = new MapModel(sceneNameData);
+            mapStateMachine = new MapStateMachine(this);
             AudioSourceView.Instance.PlayMapBGM();
         }
 
@@ -33,23 +32,25 @@ namespace Assets.Scripts.Map.Controller
 
         public void InitializeMail()
         {
-            mapView.InitializeMailAndIcon(MapModel.CurrentStageIndex);
+            mapView.InitializeMailAndIcon(MapModel.CurrentStageIndex, mapModel.IsStageIndexUpper, mapModel.IsStageIndexLower);
         }
 
         public void SelectRight(CancellationToken token)
         {
-            if (stageIndexPrev == MapModel.CurrentStageIndex)
+            mapModel.UpdateStageIndex(1, out bool isChanged);
+            if (!isChanged)
                 return;
             AudioSourceView.Instance.PlaySelectSE();
-            mapView.SelectRight(MapModel.CurrentStageIndex, token).Forget();
+            mapView.SelectRight(MapModel.CurrentStageIndex, mapModel.IsStageIndexUpper, token).Forget();
         }
 
         public void SelectLeft(CancellationToken token)
         {
-            if (stageIndexPrev == MapModel.CurrentStageIndex)
+            mapModel.UpdateStageIndex(-1, out bool isChanged);
+            if (!isChanged)
                 return;
             AudioSourceView.Instance.PlaySelectSE();
-            mapView.SelectLeft(MapModel.CurrentStageIndex, token).Forget();
+            mapView.SelectLeft(MapModel.CurrentStageIndex, mapModel.IsStageIndexLower, token).Forget();
         }
 
         public async UniTask SetDifficulty(bool isHard, CancellationToken token)
@@ -79,12 +80,6 @@ namespace Assets.Scripts.Map.Controller
         public void OpenSceneFromTitle()
         {
             mapView.OpenSceneFromTitle();
-        }
-
-        public void UpdateStageIndex(int additionalIndex)
-        {
-            stageIndexPrev = MapModel.CurrentStageIndex;
-            mapModel.UpdateStageIndex(additionalIndex);
         }
     }
 }

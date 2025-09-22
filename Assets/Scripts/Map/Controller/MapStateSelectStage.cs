@@ -29,15 +29,9 @@ namespace Assets.Scripts.Map.Controller
         public void HandleInput()
         {
             if (CustomInputSystem.Instance.GetRightKeyWithCooldown())
-            {
-                mC.UpdateStageIndex(1);
                 mC.SelectRight(token);
-            }
             else if (CustomInputSystem.Instance.GetLeftKeyWithCooldown())
-            {
-                mC.UpdateStageIndex(-1);
                 mC.SelectLeft(token);
-            }
             else if (CustomInputSystem.Instance.GetUpKeyWithCooldown())
                 mC.SetDifficulty(true, token).Forget();
             else if (CustomInputSystem.Instance.GetDownKeyWithCooldown())

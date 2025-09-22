@@ -36,8 +36,6 @@ namespace Assets.Scripts.Stage.View
         private void Awake()
         {
             slowEffectView.SetColor(viewData.SlowEffectColor);
-            if (MapModel.IsHardMode)
-                timeLimitText.color = viewData.HardModeColor;
         }
 
         public void SetBlockMap(Tilemap tilemap)
@@ -194,11 +192,13 @@ namespace Assets.Scripts.Stage.View
             }
         }
 
-        public void SetTimeLimit(int timeLimit)
+        public void SetTimeLimit(int timeLimit, bool isHardMode)
         {
             if (timeLimitText == null)
                 return;
             timeLimitText.text = timeLimit.ToString();
+            if (isHardMode)
+                timeLimitText.color = viewData.HardModeColor;
         }
     }
 }

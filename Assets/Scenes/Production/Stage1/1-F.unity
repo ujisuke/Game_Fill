@@ -727,9 +727,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4651861932990376178, guid: 614212f3059262549ba8e1bf996681b6, type: 3}
+      propertyPath: m_Pitch
+      value: 1.92
+      objectReference: {fileID: 0}
     - target: {fileID: 6126964767519016552, guid: 614212f3059262549ba8e1bf996681b6, type: 3}
       propertyPath: m_Name
       value: AudioSource
+      objectReference: {fileID: 0}
+    - target: {fileID: 7886830039434321174, guid: 614212f3059262549ba8e1bf996681b6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7886830039434321174, guid: 614212f3059262549ba8e1bf996681b6, type: 3}
+      propertyPath: lowpassLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0.07521601
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
