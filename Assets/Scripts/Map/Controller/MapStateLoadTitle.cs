@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Assets.Scripts.AudioSource.View;
+using Assets.Scripts.Map.Model;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,6 +25,7 @@ namespace Assets.Scripts.Map.Controller
         {
             AudioSourceView.Instance.PlayChooseSE();
             AudioSourceView.Instance.FadeOutBGM().Forget();
+            MapModel.SetDifficulty(false);
             LoadScene().Forget();
         }
 
