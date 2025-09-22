@@ -1,4 +1,5 @@
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Map.Data;
 using Assets.Scripts.Map.Model;
 using Assets.Scripts.Map.View;
@@ -19,8 +20,9 @@ namespace Assets.Scripts.Map.Controller
 
         private void Awake()
         {
-            mapStateMachine = new MapStateMachine(this);
             mapModel = new MapModel(sceneNameData);
+            mapStateMachine = new MapStateMachine(this);
+            AudioSourceView.Instance.PlayMapBGM();
         }
 
         private void Update()
@@ -30,22 +32,33 @@ namespace Assets.Scripts.Map.Controller
 
         public void InitializeMail()
         {
-            mapView.InitializeMailAndIcon(MapModel.CurrentStageIndex);
+            mapView.InitializeMailAndIcon(MapModel.CurrentStageIndex, mapModel.IsStageIndexUpper, mapModel.IsStageIndexLower);
         }
 
         public void SelectRight(CancellationToken token)
         {
-            mapView.SelectRight(MapModel.CurrentStageIndex, token).Forget();
+            mapModel.UpdateStageIndex(1, out bool isChanged);
+            if (!isChanged)
+                return;
+            AudioSourceView.Instance.PlaySelectSE();
+            mapView.SelectRight(MapModel.CurrentStageIndex, mapModel.IsStageIndexUpper, token).Forget();
         }
 
         public void SelectLeft(CancellationToken token)
         {
-            mapView.SelectLeft(MapModel.CurrentStageIndex, token).Forget();
+            mapModel.UpdateStageIndex(-1, out bool isChanged);
+            if (!isChanged)
+                return;
+            AudioSourceView.Instance.PlaySelectSE();
+            mapView.SelectLeft(MapModel.CurrentStageIndex, mapModel.IsStageIndexLower, token).Forget();
         }
 
         public async UniTask SetDifficulty(bool isHard, CancellationToken token)
         {
+            if (MapModel.IsHardMode == isHard)
+                return;
             MapModel.SetDifficulty(isHard);
+            AudioSourceView.Instance.PlayChooseSE();
             await mapView.SetDifficulty(isHard, token);
         }
 
@@ -67,11 +80,6 @@ namespace Assets.Scripts.Map.Controller
         public void OpenSceneFromTitle()
         {
             mapView.OpenSceneFromTitle();
-        }
-
-        public void UpdateStageIndex(int additionalIndex)
-        {
-            mapModel.UpdateStageIndex(additionalIndex);
         }
     }
 }

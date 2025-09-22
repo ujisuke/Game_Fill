@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
 using Cysharp.Threading.Tasks;
@@ -24,7 +25,9 @@ namespace Assets.Scripts.Farce.View
         public async UniTask Close(CancellationToken token)
         {
             frontView.PlayAnim("Close", viewData.CloseAnimSeconds);
-            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneDelaySeconds), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneDelaySeconds - viewData.PlayCloseSEDelaySeconds), cancellationToken: token);
+            AudioSourceView.Instance.PlayCloseSE();
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.PlayCloseSEDelaySeconds), cancellationToken: token);
         }
     }
 }

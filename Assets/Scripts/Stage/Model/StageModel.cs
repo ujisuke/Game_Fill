@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Controller;
 using Cysharp.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace Assets.Scripts.Stage.Model
         private readonly StageController stageController;
         private int timeLimit;
         private static StageModel instance;
+
         public int TimeLimit => timeLimit;
         public static StageModel Instance => instance;
 
@@ -135,11 +137,11 @@ namespace Assets.Scripts.Stage.Model
             stageController.StopSlowEffect();
         }
 
-        public async UniTask CountDownTimer()
+        public async UniTask CountDownTimer(CancellationToken token)
         {
             while (timeLimit > 0)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(1));
+                await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
                 if (PlayerModel.Instance == null || PlayerModel.Instance.IsOnExit)
                     break;
                 timeLimit--;

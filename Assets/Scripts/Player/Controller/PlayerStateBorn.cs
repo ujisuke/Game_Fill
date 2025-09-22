@@ -33,7 +33,7 @@ namespace Assets.Scripts.Player.Controller
 
         public void OnStateExit()
         {
-            StageModel.Instance.CountDownTimer().Forget();
+            StageModel.Instance.CountDownTimer(pC.Token).Forget();
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Map.Data;
 using Assets.Scripts.Pause.View;
@@ -18,10 +19,12 @@ namespace Assets.Scripts.Title.Controller
         public string VolumeSceneName => sceneNameData.VolumeSceneName;
         public string MapSceneName => sceneNameData.MapSceneName;
         public string TutorialSceneName => sceneNameData.TutorialSceneName;
+        public string GallerySceneName => sceneNameData.GallerySceneName;
 
-        private void Awake()
+        private void Start()
         {
             tSM = new TitleStateMachine(this);
+            AudioSourceView.Instance.PlayTitleBGM();
         }
 
         private void Update()
@@ -29,9 +32,12 @@ namespace Assets.Scripts.Title.Controller
             tSM.HandleInput();
         }
 
-        public void UpdateInitButtonSelection(int index)
+        public void UpdateInitButtonSelection(int indexNew, int indexPrev, bool isInit = false)
         {
-            titleView.UpdateInitButtonSelection(index);
+            if (indexPrev == indexNew && !isInit)
+                return;
+            AudioSourceView.Instance.PlaySelectSE();
+            titleView.UpdateInitButtonSelection(indexNew, indexPrev);
         }
 
         public void SetActiveButtons(bool isActive)

@@ -1,4 +1,5 @@
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Map.Controller;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace Assets.Scripts.Title.Controller
 
         public void OnStateEnter()
         {
+            AudioSourceView.Instance.FadeOutBGM().Forget();
             LoadScene().Forget();
         }
 

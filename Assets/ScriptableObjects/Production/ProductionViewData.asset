@@ -26,6 +26,7 @@ MonoBehaviour:
   closeAnimSeconds: 0.2
   inBlackAnimSeconds: 0.3
   loadSceneDelaySeconds: 0.3
+  playCloseSEDelaySeconds: 0.1
   loadSceneWithBlackDelaySeconds: 0.4
   openAnimSeconds: 0.2
   outBlackAnimSeconds: 0.3
@@ -37,3 +38,4 @@ MonoBehaviour:
   loadTutorialDelaySeconds: 2
   loadFarceDelaySeconds: 1
   slowEffectColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
+  hardModeColor: {r: 0.3372549, g: 0.9960785, b: 0.9176471, a: 1}

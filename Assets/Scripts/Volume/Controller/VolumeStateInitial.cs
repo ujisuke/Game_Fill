@@ -24,20 +24,22 @@ namespace Assets.Scripts.Volume.Controller
         public void OnStateEnter()
         {
             selectedIndex = 0;
-            vC.UpdateVolumeButtonSelection(selectedIndex);
+            vC.UpdateVolumeButtonSelection(selectedIndex, selectedIndex, true);
         }
 
         public void HandleInput()
         {
             if (CustomInputSystem.Instance.GetUpKeyWithCooldown())
             {
-                selectedIndex = math.max(0, selectedIndex - 1);
-                vC.UpdateVolumeButtonSelection(selectedIndex);
+                int selectedIndexNew = math.max(0, selectedIndex - 1);
+                vC.UpdateVolumeButtonSelection(selectedIndexNew, selectedIndex);
+                selectedIndex = selectedIndexNew;
             }
             else if (CustomInputSystem.Instance.GetDownKeyWithCooldown())
             {
-                selectedIndex = math.min(3, selectedIndex + 1);
-                vC.UpdateVolumeButtonSelection(selectedIndex);
+                int selectedIndexNew = math.min(3, selectedIndex + 1);
+                vC.UpdateVolumeButtonSelection(selectedIndexNew, selectedIndex);
+                selectedIndex = selectedIndexNew;
             }
             else if (CustomInputSystem.Instance.GetRightKeyWithCooldown() && selectedIndex != 3)
                 vC.SelectRight(selectedIndex, token);
@@ -45,7 +47,7 @@ namespace Assets.Scripts.Volume.Controller
                 vC.SelectLeft(selectedIndex, token);
 
             if (CustomInputSystem.Instance.GetPauseKeyWithCooldown()
-            || (CustomInputSystem.Instance.DoesSelectKeyUp() && selectedIndex == 3))
+            || (CustomInputSystem.Instance.GetSelectKeyUp() && selectedIndex == 3))
                 vSM.ChangeState(new VolumeStateExitPage(vC));
         }
 

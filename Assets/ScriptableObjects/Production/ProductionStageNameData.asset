@@ -17,6 +17,7 @@ MonoBehaviour:
   pauseSceneName: Pause
   volumeSceneName: Volume
   endingSceneName: 5-E
+  gallerySceneName: Gallery
   stageNameList:
   - 0-1
   - 1-1

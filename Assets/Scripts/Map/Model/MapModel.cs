@@ -10,18 +10,22 @@ namespace Assets.Scripts.Map.Model
         private static int currentStageIndex = 0;
         private static bool isHardMode = false;
         public static int CurrentStageIndex => currentStageIndex;
+        public static int StageIndexUpper => ES3.Load("ClearedStageIndex", -1) + 1;
         public static bool IsHardMode => isHardMode;
         public string CurrentStageName => sceneNameData.GetCurrentStageName(currentStageIndex);
+        public bool IsStageIndexUpper => currentStageIndex == StageIndexUpper;
+        public bool IsStageIndexLower => currentStageIndex == 0;
 
         public MapModel(SceneNameData sceneNameData)
         {
             this.sceneNameData = sceneNameData;
         }
 
-        public void UpdateStageIndex(int additionalIndex)
+        public void UpdateStageIndex(int additionalIndex, out bool isChanged)
         {
-            int listUpper = math.min(ES3.Load("ClearedStageIndex", 0) + 1, sceneNameData.StageCount - 1);
-            currentStageIndex = math.clamp(currentStageIndex + additionalIndex, 0, listUpper);
+            int newStageIndex = math.clamp(currentStageIndex + additionalIndex, 0, StageIndexUpper);
+            isChanged = newStageIndex != currentStageIndex;
+            currentStageIndex = newStageIndex;
         }
 
         public static void SetDifficulty(bool isHard)

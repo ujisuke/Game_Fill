@@ -13,6 +13,7 @@ namespace Assets.Scripts.Map.Data
         [SerializeField] private string pauseSceneName;
         [SerializeField] private string volumeSceneName;
         [SerializeField] private string endingSceneName;
+        [SerializeField] private string gallerySceneName;
         [SerializeField] private List<string> stageNameList;
 
         public string TitleSceneName => titleSceneName;
@@ -20,6 +21,7 @@ namespace Assets.Scripts.Map.Data
         public string PauseSceneName => pauseSceneName;
         public string VolumeSceneName => volumeSceneName;
         public string EndingSceneName => endingSceneName;
+        public string GallerySceneName => gallerySceneName;
         public int StageCount => stageNameList.Count;
         public string TutorialSceneName => stageNameList[0];
 

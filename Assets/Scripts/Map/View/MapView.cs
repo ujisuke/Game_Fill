@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
 using Assets.Scripts.Player.Model;
@@ -30,17 +31,13 @@ namespace Assets.Scripts.Map.View
         [SerializeField] private Animator NiLLAnimator;
         [SerializeField] private Animator BoLLAnimator;
         [SerializeField] private SpriteRenderer hardIcon;
-        private int mailIndexPrev;
-
-        private void Awake()
-        {
-            mailIndexPrev = 0;
-        }
 
         public async UniTask CloseScene(CancellationToken token)
         {
             frontView.PlayAnim("Close", viewData.CloseAnimSeconds);
-            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneDelaySeconds), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneDelaySeconds - viewData.PlayCloseSEDelaySeconds), cancellationToken: token);
+            AudioSourceView.Instance.PlayCloseSE();
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.PlayCloseSEDelaySeconds), cancellationToken: token);
         }
 
         public async UniTask CloseSceneToTitle(CancellationToken token)
@@ -61,23 +58,35 @@ namespace Assets.Scripts.Map.View
             frontView.Initialize(frontOpenFromTitleInitSprite);
         }
 
-        public void InitializeMailAndIcon(int stageIndex)
+        public void InitializeMailAndIcon(int stageIndex, bool isStageIndexUpper, bool isStageIndexLower)
         {
-            int listUpper = math.min(ES3.Load("ClearedStageIndex", 0) + 1, mailTextList.Count - 1);
-            mailIndexPrev = stageIndex;
-            if (stageIndex < listUpper)
-                rightArrowView.PlayAnim("Awake");
-            if (stageIndex > 0)
+            if (isStageIndexUpper && isStageIndexLower)
+            {
+                rightArrowView.PlayAnim("Empty");
+                leftArrowView.PlayAnim("Empty");
+            }
+            else if (isStageIndexUpper)
+            {
+                rightArrowView.PlayAnim("Empty");
                 leftArrowView.PlayAnim("Awake");
+            }
+            else if (isStageIndexLower)
+            {
+                rightArrowView.PlayAnim("Awake");
+                leftArrowView.PlayAnim("Empty");
+            }
+            else
+            {
+                rightArrowView.PlayAnim("Awake");
+                leftArrowView.PlayAnim("Awake");
+            }
+
             UpdateMailText(stageIndex);
             UpdateHardIcon(stageIndex);
         }
 
-        public async UniTask SelectRight(int stageIndex, CancellationToken token)
+        public async UniTask SelectRight(int stageIndex, bool isStageIndexUpper, CancellationToken token)
         {
-            int listUpper = math.min(ES3.Load("ClearedStageIndex", 0) + 1, mailTextList.Count - 1);
-            if (stageIndex == listUpper && mailIndexPrev == listUpper)
-                return;
             rightArrowView.PlayAnim("Awake");
             mailView.PlayAnim("Awake");
             await UniTask.DelayFrame(1, cancellationToken: token);
@@ -86,17 +95,15 @@ namespace Assets.Scripts.Map.View
             mailView.PlayAnim("ChangeText");
             UpdateMailText(stageIndex);
             UpdateHardIcon(stageIndex);
-            mailIndexPrev = stageIndex;
-            if (stageIndex < listUpper)
+
+            if (!isStageIndexUpper)
                 return;
             await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: token);
             rightArrowView.PlayAnim("Empty");
         }
 
-        public async UniTask SelectLeft(int stageIndex, CancellationToken token)
+        public async UniTask SelectLeft(int stageIndex, bool isStageIndexLower, CancellationToken token)
         {
-            if (stageIndex == 0 && mailIndexPrev == 0)
-                return;
             leftArrowView.PlayAnim("Awake");
             mailView.PlayAnim("Awake");
             await UniTask.DelayFrame(1, cancellationToken: token);
@@ -105,8 +112,8 @@ namespace Assets.Scripts.Map.View
             mailView.PlayAnim("ChangeText");
             UpdateMailText(stageIndex);
             UpdateHardIcon(stageIndex);
-            mailIndexPrev = stageIndex;
-            if (stageIndex > 0)
+
+            if (!isStageIndexLower)
                 return;
             await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: token);
             leftArrowView.PlayAnim("Empty");

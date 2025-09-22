@@ -29,25 +29,15 @@ namespace Assets.Scripts.Map.Controller
         public void HandleInput()
         {
             if (CustomInputSystem.Instance.GetRightKeyWithCooldown())
-            {
-                mC.UpdateStageIndex(1);
                 mC.SelectRight(token);
-            }
             else if (CustomInputSystem.Instance.GetLeftKeyWithCooldown())
-            {
-                mC.UpdateStageIndex(-1);
                 mC.SelectLeft(token);
-            }
             else if (CustomInputSystem.Instance.GetUpKeyWithCooldown())
-            {
                 mC.SetDifficulty(true, token).Forget();
-            }
             else if (CustomInputSystem.Instance.GetDownKeyWithCooldown())
-            {
                 mC.SetDifficulty(false, token).Forget();
-            }
 
-            if (CustomInputSystem.Instance.DoesSelectKeyUp())
+            if (CustomInputSystem.Instance.GetSelectKeyUp())
                 mSM.ChangeState(new MapStateLoadStage(mC));
             else if (CustomInputSystem.Instance.GetPauseKeyWithCooldown())
                 mSM.ChangeState(new MapStateLoadTitle(mC));

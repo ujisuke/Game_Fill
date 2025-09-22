@@ -1701,8 +1701,8 @@ MonoBehaviour:
   - {fileID: 1091161415}
   - {fileID: 38753696}
   audioMixer: {fileID: 24100000, guid: 9a6ddc752667b9348a432ebb88f9e885, type: 2}
-  volumeNames:
-  - Master
+  volumeNameList:
+  - MASTER
   - BGM
   - SE
 --- !u!114 &1063073870

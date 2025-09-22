@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
+using Assets.Scripts.Map.Model;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Controller;
 using Cysharp.Threading.Tasks;
@@ -24,7 +26,7 @@ namespace Assets.Scripts.Stage.View
         [SerializeField] private Text timeLimitText;
         [SerializeField] private Sprite frontOpenRellInitSprite;
         [SerializeField] private Sprite frontOpenInitSprite;
-        [SerializeField] private ViewData stageViewData;
+        [SerializeField] private ViewData viewData;
         [SerializeField] private List<GameObject> additionalObjectList;
         [SerializeField] private HouseView endingHouse;
         [SerializeField] private TextBox endingThanks;
@@ -33,7 +35,7 @@ namespace Assets.Scripts.Stage.View
 
         private void Awake()
         {
-            slowEffectView.SetColor(stageViewData.SlowEffectColor);
+            slowEffectView.SetColor(viewData.SlowEffectColor);
         }
 
         public void SetBlockMap(Tilemap tilemap)
@@ -68,7 +70,7 @@ namespace Assets.Scripts.Stage.View
             if (PlayerModel.Instance == null)
                 return;
             slowEffectView.transform.position = PlayerModel.Instance.Pos;
-            slowEffectView.PlayAnim("SlowIn", stageViewData.SlowInAnimSeconds);
+            slowEffectView.PlayAnim("SlowIn", viewData.SlowInAnimSeconds);
         }
 
         public void StopSlowEffect()
@@ -79,7 +81,7 @@ namespace Assets.Scripts.Stage.View
         public async UniTask PlayClearEffect(CancellationToken token)
         {
             await PlayGoodAndText(token);
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.CloseAnimDelaySeconds), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.CloseAnimDelaySeconds), cancellationToken: token);
             await CloseStage(token);
         }
 
@@ -87,11 +89,11 @@ namespace Assets.Scripts.Stage.View
         {
             isRetry = false;
             await PlayGoodAndText(token);
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ClearFinalAnimDelaySeconds), cancellationToken: token);
-            fillEffectView.PlayAnim("ClearFinal", stageViewData.ClearAnimSeconds);
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.CloseAnimDelaySeconds), cancellationToken: token);
-            frontView.PlayAnim("InBlack", stageViewData.InBlackAnimSeconds);
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadFarceDelaySeconds), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.ClearFinalAnimDelaySeconds), cancellationToken: token);
+            fillEffectView.PlayAnim("ClearFinal", viewData.ClearAnimSeconds);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.CloseAnimDelaySeconds), cancellationToken: token);
+            frontView.PlayAnim("InBlack", viewData.InBlackAnimSeconds);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadFarceDelaySeconds), cancellationToken: token);
         }
 
         public async UniTask PlayEndingEffect(CancellationToken token)
@@ -99,11 +101,11 @@ namespace Assets.Scripts.Stage.View
             isRetry = false;
             timeLimitText.enabled = false;
             endingHouse.Break();
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.HouseIlluminateDelaySeconds), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.HouseIlluminateDelaySeconds), cancellationToken: token);
             endingHouse.Illuminate();
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ThanksDelaySeconds), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.ThanksDelaySeconds), cancellationToken: token);
             endingThanks.ShowAndPlay();
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadTitleOnEndingDelaySeconds), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadTitleOnEndingDelaySeconds), cancellationToken: token);
         }
 
         private async UniTask PlayGoodAndText(CancellationToken token)
@@ -111,22 +113,24 @@ namespace Assets.Scripts.Stage.View
             StopAllBlocks();
             screenView.PlayAnim("Stop");
             GoodView.transform.position = PlayerModel.Instance.Pos + Vector2.up;
-            GoodView.PlayAnim("Good", stageViewData.GoodAnimSeconds);
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ClearAnimDelaySeconds), cancellationToken: token);
+            GoodView.PlayAnim("Good", viewData.GoodAnimSeconds);
+            AudioSourceView.Instance.PlayGoodSE();
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.ClearAnimDelaySeconds), cancellationToken: token);
             screenView.PlayAnim("Play");
             GoodView.PlayAnim("Empty");
             timeLimitText.enabled = false;
             for (int i = 0; i < additionalObjectList.Count; i++)
                 Destroy(additionalObjectList[i]);
-            fillEffectView.PlayAnim("Clear", stageViewData.ClearAnimSeconds);
+            fillEffectView.PlayAnim("Clear", viewData.ClearAnimSeconds);
             await PaintStage(token);
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.ClearTextDelaySeconds), cancellationToken: token);
-            clearTextView.PlayAnim("Awake", stageViewData.ClearTextAnimSeconds);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.ClearTextDelaySeconds), cancellationToken: token);
+            clearTextView.PlayAnim("Awake", viewData.ClearTextAnimSeconds);
+            AudioSourceView.Instance.PlayClearSE();
         }
 
         private async UniTask PaintStage(CancellationToken token)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.PaintStageDelaySeconds), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.PaintStageDelaySeconds), cancellationToken: token);
             for (int i = 0; i < blockMap.GetLength(0) + blockMap.GetLength(1); i++)
             {
                 for (int x = 0; x <= i; x++)
@@ -151,23 +155,27 @@ namespace Assets.Scripts.Stage.View
 
         public async UniTask CloseStage(CancellationToken token)
         {
-            frontView.PlayAnim("Close", stageViewData.CloseAnimSeconds);
+            frontView.PlayAnim("Close", viewData.CloseAnimSeconds);
             isRetry = false;
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneDelaySeconds), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneDelaySeconds - viewData.PlayCloseSEDelaySeconds), cancellationToken: token);
+            AudioSourceView.Instance.PlayCloseSE();
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.PlayCloseSEDelaySeconds), cancellationToken: token);
         }
 
         public async UniTask CloseStageRetry(CancellationToken token)
         {
-            frontView.PlayAnim("CloseRell", stageViewData.CloseAnimSeconds);
+            frontView.PlayAnim("CloseRell", viewData.CloseAnimSeconds);
             isRetry = true;
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneDelaySeconds), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneDelaySeconds - viewData.PlayCloseSEDelaySeconds), cancellationToken: token);
+            AudioSourceView.Instance.PlayCloseSE();
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.PlayCloseSEDelaySeconds), cancellationToken: token);
         }
 
         public async UniTask CloseStageWithBlack(CancellationToken token)
         {
-            frontView.PlayAnim("InBlack", stageViewData.InBlackAnimSeconds);
+            frontView.PlayAnim("InBlack", viewData.InBlackAnimSeconds);
             isRetry = false;
-            await UniTask.Delay(TimeSpan.FromSeconds(stageViewData.LoadSceneWithBlackDelaySeconds), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(viewData.LoadSceneWithBlackDelaySeconds), cancellationToken: token);
         }
 
         public void OpenStage()
@@ -175,20 +183,22 @@ namespace Assets.Scripts.Stage.View
             if (isRetry)
             {
                 frontView.Initialize(frontOpenRellInitSprite);
-                frontView.PlayAnim("OpenRell", stageViewData.OpenAnimSeconds);
+                frontView.PlayAnim("OpenRell", viewData.OpenAnimSeconds);
             }
             else
             {
                 frontView.Initialize(frontOpenInitSprite);
-                frontView.PlayAnim("Open", stageViewData.OpenAnimSeconds);
+                frontView.PlayAnim("Open", viewData.OpenAnimSeconds);
             }
         }
 
-        public void SetTimeLimit(int timeLimit)
+        public void SetTimeLimit(int timeLimit, bool isHardMode)
         {
             if (timeLimitText == null)
                 return;
             timeLimitText.text = timeLimit.ToString();
+            if (isHardMode)
+                timeLimitText.color = viewData.HardModeColor;
         }
     }
 }

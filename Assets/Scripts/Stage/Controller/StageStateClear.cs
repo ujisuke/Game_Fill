@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
@@ -27,8 +28,16 @@ namespace Assets.Scripts.Stage.Controller
 
         private async UniTask Clear()
         {
-            if (sC.IsFinalStage)
+            if (StageController.IsInGallery)
             {
+                StageController.SetIsOnGallery(false);
+                AudioSourceView.Instance.FadeOutBGM().Forget();
+                await sC.PlayClearEffect(token);
+                SceneManager.LoadScene(sC.GallerySceneName);
+            }
+            else if (sC.IsFinalStage)
+            {
+                AudioSourceView.Instance.FadeOutBGM().Forget();
                 await sC.PlayClearFinalEffect(token);
                 SceneManager.LoadScene(sC.NextSceneName);
             }
@@ -36,6 +45,8 @@ namespace Assets.Scripts.Stage.Controller
                 sSM.ChangeState(new StageStateEnding(sC, sSM));
             else
             {
+                if (sC.NextSceneName[^1] == 'F')
+                    AudioSourceView.Instance.FadeOutBGM().Forget();
                 await sC.PlayClearEffect(token);
                 SceneManager.LoadScene(sC.NextSceneName);
             }

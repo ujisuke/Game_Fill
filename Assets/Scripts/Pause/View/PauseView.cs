@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
+using Assets.Scripts.Stage.Controller;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,26 +10,24 @@ namespace Assets.Scripts.Pause.View
     public class PauseView : MonoBehaviour
     {
         [SerializeField] private List<ButtonView> buttonList;
-        private int currentIndex;
+        [SerializeField] private ButtonView galleryButton;
 
         private void Awake()
         {
-            Initialize();
+            if (StageController.IsInGallery)
+            {
+                buttonList[2].gameObject.SetActive(false);
+                buttonList[2] = galleryButton;
+                galleryButton.gameObject.SetActive(true);
+            }
+            else
+                galleryButton.gameObject.SetActive(false);
         }
 
-        public void Initialize()
+        public void UpdateInitButtonSelection(int indexNew, int indexPrev)
         {
-            currentIndex = 0;
-            buttonList[currentIndex].PlaySelectedAnim();
-        }
-
-        public void UpdateInitButtonSelection(int index)
-        {
-            if (currentIndex == index) return;
-
-            buttonList[currentIndex].PlayDeselectedAnim();
-            currentIndex = index;
-            buttonList[currentIndex].PlaySelectedAnim();
+            buttonList[indexPrev].PlayDeselectedAnim();
+            buttonList[indexNew].PlaySelectedAnim();
         }
     }
 }

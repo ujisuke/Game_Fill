@@ -1,4 +1,5 @@
 using System.Threading;
+using Assets.Scripts.AudioSource.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,7 @@ namespace Assets.Scripts.Farce.Controller
 
         public void OnStateEnter()
         {
+            AudioSourceView.Instance.FadeOutBGM().Forget();
             LoadScene().Forget();
         }
 

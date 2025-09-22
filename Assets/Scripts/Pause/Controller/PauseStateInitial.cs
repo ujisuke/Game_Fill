@@ -1,4 +1,5 @@
 using Assets.Scripts.Common.Controller;
+using Assets.Scripts.Stage.Controller;
 using Assets.Scripts.Volume.Controller;
 using Unity.Mathematics;
 
@@ -11,9 +12,11 @@ namespace Assets.Scripts.Pause.Controller
         private int selectedIndex;
         private static bool isBack;
         private static bool doesSelectStage;
+        private static bool doesBackGallery;
         private static bool doesExitGame;
         public static bool IsBack => isBack;
         public static bool DoesSelectStage => doesSelectStage;
+        public static bool DoesBackGallery => doesBackGallery;
         public static bool DoesExitGame => doesExitGame;
 
         public PauseStateInitial(PauseController pC, PauseStateMachine pSM)
@@ -24,8 +27,12 @@ namespace Assets.Scripts.Pause.Controller
 
         public void OnStateEnter()
         {
-            selectedIndex = 0;
-            pC.Initialize();
+            if (PauseStateSetVolume.FromPause)
+                selectedIndex = 1;
+            else
+                selectedIndex = 0;
+            PauseStateSetVolume.ResetFlag();
+            pC.UpdateInitButtonSelection(selectedIndex, selectedIndex, true);
             VolumeStateExitPage.ResetFlag();
         }
 
@@ -33,13 +40,15 @@ namespace Assets.Scripts.Pause.Controller
         {
             if (CustomInputSystem.Instance.GetUpKeyWithCooldown())
             {
-                selectedIndex = math.max(0, selectedIndex - 1);
-                pC.UpdateInitButtonSelection(selectedIndex);
+                int selectedIndexNew = math.max(0, selectedIndex - 1);
+                pC.UpdateInitButtonSelection(selectedIndexNew, selectedIndex);
+                selectedIndex = selectedIndexNew;
             }
             else if (CustomInputSystem.Instance.GetDownKeyWithCooldown())
             {
-                selectedIndex = math.min(3, selectedIndex + 1);
-                pC.UpdateInitButtonSelection(selectedIndex);
+                int selectedIndexNew = math.min(3, selectedIndex + 1);
+                pC.UpdateInitButtonSelection(selectedIndexNew, selectedIndex);
+                selectedIndex = selectedIndexNew;
             }
 
             if (CustomInputSystem.Instance.GetPauseKeyWithCooldown())
@@ -47,7 +56,7 @@ namespace Assets.Scripts.Pause.Controller
                 isBack = true;
                 pSM.ChangeState(new PauseStateSelected(pC));
             }
-            else if (CustomInputSystem.Instance.DoesSelectKeyUp())
+            else if (CustomInputSystem.Instance.GetSelectKeyUp())
             {
                 switch (selectedIndex)
                 {
@@ -59,7 +68,10 @@ namespace Assets.Scripts.Pause.Controller
                         pSM.ChangeState(new PauseStateSetVolume(pC));
                         break;
                     case 2:
-                        doesSelectStage = true;
+                        if(StageController.IsInGallery)
+                            doesBackGallery = true;
+                        else 
+                            doesSelectStage = true;
                         pSM.ChangeState(new PauseStateSelected(pC));
                         break;
                     case 3:
@@ -78,6 +90,7 @@ namespace Assets.Scripts.Pause.Controller
         public static void ResetFlags()
         {
             isBack = false;
+            doesBackGallery = false;
             doesSelectStage = false;
             doesExitGame = false;
         }

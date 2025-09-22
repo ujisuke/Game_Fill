@@ -1,5 +1,7 @@
 using System;
+using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Player.Model;
+using Assets.Scripts.Stage.Model;
 using Cysharp.Threading.Tasks;
 
 namespace Assets.Scripts.Player.Controller
@@ -19,6 +21,8 @@ namespace Assets.Scripts.Player.Controller
 
         public void OnStateEnter()
         {
+            AudioSourceView.Instance.RestoreBGM();
+            AudioSourceView.Instance.PlayDeadSE();
             Dead().Forget();
         }
 
@@ -28,7 +32,7 @@ namespace Assets.Scripts.Player.Controller
             await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
             PlayerModel.RemoveInstance();
             await UniTask.Delay(TimeSpan.FromSeconds(0.8f));
-            if(pC != null)
+            if (pC != null)
                 pC.OnDestroy();
         }
 

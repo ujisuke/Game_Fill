@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: ProductionPlayerData
   m_EditorClassIdentifier: 
   moveSpeed: 12
-  hurtBoxScale: {x: 0.6, y: 0.6}
+  stopSeconds: 0.1
+  hurtBoxScale: {x: 0.5, y: 0.5}
+  compress: {x: 1.2, y: 0.75}

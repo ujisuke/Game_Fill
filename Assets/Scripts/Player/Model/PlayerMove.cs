@@ -34,7 +34,7 @@ namespace Assets.Scripts.Player.Model
 
         public PlayerMove MoveTurn(Vector2 moveDir)
         {
-            Vector2 newPos = pos + moveSpeedCurrent * Time.deltaTime * moveDir;
+            Vector2 newPos = pos;
             return new PlayerMove(newPos, moveSpeedDefault, moveSpeedCurrent, moveDir, decelerationFactor);
         }
 
