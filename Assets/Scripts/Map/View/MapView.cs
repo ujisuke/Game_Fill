@@ -58,7 +58,7 @@ namespace Assets.Scripts.Map.View
             frontView.Initialize(frontOpenFromTitleInitSprite);
         }
 
-        public void InitializeMailAndIcon(int stageIndex, bool isStageIndexUpper, bool isStageIndexLower)
+        public void Initialize(int stageIndex, bool isStageIndexUpper, bool isStageIndexLower, bool isHardMode)
         {
             if (isStageIndexUpper && isStageIndexLower)
             {
@@ -83,6 +83,18 @@ namespace Assets.Scripts.Map.View
 
             UpdateMailText(stageIndex);
             UpdateHardIcon(stageIndex);
+            
+            hardText.enabled = isHardMode;
+            if (isHardMode)
+            {
+                NiLLAnimator.Play("IdleHard");
+                BoLLAnimator.Play("IdleHard");
+            }
+            else
+            {
+                NiLLAnimator.Play("Idle");
+                BoLLAnimator.Play("Idle");
+            }
         }
 
         public async UniTask SelectRight(int stageIndex, bool isStageIndexUpper, CancellationToken token)
@@ -129,12 +141,12 @@ namespace Assets.Scripts.Map.View
             hardIcon.enabled = ES3.Load("Hard" + stageIndex, false);
         }
 
-        public async UniTask SetDifficulty(bool isHard, CancellationToken token)
+        public async UniTask SetDifficulty(bool isHardMode, CancellationToken token)
         {
             mailView.PlayAnim("Awake");
             await UniTask.DelayFrame(1, cancellationToken: token);
-            hardText.enabled = isHard;
-            if (isHard)
+            hardText.enabled = isHardMode;
+            if (isHardMode)
             {
                 mailView.PlayAnim("GetHard");
                 NiLLAnimator.Play("IdleHard");

@@ -16,7 +16,7 @@ namespace Assets.Scripts.Map.Controller
 
         public void OnStateEnter()
         {
-            mC.InitializeMail();
+            mC.InitializeView();
             if (isFromTitle)
                 mC.OpenSceneFromTitle();
             else

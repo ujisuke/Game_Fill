@@ -30,9 +30,9 @@ namespace Assets.Scripts.Map.Controller
             mapStateMachine.HandleInput();
         }
 
-        public void InitializeMail()
+        public void InitializeView()
         {
-            mapView.InitializeMailAndIcon(MapModel.CurrentStageIndex, mapModel.IsStageIndexUpper, mapModel.IsStageIndexLower);
+            mapView.Initialize(MapModel.CurrentStageIndex, mapModel.IsStageIndexUpper, mapModel.IsStageIndexLower, MapModel.IsHardMode);
         }
 
         public void SelectRight(CancellationToken token)
