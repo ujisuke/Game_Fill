@@ -3052,8 +3052,9 @@ MonoBehaviour:
   viewData: {fileID: 11400000, guid: 1c0d6dbcc16fa8d43b8cc2ee5f6ec8ec, type: 2}
   text: {fileID: 768263795}
   showText:
-  - "\u9593\u9055\u3063\u3066\u3082<color=#56FEEA>Fillmina</color>\u306B\u89E6\u308B\u306A\u3088\n\u305D\u306E\u307B\u3046\u304C\u5065\u5EB7\u306B\u3044\u3044"
+  - "<color=#56FEEA>Fillmina</color>\u306B\u8FFD\u7A81\u3067\u3082\u3057\u305F\u3089\u30C0\u30A4\u30B5\u30F3\u30B8\u3060\n\u79FB\u52D5\u4E2D\u306B<color=#FFDF7A>W\u30FBA\u30FBS\u30FBD\u30AD\u30FC</color>\u3067\u5411\u304D\u3092\u5909\u3048\u3066\u30E8\u3051\u308B\u3053\u3068\u3060\u306A"
   showDelaySeconds: 0
+  doesPlaySE: 1
 --- !u!114 &768263795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3087,7 +3088,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.8
-  m_Text: Text
+  m_Text: 
 --- !u!222 &768263796
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8410,6 +8411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1441032657}
   stageView: {fileID: 2068900229}
+  timeLimitEasy: 99
   timeLimitNormal: 99
   timeLimitHard: 2
   isFinalStage: 0

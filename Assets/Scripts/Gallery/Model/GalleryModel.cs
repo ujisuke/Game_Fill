@@ -6,12 +6,13 @@ namespace Assets.Scripts.Gallery.Model
 {
     public class GalleryModel
     {
-        private readonly SceneNameData sceneNameData;
         private static int currentStageIndex = 0;
         private static int currentStageChildIndex = 0;
+        private static bool isEasyMode = false;
         private static bool isHardMode = false;
         public static int CurrentStageIndex => currentStageIndex;
         public static int CurrentStageChildIndex => currentStageChildIndex;
+        public static bool IsEasyMode => isEasyMode;
         public static bool IsHardMode => isHardMode;
         public string CurrentStageName => $"{currentStageIndex}-{currentStageChildIndex + 1}";
         public static int StageChildIndexUpper => 4;
@@ -19,9 +20,9 @@ namespace Assets.Scripts.Gallery.Model
         public static bool IsStageIndexUpper => currentStageIndex == StageIndexUpper;
         public static bool IsStageIndexLower => currentStageIndex == 0;
 
-        public GalleryModel(SceneNameData sceneNameData)
+        public GalleryModel()
         {
-            this.sceneNameData = sceneNameData;
+
         }
 
         public void UpdateStageAndChildIndex(int additionalIndex, out bool isChildIndexChanged, out bool isStageIndexChanged)
@@ -53,9 +54,38 @@ namespace Assets.Scripts.Gallery.Model
             isChildIndexChanged = true;
         }
 
-        public static void SetDifficulty(bool isHard)
+        public static void SetDifficulty(bool isUp)
         {
-            isHardMode = isHard;
+            if (isEasyMode && isUp)
+            {
+                isEasyMode = false;
+                isHardMode = false;
+                return;
+            }
+            else if (!isEasyMode && !isHardMode && isUp)
+            {
+                isEasyMode = false;
+                isHardMode = true;
+                return;
+            }
+            else if (isHardMode && !isUp)
+            {
+                isEasyMode = false;
+                isHardMode = false;
+                return;
+            }
+            else if (!isEasyMode && !isHardMode && !isUp)
+            {
+                isEasyMode = true;
+                isHardMode = false;
+                return;
+            }
+        }
+
+        public static void ReSetDifficulty()
+        {
+            isEasyMode = false;
+            isHardMode = false;
         }
         
         public void SetCurrentStageAndChildIndexFromTitle()

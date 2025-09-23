@@ -28,10 +28,13 @@ namespace Assets.Scripts.Gallery.View
         [SerializeField] private ImageView rightArrowView;
         [SerializeField] private ImageView leftArrowView;
         [SerializeField] private Text stageText;
+        [SerializeField] private Text easyText;
+        [SerializeField] private Text normalText;
         [SerializeField] private Text hardText;
         [SerializeField] private Text switchText;
         [SerializeField] private Text entrustText;
         private int stageChildIndexPrev = 0;
+        private Color32 easyColor, normalColor, hardColor;
 
         public async UniTask CloseScene(CancellationToken token)
         {
@@ -59,14 +62,19 @@ namespace Assets.Scripts.Gallery.View
             frontView.Initialize(frontOpenFromTitleInitSprite);
         }
 
-        public void Initialize(int stageIndex, int stageChildIndex, bool isHardMode, int stageIndexUpper, bool isStageIndexUpper, bool isStageIndexLower)
+        public void Initialize(int stageIndex, int stageChildIndex, bool isEasyMode, bool isHardMode, int stageIndexUpper, bool isStageIndexUpper, bool isStageIndexLower)
         {
+            easyColor = easyText.color;
+            normalColor = normalText.color;
+            hardColor = hardText.color;
             stageChildIndexPrev = stageChildIndex;
             if (stageIndexUpper < 0)
             {
                 leftArrowView.PlayAnim("Empty");
                 rightArrowView.PlayAnim("Empty");
                 stageText.text = "まだ ナニも ない...";
+                easyText.enabled = false;
+                normalText.enabled = false;
                 hardText.enabled = false;
                 switchText.enabled = false;
                 entrustText.enabled = false;
@@ -77,7 +85,7 @@ namespace Assets.Scripts.Gallery.View
 
             SetStageBoards(stageIndex);
             StageBoardViewList[stageChildIndex].PlayAnim("Selected");
-            SetDifficulty(isHardMode);
+            SetDifficulty(isEasyMode, isHardMode);
 
             if (isStageIndexUpper && isStageIndexLower)
             {
@@ -154,9 +162,11 @@ namespace Assets.Scripts.Gallery.View
             leftArrowView.PlayAnim("Empty");
         }
 
-        public void SetDifficulty(bool isHard)
+        public void SetDifficulty(bool isEasyMode, bool isHardMode)
         {
-            hardText.enabled = isHard;
+            easyText.color = isEasyMode ? new Color32(easyColor.r, easyColor.g, easyColor.b, 255) : new Color32(easyColor.r, easyColor.g, easyColor.b, 20);
+            normalText.color = !isEasyMode && !isHardMode ? new Color32(normalColor.r, normalColor.g, normalColor.b, 255) : new Color32(normalColor.r, normalColor.g, normalColor.b, 20);
+            hardText.color = isHardMode ? new Color32(hardColor.r, hardColor.g, hardColor.b, 255) : new Color32(hardColor.r, hardColor.g, hardColor.b, 20);
         }
     }
 

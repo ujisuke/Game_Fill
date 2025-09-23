@@ -32,7 +32,7 @@ namespace Assets.Scripts.Map.Controller
 
         public void InitializeView()
         {
-            mapView.Initialize(MapModel.CurrentStageIndex, mapModel.IsStageIndexUpper, mapModel.IsStageIndexLower, MapModel.IsHardMode);
+            mapView.Initialize(MapModel.CurrentStageIndex, mapModel.IsStageIndexUpper, mapModel.IsStageIndexLower, MapModel.IsEasyMode, MapModel.IsHardMode);
         }
 
         public void SelectRight(CancellationToken token)
@@ -53,13 +53,15 @@ namespace Assets.Scripts.Map.Controller
             mapView.SelectLeft(MapModel.CurrentStageIndex, mapModel.IsStageIndexLower, token).Forget();
         }
 
-        public async UniTask SetDifficulty(bool isHard, CancellationToken token)
+        public async UniTask SetDifficulty(bool isUp, CancellationToken token)
         {
-            if (MapModel.IsHardMode == isHard)
+            if (MapModel.IsHardMode && isUp)
                 return;
-            MapModel.SetDifficulty(isHard);
+            else if (MapModel.IsEasyMode && !isUp)
+                return;
+            MapModel.SetDifficulty(isUp);
             AudioSourceView.Instance.PlayChooseSE();
-            await mapView.SetDifficulty(isHard, token);
+            await mapView.SetDifficulty(MapModel.IsEasyMode, MapModel.IsHardMode, token);
         }
 
         public async UniTask CloseScene(CancellationToken token)

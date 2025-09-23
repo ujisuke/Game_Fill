@@ -192,13 +192,17 @@ namespace Assets.Scripts.Stage.View
             }
         }
 
-        public void SetTimeLimit(int timeLimit, bool isHardMode)
+        public void SetTimeLimit(int timeLimit, bool isEasyMode, bool isHardMode)
         {
             if (timeLimitText == null)
                 return;
             timeLimitText.text = timeLimit.ToString();
-            if (isHardMode)
+            if (isEasyMode)
+                timeLimitText.color = viewData.EasyModeColor;
+            else if (isHardMode)
                 timeLimitText.color = viewData.HardModeColor;
+            else
+                timeLimitText.color = viewData.NormalModeColor;
         }
     }
 }

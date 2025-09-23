@@ -16,6 +16,7 @@ namespace Assets.Scripts.Stage.Controller
         [SerializeField] private Tilemap tilemap;
         private StageModel stageModel;
         [SerializeField] private StageView stageView;
+        [SerializeField] private int timeLimitEasy;
         [SerializeField] private int timeLimitNormal;
         [SerializeField] private int timeLimitHard;
         private StageStateMachine stageStateMachine;
@@ -24,6 +25,7 @@ namespace Assets.Scripts.Stage.Controller
         [SerializeField] private string nextSceneName;
         [SerializeField] private SceneNameData sceneNameData;
         private static bool isInGallery = false;
+        private bool isEasyMode => MapModel.IsEasyMode || GalleryModel.IsEasyMode;
         private bool isHardMode => MapModel.IsHardMode || GalleryModel.IsHardMode;
 
         public bool IsFinalStage => isFinalStage;
@@ -37,11 +39,17 @@ namespace Assets.Scripts.Stage.Controller
 
         private void Awake()
         {
-            int timeLimit = isHardMode ? timeLimitHard : timeLimitNormal;
+            int timeLimit;
+            if (isHardMode)
+                timeLimit = timeLimitHard;
+            else if (isEasyMode)
+                timeLimit = timeLimitEasy;
+            else
+                timeLimit = timeLimitNormal;
             stageModel = new StageModel(tilemap, this, timeLimit);
             stageStateMachine = new(this);
             stageView.SetBlockMap(tilemap);
-            stageView.SetTimeLimit(timeLimit, isHardMode);
+            stageView.SetTimeLimit(timeLimit, isEasyMode, isHardMode);
             if (!isEndingStage)
                 AudioSourceView.Instance.PlayStageBGM(isInGallery ? GalleryModel.CurrentStageIndex : MapModel.CurrentStageIndex);
         }
@@ -96,7 +104,7 @@ namespace Assets.Scripts.Stage.Controller
 
         public void SetTimeLimit(int timeLimit)
         {
-            stageView.SetTimeLimit(timeLimit, isHardMode);
+            stageView.SetTimeLimit(timeLimit, isEasyMode, isHardMode);
         }
 
         public static void SetIsOnGallery(bool isOnGallery)
