@@ -57,6 +57,7 @@ namespace Assets.Scripts.Common.Controller
         }
 
         public bool GetSlowKey() => Input.GetMouseButton(1);
+        public bool GetFillKey() => Input.GetMouseButton(0);
 
         public bool GetSelectKeyUp()
         {
@@ -169,7 +170,7 @@ namespace Assets.Scripts.Common.Controller
             else
                 return false;
         }
-        
+
         private async UniTask CooldownLeft()
         {
             float cooldownSecondsDelta = cooldownSeconds * 0.1f;

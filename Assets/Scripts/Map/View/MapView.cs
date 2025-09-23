@@ -8,6 +8,7 @@ using Assets.Scripts.Player.Model;
 using Assets.Scripts.Stage.Controller;
 using Cysharp.Threading.Tasks;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
@@ -27,10 +28,13 @@ namespace Assets.Scripts.Map.View
         [SerializeField] private Text mailText;
         [SerializeField] private int mailTitleSize;
         [SerializeField] private List<MailText> mailTextList;
+        [SerializeField] private Text easyText;
+        [SerializeField] private Text normalText;
         [SerializeField] private Text hardText;
         [SerializeField] private Animator NiLLAnimator;
         [SerializeField] private Animator BoLLAnimator;
         [SerializeField] private SpriteRenderer hardIcon;
+        private Color32 easyColor, normalColor, hardColor;
 
         public async UniTask CloseScene(CancellationToken token)
         {
@@ -58,8 +62,12 @@ namespace Assets.Scripts.Map.View
             frontView.Initialize(frontOpenFromTitleInitSprite);
         }
 
-        public void Initialize(int stageIndex, bool isStageIndexUpper, bool isStageIndexLower, bool isHardMode)
+        public void Initialize(int stageIndex, bool isStageIndexUpper, bool isStageIndexLower, bool isEasyMode, bool isHardMode)
         {
+            easyColor = easyText.color;
+            normalColor = normalText.color;
+            hardColor = hardText.color;
+            
             if (isStageIndexUpper && isStageIndexLower)
             {
                 rightArrowView.PlayAnim("Empty");
@@ -83,18 +91,7 @@ namespace Assets.Scripts.Map.View
 
             UpdateMailText(stageIndex);
             UpdateHardIcon(stageIndex);
-            
-            hardText.enabled = isHardMode;
-            if (isHardMode)
-            {
-                NiLLAnimator.Play("IdleHard");
-                BoLLAnimator.Play("IdleHard");
-            }
-            else
-            {
-                NiLLAnimator.Play("Idle");
-                BoLLAnimator.Play("Idle");
-            }
+            UpdateTextAndCharacterOnDifficulty(isEasyMode, isHardMode);
         }
 
         public async UniTask SelectRight(int stageIndex, bool isStageIndexUpper, CancellationToken token)
@@ -141,22 +138,45 @@ namespace Assets.Scripts.Map.View
             hardIcon.enabled = ES3.Load("Hard" + stageIndex, false);
         }
 
-        public async UniTask SetDifficulty(bool isHardMode, CancellationToken token)
+        private void UpdateMailOnDifficulty(bool isEasyMode, bool isHardMode)
         {
-            mailView.PlayAnim("Awake");
-            await UniTask.DelayFrame(1, cancellationToken: token);
-            hardText.enabled = isHardMode;
-            if (isHardMode)
-            {
+            if (isEasyMode)
+                mailView.PlayAnim("GetEasy");
+            else if (isHardMode)
                 mailView.PlayAnim("GetHard");
+            else
+                mailView.PlayAnim("GetNormal");
+        }
+
+        private void UpdateTextAndCharacterOnDifficulty(bool isEasyMode, bool isHardMode)
+        {
+            easyText.color = isEasyMode ? new Color32(easyColor.r, easyColor.g, easyColor.b, 255) : new Color32(easyColor.r, easyColor.g, easyColor.b, 20);
+            normalText.color = !isEasyMode && !isHardMode ? new Color32(normalColor.r, normalColor.g, normalColor.b, 255) : new Color32(normalColor.r, normalColor.g, normalColor.b, 20);
+            hardText.color = isHardMode ? new Color32(hardColor.r, hardColor.g, hardColor.b, 255) : new Color32(hardColor.r, hardColor.g, hardColor.b, 20);
+
+            if (isEasyMode)
+            {
+                NiLLAnimator.Play("IdleEasy");
+                BoLLAnimator.Play("IdleEasy");
+            }
+            else if (isHardMode)
+            {
                 NiLLAnimator.Play("IdleHard");
                 BoLLAnimator.Play("IdleHard");
             }
             else
             {
-                NiLLAnimator.Play("Idle");
-                BoLLAnimator.Play("Idle");
+                NiLLAnimator.Play("IdleNormal");
+                BoLLAnimator.Play("IdleNormal");
             }
+        }
+
+        public async UniTask SetDifficulty(bool isEasyMode, bool isHardMode, CancellationToken token)
+        {
+            mailView.PlayAnim("Awake");
+            await UniTask.DelayFrame(1, cancellationToken: token);
+            UpdateTextAndCharacterOnDifficulty(isEasyMode, isHardMode);
+            UpdateMailOnDifficulty(isEasyMode, isHardMode);
         }
     }
 

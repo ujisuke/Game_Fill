@@ -15,8 +15,8 @@ namespace Assets.Scripts.Player.Controller
         private readonly PlayerController pC;
         private readonly PlayerStateMachine pSM;
         private bool isLookingLeft;
-        private CancellationTokenSource cTS;
-        private CancellationToken token;
+        private readonly CancellationTokenSource cTS;
+        private readonly CancellationToken token;
         private bool isStopping;
 
         public PlayerStateMove(PlayerModel pM, PlayerController pC, PlayerStateMachine pSM, bool isLookingLeft = false, bool isInitial = false)
@@ -120,7 +120,7 @@ namespace Assets.Scripts.Player.Controller
                 pSM.ChangeState(new PlayerStateDead(pM, pC, pSM));
             else if (pM.IsOnExit)
                 pSM.ChangeState(new PlayerStateExit(pM, pC, pSM));
-            else if (Input.GetMouseButton(0) && !isStopping)
+            else if (CustomInputSystem.Instance.GetFillKey() && !isStopping)
                 pSM.ChangeState(new PlayerStateFill(pM, pC, pSM, isLookingLeft));
         }
 

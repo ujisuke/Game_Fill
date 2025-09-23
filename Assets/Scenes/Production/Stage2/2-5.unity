@@ -12173,8 +12173,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1441032657}
   stageView: {fileID: 2068900229}
-  timeLimitNormal: 15
-  timeLimitHard: 11
+  timeLimitEasy: 58
+  timeLimitNormal: 18
+  timeLimitHard: 12
   isFinalStage: 1
   isEndingStage: 0
   nextSceneName: 2-F

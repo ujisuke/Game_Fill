@@ -27,7 +27,12 @@ namespace Assets.Scripts.Player.Controller
 
         public void HandleInput()
         {
-            if (CustomInputSystem.Instance.GetLeftKey() || CustomInputSystem.Instance.GetRightKey() || CustomInputSystem.Instance.GetUpKey() || CustomInputSystem.Instance.GetDownKey())
+            Debug.Log($"Fill:{CustomInputSystem.Instance.GetFillKey()}, Up:{CustomInputSystem.Instance.GetUpKey()}");
+            if (!(CustomInputSystem.Instance.GetLeftKey() || CustomInputSystem.Instance.GetRightKey() || CustomInputSystem.Instance.GetUpKey() || CustomInputSystem.Instance.GetDownKey()))
+                return;
+            if (CustomInputSystem.Instance.GetFillKey())
+                pSM.ChangeState(new PlayerStateFill(pM, pC, pSM, isInitial: true));
+            else
                 pSM.ChangeState(new PlayerStateMove(pM, pC, pSM, isInitial: true));
         }
 

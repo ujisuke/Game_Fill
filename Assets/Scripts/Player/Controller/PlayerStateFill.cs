@@ -15,19 +15,43 @@ namespace Assets.Scripts.Player.Controller
         private readonly PlayerController pC;
         private readonly PlayerStateMachine pSM;
         private bool isLookingLeft;
-        private CancellationTokenSource cTS;
-        private CancellationToken token;
+        private readonly CancellationTokenSource cTS;
+        private readonly CancellationToken token;
         private bool isStopping;
 
-        public PlayerStateFill(PlayerModel pM, PlayerController pC, PlayerStateMachine pSM, bool isLookingLeft = false)
+        public PlayerStateFill(PlayerModel pM, PlayerController pC, PlayerStateMachine pSM, bool isLookingLeft = false, bool isInitial = false)
         {
             this.pM = pM;
             this.pC = pC;
             this.pSM = pSM;
             this.isLookingLeft = isLookingLeft;
+
             cTS = new CancellationTokenSource();
             token = cTS.Token;
             isStopping = false;
+
+            if (!isInitial)
+                return;
+            if (CustomInputSystem.Instance.GetUpKey())
+            {
+                pM.MoveTurn(Vector2.up);
+                pC.Compress(true);
+            }
+            else if (CustomInputSystem.Instance.GetDownKey())
+            {
+                pM.MoveTurn(Vector2.down);
+                pC.Compress(true);
+            }
+            else if (CustomInputSystem.Instance.GetLeftKey())
+            {
+                pM.MoveTurn(Vector2.left);
+                pC.Compress(true);
+            }
+            else if (CustomInputSystem.Instance.GetRightKey())
+            {
+                pM.MoveTurn(Vector2.right);
+                pC.Compress(true);
+            }
         }
 
         public void OnStateEnter()
@@ -98,7 +122,7 @@ namespace Assets.Scripts.Player.Controller
                 pSM.ChangeState(new PlayerStateDead(pM, pC, pSM));
             else if (pM.IsOnExit)
                 pSM.ChangeState(new PlayerStateExit(pM, pC, pSM));
-            else if (!Input.GetMouseButton(0) && !isStopping)
+            else if (!CustomInputSystem.Instance.GetFillKey() && !isStopping)
                 pSM.ChangeState(new PlayerStateMove(pM, pC, pSM, isLookingLeft));
         }
 

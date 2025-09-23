@@ -21,7 +21,7 @@ namespace Assets.Scripts.Gallery.Controller
 
         private void Awake()
         {
-            galleryModel = new GalleryModel(sceneNameData);
+            galleryModel = new();
             galleryStateMachine = new GalleryStateMachine(this);
         }
 
@@ -42,7 +42,7 @@ namespace Assets.Scripts.Gallery.Controller
             else
                 StageController.SetIsOnGallery(false);
 
-            galleryView.Initialize(GalleryModel.CurrentStageIndex, GalleryModel.CurrentStageChildIndex, GalleryModel.IsHardMode, GalleryModel.StageIndexUpper, GalleryModel.IsStageIndexUpper, GalleryModel.IsStageIndexLower);
+            galleryView.Initialize(GalleryModel.CurrentStageIndex, GalleryModel.CurrentStageChildIndex, GalleryModel.IsEasyMode, GalleryModel.IsHardMode, GalleryModel.StageIndexUpper, GalleryModel.IsStageIndexUpper, GalleryModel.IsStageIndexLower);
         }
 
         public async UniTask CloseScene(CancellationToken token)
@@ -91,13 +91,15 @@ namespace Assets.Scripts.Gallery.Controller
                 galleryView.SelectLeftStage(GalleryModel.CurrentStageIndex, GalleryModel.IsStageIndexLower, token).Forget();
         }
 
-        public void SetDifficulty(bool isHard)
+        public void SetDifficulty(bool isUp)
         {
-            if (GalleryModel.IsHardMode == isHard)
+            if (GalleryModel.IsHardMode && isUp)
                 return;
-            GalleryModel.SetDifficulty(isHard);
+            else if (GalleryModel.IsEasyMode && !isUp)
+                return;
+            GalleryModel.SetDifficulty(isUp);
             AudioSourceView.Instance.PlayChooseSE();
-            galleryView.SetDifficulty(isHard);
+            galleryView.SetDifficulty(GalleryModel.IsEasyMode, GalleryModel.IsHardMode);
         }
     }
 }

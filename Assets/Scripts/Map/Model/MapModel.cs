@@ -8,9 +8,11 @@ namespace Assets.Scripts.Map.Model
     {
         private readonly SceneNameData sceneNameData;
         private static int currentStageIndex = 0;
+        private static bool isEasyMode = false;
         private static bool isHardMode = false;
         public static int CurrentStageIndex => currentStageIndex;
         public static int StageIndexUpper => ES3.Load("ClearedStageIndex", -1) + 1;
+        public static bool IsEasyMode => isEasyMode;
         public static bool IsHardMode => isHardMode;
         public string CurrentStageName => sceneNameData.GetCurrentStageName(currentStageIndex);
         public bool IsStageIndexUpper => currentStageIndex == StageIndexUpper;
@@ -28,9 +30,38 @@ namespace Assets.Scripts.Map.Model
             currentStageIndex = newStageIndex;
         }
 
-        public static void SetDifficulty(bool isHard)
+        public static void SetDifficulty(bool isUp)
         {
-            isHardMode = isHard;
+            if (isEasyMode && isUp)
+            {
+                isEasyMode = false;
+                isHardMode = false;
+                return;
+            }
+            else if (!isEasyMode && !isHardMode && isUp)
+            {
+                isEasyMode = false;
+                isHardMode = true;
+                return;
+            }
+            else if (isHardMode && !isUp)
+            {
+                isEasyMode = false;
+                isHardMode = false;
+                return;
+            }
+            else if (!isEasyMode && !isHardMode && !isUp)
+            {
+                isEasyMode = true;
+                isHardMode = false;
+                return;
+            }
+        }
+
+        public static void ReSetDifficulty()
+        {
+            isEasyMode = false;
+            isHardMode = false;
         }
     }
 }
