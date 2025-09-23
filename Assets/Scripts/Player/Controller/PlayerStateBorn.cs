@@ -27,7 +27,6 @@ namespace Assets.Scripts.Player.Controller
 
         public void HandleInput()
         {
-            Debug.Log($"Fill:{CustomInputSystem.Instance.GetFillKey()}, Up:{CustomInputSystem.Instance.GetUpKey()}");
             if (!(CustomInputSystem.Instance.GetLeftKey() || CustomInputSystem.Instance.GetRightKey() || CustomInputSystem.Instance.GetUpKey() || CustomInputSystem.Instance.GetDownKey()))
                 return;
             if (CustomInputSystem.Instance.GetFillKey())
