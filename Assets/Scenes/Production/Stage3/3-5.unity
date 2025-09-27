@@ -12234,7 +12234,7 @@ MonoBehaviour:
   tilemap: {fileID: 1441032657}
   stageView: {fileID: 2068900229}
   timeLimitEasy: 47
-  timeLimitNormal: 16
+  timeLimitNormal: 18
   timeLimitHard: 10
   isFinalStage: 1
   isEndingStage: 0
