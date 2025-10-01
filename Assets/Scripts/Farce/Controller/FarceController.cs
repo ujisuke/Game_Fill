@@ -1,14 +1,9 @@
 using System.Threading;
 using Assets.Scripts.AudioSource.View;
-using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Farce.View;
 using Assets.Scripts.Map.Data;
-using Assets.Scripts.Pause.View;
-using Assets.Scripts.Stage.Controller;
-using Assets.Scripts.Title.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Farce.Controller
 {

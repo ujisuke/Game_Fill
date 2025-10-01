@@ -1,5 +1,4 @@
 using Assets.Scripts.Map.Model;
-using UnityEngine;
 
 namespace Assets.Scripts.Farce.Model
 {

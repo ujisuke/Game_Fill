@@ -1,7 +1,6 @@
 using Assets.Scripts.Common.View;
 using Assets.Scripts.Player.Data;
 using Assets.Scripts.Player.Model;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.View

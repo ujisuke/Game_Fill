@@ -1,5 +1,3 @@
-using Cysharp.Threading.Tasks;
-
 namespace Assets.Scripts.Map.Controller
 {
     public class MapStateInitial : IMapState
@@ -17,6 +15,7 @@ namespace Assets.Scripts.Map.Controller
         public void OnStateEnter()
         {
             mC.InitializeView();
+            //タイトルから来る場合とステージから戻ってくる場合で遷移画面が異なる
             if (isFromTitle)
                 mC.OpenSceneFromTitle();
             else

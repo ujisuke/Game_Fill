@@ -1,9 +1,7 @@
 using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Player.Model;
-using Assets.Scripts.Stage.Controller;
 using Assets.Scripts.Stage.Model;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets.Scripts.Player.Controller
 {

@@ -1,8 +1,4 @@
-using Assets.Scripts.Common.Controller;
-using Assets.Scripts.Player.Model;
-using Assets.Scripts.Stage.Model;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Stage.Controller
 {

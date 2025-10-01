@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Assets.Scripts.Pause.Controller
 {
     public class PauseStateMachine

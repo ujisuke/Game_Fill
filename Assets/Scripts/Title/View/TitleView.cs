@@ -5,7 +5,6 @@ using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.Title.View
 {

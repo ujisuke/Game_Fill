@@ -1,10 +1,6 @@
 using System.Threading;
 using Assets.Scripts.AudioSource.View;
-using Assets.Scripts.Common.Controller;
-using Assets.Scripts.Player.Model;
-using Assets.Scripts.Stage.Model;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Stage.Controller

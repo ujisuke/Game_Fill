@@ -1,9 +1,7 @@
-using System;
 using System.Threading;
 using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Stage.Controller;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Gallery.Controller

@@ -1,7 +1,6 @@
 using System;
 using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Player.Model;
-using Assets.Scripts.Stage.Model;
 using Cysharp.Threading.Tasks;
 
 namespace Assets.Scripts.Player.Controller

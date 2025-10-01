@@ -1,6 +1,3 @@
-using Assets.Scripts.Map.Data;
-using UnityEngine;
-
 namespace Assets.Scripts.Map.Controller
 {
     public class MapStateMachine

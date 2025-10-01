@@ -1,6 +1,3 @@
-using System;
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +10,8 @@ namespace Assets.Scripts.Common.View
 
         public void PlaySelectedAnim()
         {
+            //Imageがダミーのスプライトと同じになるまでにタイムラグがあり，最初に見た目がチラついていた
+            //その対策として，最初だけスプライトを直に適用している
             dummySpriteRenderer.sprite = selectedInitSprite;
             text.enabled = true;
             Update();

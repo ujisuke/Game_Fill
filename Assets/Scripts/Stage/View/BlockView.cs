@@ -1,5 +1,5 @@
 using Assets.Scripts.Common.View;
-using Assets.Scripts.Player.Model;
+using Assets.Scripts.Stage.Model;
 using Assets.Scripts.Stage.Controller;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -96,7 +96,7 @@ namespace Assets.Scripts.Stage.View
                 PlayAnim("WhiteFilled");
         }
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR  //エディタ上でステージを作りやすくするため，blockTypeを変更したときに見た目を更新する
         private void OnValidate()
         {
             UnityEditor.EditorApplication.update += SetViewOnEditor;

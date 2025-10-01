@@ -1,7 +1,6 @@
 using System.Threading;
 using Assets.Scripts.Common.Controller;
 using Unity.Mathematics;
-using UnityEngine;
 
 namespace Assets.Scripts.Volume.Controller
 {

@@ -27,7 +27,7 @@ namespace Assets.Scripts.Pause.Controller
 
         public void OnStateEnter()
         {
-            if (PauseStateSetVolume.FromPause)
+            if (PauseStateSetVolume.FromPause)  //音量設定画面から戻ってきた場合は「音量設定」ボタンを選択している状態にする(違和感を減らすため)
                 selectedIndex = 1;
             else
                 selectedIndex = 0;

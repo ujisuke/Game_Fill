@@ -1,4 +1,3 @@
-using Assets.Scripts.Common.View;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +5,8 @@ namespace Assets.Scripts.Common.View
 {
     public class ImageView : MonoBehaviour
     {
+        //Imageにアニメーションを適用できなかったので，ダミーにアニメーションをさせてImageに適用している
+
         [SerializeField] private Animator animator;
         [SerializeField] protected SpriteRenderer dummySpriteRenderer;
         [SerializeField] private Image image;

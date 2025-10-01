@@ -1,8 +1,6 @@
 using System.Threading;
 using Assets.Scripts.Common.Controller;
-using Assets.Scripts.Map.Data;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets.Scripts.Map.Controller
 {

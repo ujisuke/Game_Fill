@@ -38,6 +38,11 @@ namespace Assets.Scripts.Common.Controller
             isPushingDown = false;
         }
 
+        //Get~~KeyDown=>押された瞬間か否か
+        //Get~~KeyUp=>長押しから離された瞬間か否か
+        //Get~~Key=>押されているか否か
+        //Get~~KeyWithCooldown=>押されているか否か、長押し中に定期的に判定する
+
         public bool GetSlowKeyDown()
         {
             if (isPushingSlow && GetSlowKey())
