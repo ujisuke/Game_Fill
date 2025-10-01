@@ -1,10 +1,7 @@
 using Assets.Scripts.AudioSource.View;
-using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Map.Data;
 using Assets.Scripts.Pause.View;
-using Assets.Scripts.Stage.Controller;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Pause.Controller
 {
@@ -31,7 +28,7 @@ namespace Assets.Scripts.Pause.Controller
         {
             if (indexNew == indexPrev && !isFromSetVolume)
                 return;
-            if (!isFromSetVolume)
+            if (!isFromSetVolume)  //音量設定画面から戻るときは「戻る」ボタン選択のSEと被るため鳴らさない
                 AudioSourceView.Instance.PlaySelectSE();
             pauseView.UpdateInitButtonSelection(indexNew, indexPrev);
         }

@@ -1,7 +1,4 @@
-using Assets.Scripts.Common.Controller;
-using Assets.Scripts.Pause.Controller;
 using Assets.Scripts.Volume.Controller;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

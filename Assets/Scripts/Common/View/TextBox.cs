@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Data;
 using Cysharp.Threading.Tasks;
@@ -35,8 +34,9 @@ namespace Assets.Scripts.Common.View
                 string colorTextL = string.Empty;
                 string colorTextR = string.Empty;
                 int i = 0;
-                while (i < showText[k].Length)
+                while (i < showText[k].Length)  // 1文字ずつ表示
                 {
+                    // 色指定のタグがあれば，指定範囲内の最後の文字まで1文字ずつタグで挟んで表示する
                     if (showText[k][i] == '<' && colorTextL == string.Empty)
                     {
                         colorTextL = showText[k].Substring(i, 15);

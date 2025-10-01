@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Player.Model
+namespace Assets.Scripts.Stage.Model
 {
     public class HitBox
     {

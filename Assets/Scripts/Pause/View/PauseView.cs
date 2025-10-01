@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
 using Assets.Scripts.Stage.Controller;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.Pause.View
 {
@@ -14,7 +12,7 @@ namespace Assets.Scripts.Pause.View
 
         private void Awake()
         {
-            if (StageController.IsInGallery)
+            if (StageController.IsInGallery)  //ギャラリー内のステージでポーズ画面を開いた場合は「ギャラリーへ戻る」ボタンを表示する
             {
                 buttonList[2].gameObject.SetActive(false);
                 buttonList[2] = galleryButton;

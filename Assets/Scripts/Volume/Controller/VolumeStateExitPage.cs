@@ -1,8 +1,5 @@
 using Assets.Scripts.AudioSource.View;
-using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Pause.Controller;
-using Unity.Mathematics;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Volume.Controller

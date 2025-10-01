@@ -21,7 +21,7 @@ namespace Assets.Scripts.Stage.Controller
             Time.timeScale = 0;
         }
 
-        public void HandleInput()
+        public void HandleInput()  //ポーズ画面の状態に応じて状態遷移を行う
         {
             if (PauseStateInitial.IsBack)
                 sSM.ChangeState(new StageStatePlay(sSM, sC));

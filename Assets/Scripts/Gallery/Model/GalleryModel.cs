@@ -1,11 +1,11 @@
-using Assets.Scripts.Map.Data;
 using Unity.Mathematics;
-using UnityEngine;
 
 namespace Assets.Scripts.Gallery.Model
 {
     public class GalleryModel
     {
+        //(例)ステージ名1-3に対し，StageIndex=1，StageChildIndex=2
+        //StageChildIndexは0から始まり，表示される数より1小さいので注意
         private static int currentStageIndex = 0;
         private static int currentStageChildIndex = 0;
         private static bool isEasyMode = false;
@@ -28,7 +28,8 @@ namespace Assets.Scripts.Gallery.Model
         public void UpdateStageAndChildIndex(int additionalIndex, out bool isChildIndexChanged, out bool isStageIndexChanged)
         {
             int newStageChildIndex = math.clamp(currentStageChildIndex + additionalIndex, 0, StageChildIndexUpper);
-
+            
+            //(例)1-1から1-5までの間で選択しているときに，左右キーで1-2や1-4に移動する場合(他のステージに移動しない場合)
             if (newStageChildIndex != currentStageChildIndex)
             {
                 isChildIndexChanged = true;

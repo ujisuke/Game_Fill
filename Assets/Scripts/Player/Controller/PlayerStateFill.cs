@@ -126,7 +126,7 @@ namespace Assets.Scripts.Player.Controller
                 pSM.ChangeState(new PlayerStateMove(pM, pC, pSM, isLookingLeft));
         }
 
-        private async UniTask StopAndGo()
+        private async UniTask StopAndGo()  //方向転換の瞬間に少しだけ動きを止める
         {
             isStopping = true;
             await UniTask.Delay(TimeSpan.FromSeconds(pC.StopSeconds), cancellationToken: token);

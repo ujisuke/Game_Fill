@@ -3,7 +3,6 @@ using Assets.Scripts.Player.Data;
 using Assets.Scripts.Player.Model;
 using Assets.Scripts.Player.View;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.Controller

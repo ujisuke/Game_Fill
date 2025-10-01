@@ -2,7 +2,6 @@ using System.Threading;
 using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Map.Controller;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Title.Controller

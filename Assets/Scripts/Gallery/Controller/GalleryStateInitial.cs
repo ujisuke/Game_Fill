@@ -1,5 +1,3 @@
-using Cysharp.Threading.Tasks;
-
 namespace Assets.Scripts.Gallery.Controller
 {
     public class GalleryStateInitial : IGalleryState

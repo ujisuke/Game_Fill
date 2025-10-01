@@ -21,7 +21,7 @@ namespace Assets.Scripts.Farce.Controller
             Time.timeScale = 0;
         }
 
-        public void HandleInput()
+        public void HandleInput()  //ポーズシーンの状態と連動して状態遷移
         {
             if (PauseStateInitial.IsBack)
                 fSM.ChangeState(new FarceStateInitial(fSM, fC));

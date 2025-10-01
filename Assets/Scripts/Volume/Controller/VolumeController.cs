@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading;
 using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Map.Data;

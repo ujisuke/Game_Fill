@@ -37,6 +37,7 @@ namespace Assets.Scripts.Gallery.Controller
 
         public void Initialize()
         {
+            //ギャラリー内のステージから戻ってきた場合と，タイトルから来た場合で処理を分ける
             if (StageController.IsInGallery == false)
                 galleryModel.SetCurrentStageAndChildIndexFromTitle();
             else
@@ -65,7 +66,7 @@ namespace Assets.Scripts.Gallery.Controller
             galleryView.OpenSceneFromTitle();
         }
 
-        public void SelectRight(CancellationToken token)
+        public void SelectRight(CancellationToken token)  //ギャラリー内のステージ選択操作
         {
             galleryModel.UpdateStageAndChildIndex(1, out bool isStageChildIndexChanged, out bool isStageIndexChanged);
 
@@ -78,7 +79,7 @@ namespace Assets.Scripts.Gallery.Controller
                 galleryView.SelectRightStage(GalleryModel.CurrentStageIndex, GalleryModel.IsStageIndexUpper, token).Forget();
         }
 
-        public void SelectLeft(CancellationToken token)
+        public void SelectLeft(CancellationToken token)  //ギャラリー内のステージ選択操作
         {
             galleryModel.UpdateStageAndChildIndex(-1, out bool isStageChildIndexChanged, out bool isStageIndexChanged);
 

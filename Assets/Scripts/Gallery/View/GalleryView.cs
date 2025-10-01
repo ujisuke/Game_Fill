@@ -4,13 +4,8 @@ using System.Threading;
 using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
-using Assets.Scripts.Player.Model;
-using Assets.Scripts.Stage.Controller;
 using Cysharp.Threading.Tasks;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Gallery.View

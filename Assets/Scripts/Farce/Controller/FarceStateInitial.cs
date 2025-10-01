@@ -1,8 +1,5 @@
 using Assets.Scripts.Common.Controller;
 using Assets.Scripts.Farce.Model;
-using Cysharp.Threading.Tasks;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 
 namespace Assets.Scripts.Farce.Controller
 {

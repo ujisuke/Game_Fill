@@ -4,14 +4,8 @@ using System.Threading;
 using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
-using Assets.Scripts.Player.Model;
-using Assets.Scripts.Stage.Controller;
 using Cysharp.Threading.Tasks;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Map.View
@@ -181,7 +175,7 @@ namespace Assets.Scripts.Map.View
     }
 
     [Serializable]
-    class MailText
+    class MailText  //インスペクターでメールのタイトル(=ステージ名)と説明文をまとめて編集するためにクラス化
     {
         [SerializeField, TextArea] private string title;
         [SerializeField, TextArea(3, 10)] private string mainText;

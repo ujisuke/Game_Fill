@@ -1,6 +1,5 @@
 using Assets.Scripts.Map.Data;
 using Unity.Mathematics;
-using UnityEngine;
 
 namespace Assets.Scripts.Map.Model
 {
