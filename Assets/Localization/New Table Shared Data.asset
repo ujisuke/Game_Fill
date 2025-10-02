@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: New Table Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: New Table
+  m_TableCollectionNameGuidString: 47c233ca334198b4d81beb7b19295ca1
+  m_Entries:
+  - m_Id: 1522180411392
+    m_Key: PlayButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2720040079360
+    m_Key: VolumeButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2752260722688
+    m_Key: GalleryButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2861123883008
+    m_Key: ExitGameButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3476377948160
+    m_Key: Control
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4526203850752
+    m_Key: Escape
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4921986764800
+    m_Key: Switch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5650008887296
+    m_Key: Hard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5713103802368
+    m_Key: Normal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5750336638976
+    m_Key: Easy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6215380094976
+    m_Key: Work
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8573518467072
+    m_Key: BackButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9193990246400
+    m_Key: BackToMapButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9700804775936
+    m_Key: BackToGalleryButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10932529254400
+    m_Key: ExitButton
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4389048164663165218
+  references:
+    version: 2
+    RefIds:
+    - rid: 4389048164663165218
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1759408759016

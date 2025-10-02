@@ -1387,6 +1387,7 @@ GameObject:
   - component: {fileID: 911936331}
   - component: {fileID: 911936333}
   - component: {fileID: 911936332}
+  - component: {fileID: 911936334}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1446,7 +1447,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u3082\u3069\u308B"
+  m_Text: "\u623B\u308B"
 --- !u!222 &911936333
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1455,6 +1456,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 911936330}
   m_CullTransparentMesh: 1
+--- !u!114 &911936334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911936330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:47c233ca334198b4d81beb7b19295ca1
+    m_TableEntryReference:
+      m_KeyId: 10932529254400
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 911936332}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &921163792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,11 +1741,6 @@ MonoBehaviour:
   - {fileID: 1134847794}
   - {fileID: 1091161415}
   - {fileID: 38753696}
-  audioMixer: {fileID: 24100000, guid: 9a6ddc752667b9348a432ebb88f9e885, type: 2}
-  volumeNameList:
-  - MASTER
-  - BGM
-  - SE
 --- !u!114 &1063073870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2671,7 +2707,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30DE\u30B9\u30BF\u30FC"
+  m_Text: MASTER
 --- !u!222 &1730081296
 CanvasRenderer:
   m_ObjectHideFlags: 0
