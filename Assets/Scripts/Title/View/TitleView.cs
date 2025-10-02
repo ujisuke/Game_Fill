@@ -17,6 +17,7 @@ namespace Assets.Scripts.Title.View
 
         private void Awake()
         {
+            Cursor.visible = false;
             buttonList[0].PlaySelectedAnim();
         }
 

@@ -10,7 +10,7 @@ namespace Assets.Scripts.Map.Model
         private static bool isEasyMode = false;
         private static bool isHardMode = false;
         public static int CurrentStageIndex => currentStageIndex;
-        public static int StageIndexUpper => ES3.Load("ClearedStageIndex", -1) + 1;
+        public static int StageIndexUpper => math.min(ES3.Load("ClearedStageIndex", -1) + 1, 5);
         public static bool IsEasyMode => isEasyMode;
         public static bool IsHardMode => isHardMode;
         public string CurrentStageName => sceneNameData.GetCurrentStageName(currentStageIndex);
