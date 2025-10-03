@@ -3055,6 +3055,7 @@ MonoBehaviour:
   - "<color=#56FEEA>Fillmina</color>\u306B\u8FFD\u7A81\u3067\u3082\u3057\u305F\u3089\u30C0\u30A4\u30B5\u30F3\u30B8\u3060\n\u79FB\u52D5\u4E2D\u306B<color=#FFDF7A>W\u30FBA\u30FBS\u30FBD\u30AD\u30FC</color>\u3067\u5411\u304D\u3092\u5909\u3048\u3066\u30E8\u3051\u308B\u3053\u3068\u3060\u306A"
   showDelaySeconds: 0
   doesPlaySE: 1
+  isJAText: 1
 --- !u!114 &768263795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3984,6 +3985,7 @@ RectTransform:
   - {fileID: 736935419}
   - {fileID: 1746513936}
   - {fileID: 768263793}
+  - {fileID: 1180624089}
   - {fileID: 1970639623}
   - {fileID: 1207957294}
   - {fileID: 1655102372}
@@ -4450,6 +4452,107 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1180624088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1180624089}
+  - component: {fileID: 1180624092}
+  - component: {fileID: 1180624091}
+  - component: {fileID: 1180624090}
+  m_Layer: 5
+  m_Name: Text (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1180624089
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180624088}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.99978995}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1009725277}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 76.68, y: -223.99}
+  m_SizeDelta: {x: 1434.1, y: 186.95}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1180624090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180624088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e72888288e263b842983a0d48488ff71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewData: {fileID: 11400000, guid: 1c0d6dbcc16fa8d43b8cc2ee5f6ec8ec, type: 2}
+  text: {fileID: 1180624091}
+  showText:
+  - "Crash into your own <color=#56FEEA>Fillmina</color> and you\u2019re in deep
+    trouble.\nWhile you\u2019re moving, use the <color=#FFDF7A>W\u30FBA\u30FBS\u30FBD
+    keys</color> to change direction and dodge it."
+  showDelaySeconds: 0
+  doesPlaySE: 1
+  isJAText: 0
+--- !u!114 &1180624091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180624088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 433d3fcd2f28fcb43be5af1b968f44ac, type: 3}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 0.8
+  m_Text: 
+--- !u!222 &1180624092
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180624088}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1184172385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7183,6 +7286,7 @@ GameObject:
   - component: {fileID: 1746513936}
   - component: {fileID: 1746513938}
   - component: {fileID: 1746513937}
+  - component: {fileID: 1746513939}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -7251,6 +7355,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746513935}
   m_CullTransparentMesh: 1
+--- !u!114 &1746513939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746513935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:47c233ca334198b4d81beb7b19295ca1
+    m_TableEntryReference:
+      m_KeyId: 26900039061504
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1746513937}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &1748529405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8395,6 +8539,7 @@ MonoBehaviour:
   - {fileID: 768263792}
   - {fileID: 941846062}
   - {fileID: 1746513935}
+  - {fileID: 1180624088}
   endingHouse: {fileID: 0}
   endingThanks: {fileID: 0}
 --- !u!114 &2068900230

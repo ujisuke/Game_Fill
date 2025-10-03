@@ -40,7 +40,6 @@ namespace Assets.Scripts.Title.Controller
                 tC.UpdateInitButtonSelection(selectedIndexNew, selectedIndex);
                 selectedIndex = selectedIndexNew;
             }
-
             else if (CustomInputSystem.Instance.GetSelectKeyUp())
             {
                 AudioSourceView.Instance.PlayChooseSE();
@@ -64,6 +63,10 @@ namespace Assets.Scripts.Title.Controller
                         break;
                 }
             }
+            else if (CustomInputSystem.Instance.GetLeftKeyWithCooldown())
+                tC.SetJapanese(false);
+            else if (CustomInputSystem.Instance.GetRightKeyWithCooldown())
+                tC.SetJapanese(true);
         }
 
         public void OnStateExit()

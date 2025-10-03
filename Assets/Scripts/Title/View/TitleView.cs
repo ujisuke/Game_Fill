@@ -5,6 +5,8 @@ using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Title.View
 {
@@ -14,11 +16,36 @@ namespace Assets.Scripts.Title.View
         [SerializeField] private ViewData viewData;
         [SerializeField] private ImageView frontView;
         [SerializeField] private Sprite frontOpenFromMapInitSprite;
+        [SerializeField] private Text jaText;
+        [SerializeField] private Text enText;
+        private Color32 languageTextShowColor;
+        private Color32 languageTextHideColor;
 
         private void Awake()
         {
             Cursor.visible = false;
             buttonList[0].PlaySelectedAnim();
+            languageTextShowColor = viewData.DefaultTextColor;
+            languageTextHideColor = new Color32(languageTextShowColor.r, languageTextShowColor.g, languageTextShowColor.b, viewData.TextHideAlpha);
+            SetJapanese(ES3.Load("IsJapanese", false));
+        }
+
+        public void SetJapanese(bool isJA)
+        {
+            if (isJA)
+            {
+                LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[1];
+                jaText.color = languageTextShowColor;
+                enText.color = languageTextHideColor;
+                ES3.Save("IsJapanese", true);
+            }
+            else
+            {
+                LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
+                enText.color = languageTextShowColor;
+                jaText.color = languageTextHideColor;
+                ES3.Save("IsJapanese", false);
+            }
         }
 
         public void UpdateInitButtonSelection(int indexNew, int indexPrev)

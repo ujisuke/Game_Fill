@@ -41,3 +41,5 @@ MonoBehaviour:
   easyModeColor: {r: 1, g: 0.8745098, b: 0.47843137, a: 1}
   normalModeColor: {r: 1, g: 1, b: 1, a: 1}
   hardModeColor: {r: 0.3372549, g: 0.9960785, b: 0.9176471, a: 1}
+  defaultTextColor: {r: 1, g: 1, b: 1, a: 1}
+  textHideAlpha: 20

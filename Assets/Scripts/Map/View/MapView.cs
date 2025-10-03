@@ -6,12 +6,14 @@ using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Map.View
 {
     public class MapView : MonoBehaviour
     {
+        [SerializeField] private StageDescriptionData stageDescriptionData;
         [SerializeField] private Sprite frontOpenInitSprite;
         [SerializeField] private Sprite frontOpenFromTitleInitSprite;
         [SerializeField] private ViewData viewData;
@@ -21,7 +23,6 @@ namespace Assets.Scripts.Map.View
         [SerializeField] private ImageView mailView;
         [SerializeField] private Text mailText;
         [SerializeField] private int mailTitleSize;
-        [SerializeField] private List<MailText> mailTextList;
         [SerializeField] private Text easyText;
         [SerializeField] private Text normalText;
         [SerializeField] private Text hardText;
@@ -58,10 +59,10 @@ namespace Assets.Scripts.Map.View
 
         public void Initialize(int stageIndex, bool isStageIndexUpper, bool isStageIndexLower, bool isEasyMode, bool isHardMode)
         {
-            easyColor = easyText.color;
-            normalColor = normalText.color;
-            hardColor = hardText.color;
-            
+            easyColor = viewData.EasyModeColor;
+            normalColor = viewData.NormalModeColor;
+            hardColor = viewData.HardModeColor;
+
             if (isStageIndexUpper && isStageIndexLower)
             {
                 rightArrowView.PlayAnim("Empty");
@@ -124,7 +125,10 @@ namespace Assets.Scripts.Map.View
 
         private void UpdateMailText(int stageIndex)
         {
-            mailText.text = mailTextList[stageIndex].GetText(mailTitleSize);
+            if (LocalizationSettings.SelectedLocale.Identifier.Code == "ja")
+                mailText.text = $"<size={mailTitleSize}>{stageDescriptionData.GetStageNameJA(stageIndex)}</size>\n\n" + stageDescriptionData.GetDescriptionJA(stageIndex);
+            else
+                mailText.text = $"<size={mailTitleSize}>{stageDescriptionData.GetStageNameEN(stageIndex)}</size>\n\n" + stageDescriptionData.GetDescriptionEN(stageIndex);
         }
 
         private void UpdateHardIcon(int stageIndex)
@@ -144,9 +148,9 @@ namespace Assets.Scripts.Map.View
 
         private void UpdateTextAndCharacterOnDifficulty(bool isEasyMode, bool isHardMode)
         {
-            easyText.color = isEasyMode ? new Color32(easyColor.r, easyColor.g, easyColor.b, 255) : new Color32(easyColor.r, easyColor.g, easyColor.b, 20);
-            normalText.color = !isEasyMode && !isHardMode ? new Color32(normalColor.r, normalColor.g, normalColor.b, 255) : new Color32(normalColor.r, normalColor.g, normalColor.b, 20);
-            hardText.color = isHardMode ? new Color32(hardColor.r, hardColor.g, hardColor.b, 255) : new Color32(hardColor.r, hardColor.g, hardColor.b, 20);
+            easyText.color = isEasyMode ? new Color32(easyColor.r, easyColor.g, easyColor.b, 255) : new Color32(easyColor.r, easyColor.g, easyColor.b, viewData.TextHideAlpha);
+            normalText.color = !isEasyMode && !isHardMode ? new Color32(normalColor.r, normalColor.g, normalColor.b, 255) : new Color32(normalColor.r, normalColor.g, normalColor.b, viewData.TextHideAlpha);
+            hardText.color = isHardMode ? new Color32(hardColor.r, hardColor.g, hardColor.b, 255) : new Color32(hardColor.r, hardColor.g, hardColor.b, viewData.TextHideAlpha);
 
             if (isEasyMode)
             {
@@ -171,19 +175,6 @@ namespace Assets.Scripts.Map.View
             await UniTask.DelayFrame(1, cancellationToken: token);
             UpdateTextAndCharacterOnDifficulty(isEasyMode, isHardMode);
             UpdateMailOnDifficulty(isEasyMode, isHardMode);
-        }
-    }
-
-    [Serializable]
-    class MailText  //インスペクターでメールのタイトル(=ステージ名)と説明文をまとめて編集するためにクラス化
-    {
-        [SerializeField, TextArea] private string title;
-        [SerializeField, TextArea(3, 10)] private string mainText;
-
-        public string GetText(int titleSize)
-        {
-            string titleString = $"<size={titleSize}>{title}</size>\n\n";
-            return titleString + mainText;
         }
     }
 }

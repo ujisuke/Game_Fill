@@ -61,10 +61,14 @@ namespace Assets.Scripts.Common.Data
         [SerializeField] private Color easyModeColor;
         [SerializeField] private Color normalModeColor;
         [SerializeField] private Color hardModeColor;
+        [SerializeField] private Color defaultTextColor;
+        [SerializeField] private byte textHideAlpha;
 
         public Color SlowEffectColor => slowEffectColor;
         public Color EasyModeColor => easyModeColor;
         public Color NormalModeColor => normalModeColor;
         public Color HardModeColor => hardModeColor;
+        public Color DefaultTextColor => defaultTextColor;
+        public byte TextHideAlpha => textHideAlpha;
     }
 }

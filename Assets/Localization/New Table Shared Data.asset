@@ -75,6 +75,14 @@ MonoBehaviour:
     m_Key: ExitButton
     m_Metadata:
       m_Items: []
+  - m_Id: 26900039061504
+    m_Key: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39324150517760
+    m_Key: FinishWork
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

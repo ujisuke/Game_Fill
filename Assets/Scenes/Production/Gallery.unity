@@ -404,6 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5071d3f0b7c776640b7435121143b3e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageDescriptionData: {fileID: 11400000, guid: 365898c9f4c10364dabef8fecd21b0f1, type: 2}
   frontOpenInitSprite: {fileID: -485440478616671248, guid: 672c0e5b256cd594aa85263f3622080c, type: 3}
   frontOpenFromTitleInitSprite: {fileID: -6208625133318700995, guid: 672c0e5b256cd594aa85263f3622080c, type: 3}
   viewData: {fileID: 11400000, guid: 1c0d6dbcc16fa8d43b8cc2ee5f6ec8ec, type: 2}
@@ -466,6 +467,8 @@ MonoBehaviour:
   hardText: {fileID: 420155181}
   switchText: {fileID: 1553722590}
   entrustText: {fileID: 1225754206}
+  noneTextJA: "\u307E\u3060\u3000\u30CA\u30CB\u3082\u3000\u306A\u3044..."
+  noneTextEN: There's still... NOTHING here.
 --- !u!114 &433184992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,7 +568,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.6
-  m_Text: "\u30C1\u30E5\u30FC\u30C8\u30EA\u30A2\u30EB"
+  m_Text: "\u30B7\u30B4\u30C80-TUTORIAL"
 --- !u!222 &462210724
 CanvasRenderer:
   m_ObjectHideFlags: 0

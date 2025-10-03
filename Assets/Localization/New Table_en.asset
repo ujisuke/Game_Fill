@@ -37,12 +37,18 @@ MonoBehaviour:
   - m_Id: 3476377948160
     m_Localized: 'Select
 
-      - W / A / S / D -
+      - W / S -
 
 
       Decide
 
-      - SPACE -'
+      - SPACE -
+
+
+      Language
+
+      -
+      A / D -'
     m_Metadata:
       m_Items: []
   - m_Id: 4526203850752
@@ -89,6 +95,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 10932529254400
     m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26900039061504
+    m_Localized: 'Pause
+
+      - ESC -'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39324150517760
+    m_Localized: 'Finish WORK
+
+      - SPACE -'
     m_Metadata:
       m_Items: []
   references:

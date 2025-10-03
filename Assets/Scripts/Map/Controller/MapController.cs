@@ -1,6 +1,6 @@
 using System.Threading;
 using Assets.Scripts.AudioSource.View;
-using Assets.Scripts.Map.Data;
+using Assets.Scripts.Common.Data;
 using Assets.Scripts.Map.Model;
 using Assets.Scripts.Map.View;
 using Cysharp.Threading.Tasks;
