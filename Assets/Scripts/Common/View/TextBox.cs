@@ -4,6 +4,7 @@ using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Data;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Common.View
@@ -15,10 +16,13 @@ namespace Assets.Scripts.Common.View
         [SerializeField, TextArea(3, 10)] private List<string> showText;
         [SerializeField] private float showDelaySeconds = 0f;
         [SerializeField] private bool doesPlaySE = true;
+        [SerializeField] private bool isJAText = true;
 
         private void Awake()
         {
-            Play().Forget();
+            // 日本語環境かつ本文が日本語のとき，または，英語環境かつ本文が英語のときのみ表示
+            if (isJAText == (LocalizationSettings.SelectedLocale.Identifier.Code == "ja"))
+                Play().Forget();
         }
 
         private async UniTask Play()

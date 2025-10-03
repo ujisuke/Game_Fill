@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Map.Data
+namespace Assets.Scripts.Common.Data
 {
     [CreateAssetMenu(fileName = "SceneNameData", menuName = "ScriptableObjects/SceneNameData")]
     public class SceneNameData : ScriptableObject
@@ -23,7 +23,7 @@ namespace Assets.Scripts.Map.Data
         public int StageCount => stageNameList.Count;
         public string TutorialSceneName => stageNameList[0];
 
-        public string GetCurrentStageName(int index)
+        public string GetStageName(int index)
         {
             return stageNameList[index];
         }

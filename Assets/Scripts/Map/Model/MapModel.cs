@@ -1,4 +1,4 @@
-using Assets.Scripts.Map.Data;
+using Assets.Scripts.Common.Data;
 using Unity.Mathematics;
 
 namespace Assets.Scripts.Map.Model
@@ -13,7 +13,7 @@ namespace Assets.Scripts.Map.Model
         public static int StageIndexUpper => math.min(ES3.Load("ClearedStageIndex", -1) + 1, 5);
         public static bool IsEasyMode => isEasyMode;
         public static bool IsHardMode => isHardMode;
-        public string CurrentStageName => sceneNameData.GetCurrentStageName(currentStageIndex);
+        public string CurrentStageName => sceneNameData.GetStageName(currentStageIndex);
         public bool IsStageIndexUpper => currentStageIndex == StageIndexUpper;
         public bool IsStageIndexLower => currentStageIndex == 0;
 

@@ -1,5 +1,5 @@
 using Assets.Scripts.AudioSource.View;
-using Assets.Scripts.Map.Data;
+using Assets.Scripts.Common.Data;
 using Assets.Scripts.Pause.View;
 using UnityEngine;
 

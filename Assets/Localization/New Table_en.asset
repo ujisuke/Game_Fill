@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: New Table_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 47c233ca334198b4d81beb7b19295ca1, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1522180411392
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2720040079360
+    m_Localized: Set Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2752260722688
+    m_Localized: Browse Gallery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2861123883008
+    m_Localized: Exit Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3476377948160
+    m_Localized: 'Select
+
+      - W / S -
+
+
+      Decide
+
+      - SPACE -
+
+
+      Language
+
+      -
+      A / D -'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4526203850752
+    m_Localized: 'Back To Title
+
+      - ESC -'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4921986764800
+    m_Localized: 'Change Mode
+
+      - W / S -'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5650008887296
+    m_Localized: Hard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5713103802368
+    m_Localized: Normal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5750336638976
+    m_Localized: Easy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6215380094976
+    m_Localized: 'Head To WORK
+
+      - SPACE -'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8573518467072
+    m_Localized: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9193990246400
+    m_Localized: Back To Lobby
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9700804775936
+    m_Localized: Back To Gallery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10932529254400
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26900039061504
+    m_Localized: 'Pause
+
+      - ESC -'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39324150517760
+    m_Localized: 'Finish WORK
+
+      - SPACE -'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

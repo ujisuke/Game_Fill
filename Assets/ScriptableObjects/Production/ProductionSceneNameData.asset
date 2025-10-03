@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db25e19a04db6254f8738558f2fdc70e, type: 3}
-  m_Name: ProductionStageNameData
+  m_Name: ProductionSceneNameData
   m_EditorClassIdentifier: 
   titleSceneName: Title
   mapSceneName: Map

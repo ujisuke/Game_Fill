@@ -2,7 +2,7 @@ using System.Threading;
 using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Gallery.Model;
 using Assets.Scripts.Gallery.View;
-using Assets.Scripts.Map.Data;
+using Assets.Scripts.Common.Data;
 using Assets.Scripts.Stage.Controller;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

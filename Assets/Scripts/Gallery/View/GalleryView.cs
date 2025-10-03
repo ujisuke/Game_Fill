@@ -6,12 +6,14 @@ using Assets.Scripts.Common.Data;
 using Assets.Scripts.Common.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Gallery.View
 {
     public class GalleryView : MonoBehaviour
     {
+        [SerializeField] private StageDescriptionData stageDescriptionData;
         [SerializeField] private Sprite frontOpenInitSprite;
         [SerializeField] private Sprite frontOpenFromTitleInitSprite;
         [SerializeField] private ViewData viewData;
@@ -28,6 +30,8 @@ namespace Assets.Scripts.Gallery.View
         [SerializeField] private Text hardText;
         [SerializeField] private Text switchText;
         [SerializeField] private Text entrustText;
+        [SerializeField] private string noneTextJA;
+        [SerializeField] private string noneTextEN;
         private int stageChildIndexPrev = 0;
         private Color32 easyColor, normalColor, hardColor;
 
@@ -59,15 +63,18 @@ namespace Assets.Scripts.Gallery.View
 
         public void Initialize(int stageIndex, int stageChildIndex, bool isEasyMode, bool isHardMode, int stageIndexUpper, bool isStageIndexUpper, bool isStageIndexLower)
         {
-            easyColor = easyText.color;
-            normalColor = normalText.color;
-            hardColor = hardText.color;
+            easyColor = viewData.EasyModeColor;
+            normalColor = viewData.NormalModeColor;
+            hardColor = viewData.HardModeColor;
             stageChildIndexPrev = stageChildIndex;
             if (stageIndexUpper < 0)
             {
                 leftArrowView.PlayAnim("Empty");
                 rightArrowView.PlayAnim("Empty");
-                stageText.text = "まだ ナニも ない...";
+                if (LocalizationSettings.SelectedLocale.Identifier.Code == "ja")
+                    stageText.text = noneTextJA;
+                else
+                    stageText.text = noneTextEN;
                 easyText.enabled = false;
                 normalText.enabled = false;
                 hardText.enabled = false;
@@ -82,29 +89,29 @@ namespace Assets.Scripts.Gallery.View
             StageBoardViewList[stageChildIndex].PlayAnim("Selected");
             SetDifficulty(isEasyMode, isHardMode);
 
+            if (LocalizationSettings.SelectedLocale.Identifier.Code == "ja")
+                stageText.text = stageDescriptionData.GetStageNameJA(stageIndex);
+            else
+                stageText.text = stageDescriptionData.GetStageNameEN(stageIndex);
             if (isStageIndexUpper && isStageIndexLower)
             {
                 leftArrowView.PlayAnim("Empty");
                 rightArrowView.PlayAnim("Empty");
-                stageText.text = "チュートリアル";
             }
             else if (isStageIndexLower)
             {
                 leftArrowView.PlayAnim("Empty");
                 rightArrowView.PlayAnim("Awake");
-                stageText.text = "チュートリアル";
             }
             else if (isStageIndexUpper)
             {
                 leftArrowView.PlayAnim("Awake");
                 rightArrowView.PlayAnim("Empty");
-                stageText.text = $"ステージ {stageIndex}";
             }
             else
             {
                 leftArrowView.PlayAnim("Awake");
                 rightArrowView.PlayAnim("Awake");
-                stageText.text = $"ステージ {stageIndex}";
             }
         }
 
@@ -128,7 +135,10 @@ namespace Assets.Scripts.Gallery.View
             rightArrowView.PlayAnim("Selected");
             leftArrowView.PlayAnim("Awake");
             SetStageBoards(stageIndex);
-            stageText.text = stageIndex == 0 ? "チュートリアル" : $"ステージ {stageIndex}";
+            if (LocalizationSettings.SelectedLocale.Identifier.Code == "ja")
+                stageText.text = stageDescriptionData.GetStageNameJA(stageIndex);
+            else
+                stageText.text = stageDescriptionData.GetStageNameEN(stageIndex);
 
             if (!isStageIndexUpper)
                 return;
@@ -150,7 +160,10 @@ namespace Assets.Scripts.Gallery.View
             leftArrowView.PlayAnim("Selected");
             rightArrowView.PlayAnim("Awake");
             SetStageBoards(stageIndex);
-            stageText.text = stageIndex == 0 ? "チュートリアル" : $"ステージ {stageIndex}";
+            if (LocalizationSettings.SelectedLocale.Identifier.Code == "ja")
+                stageText.text = stageDescriptionData.GetStageNameJA(stageIndex);
+            else
+                stageText.text = stageDescriptionData.GetStageNameEN(stageIndex);
             if (!isStageIndexLower)
                 return;
             await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: token);
@@ -159,9 +172,9 @@ namespace Assets.Scripts.Gallery.View
 
         public void SetDifficulty(bool isEasyMode, bool isHardMode)
         {
-            easyText.color = isEasyMode ? new Color32(easyColor.r, easyColor.g, easyColor.b, 255) : new Color32(easyColor.r, easyColor.g, easyColor.b, 20);
-            normalText.color = !isEasyMode && !isHardMode ? new Color32(normalColor.r, normalColor.g, normalColor.b, 255) : new Color32(normalColor.r, normalColor.g, normalColor.b, 20);
-            hardText.color = isHardMode ? new Color32(hardColor.r, hardColor.g, hardColor.b, 255) : new Color32(hardColor.r, hardColor.g, hardColor.b, 20);
+            easyText.color = isEasyMode ? new Color32(easyColor.r, easyColor.g, easyColor.b, 255) : new Color32(easyColor.r, easyColor.g, easyColor.b, viewData.TextHideAlpha);
+            normalText.color = !isEasyMode && !isHardMode ? new Color32(normalColor.r, normalColor.g, normalColor.b, 255) : new Color32(normalColor.r, normalColor.g, normalColor.b, viewData.TextHideAlpha);
+            hardText.color = isHardMode ? new Color32(hardColor.r, hardColor.g, hardColor.b, 255) : new Color32(hardColor.r, hardColor.g, hardColor.b, viewData.TextHideAlpha);
         }
     }
 

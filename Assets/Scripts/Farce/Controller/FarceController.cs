@@ -1,7 +1,7 @@
 using System.Threading;
 using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Farce.View;
-using Assets.Scripts.Map.Data;
+using Assets.Scripts.Common.Data;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

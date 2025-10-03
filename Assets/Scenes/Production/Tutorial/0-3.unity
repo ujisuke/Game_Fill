@@ -1159,6 +1159,106 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5000527993764406926, guid: f4c00a66403d4074b95b1b4a90efdb38, type: 3}
   m_PrefabInstance: {fileID: 306413283}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &323054715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 323054716}
+  - component: {fileID: 323054719}
+  - component: {fileID: 323054718}
+  - component: {fileID: 323054717}
+  m_Layer: 5
+  m_Name: Text (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &323054716
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323054715}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.99978995}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1009725277}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 76.68, y: -223.99}
+  m_SizeDelta: {x: 1434.1, y: 186.95}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &323054717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323054715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e72888288e263b842983a0d48488ff71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewData: {fileID: 11400000, guid: 1c0d6dbcc16fa8d43b8cc2ee5f6ec8ec, type: 2}
+  text: {fileID: 323054718}
+  showText:
+  - "If dodging feels tough, try hitting <color=#FFDF7A>Right Click</color> to \u201Cfocus.\u201D\nYou\u2019ll
+    slow down, which makes it easier to handle."
+  showDelaySeconds: 0
+  doesPlaySE: 1
+  isJAText: 0
+--- !u!114 &323054718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323054715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 433d3fcd2f28fcb43be5af1b968f44ac, type: 3}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 0.8
+  m_Text: 
+--- !u!222 &323054719
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323054715}
+  m_CullTransparentMesh: 1
 --- !u!1001 &341602691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3435,6 +3535,7 @@ MonoBehaviour:
   - "\u30E8\u3051\u308B\u306E\u304C\u96E3\u3057\u3044\u3068\u304D\u306F<color=#FFDF7A>\u53F3\u30AF\u30EA\u30C3\u30AF</color>\u3067\u300C\u96C6\u4E2D\u300D\u3057\u3066\u307F\u308D\n\u4F4E\u901F\u79FB\u52D5\u306B\u306A\u308B\u304B\u3089\u64CD\u4F5C\u3057\u3084\u3059\u3044\u3060\u308D\uFF1F"
   showDelaySeconds: 0
   doesPlaySE: 1
+  isJAText: 1
 --- !u!114 &768263795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4554,6 +4655,7 @@ RectTransform:
   - {fileID: 736935419}
   - {fileID: 1579171679}
   - {fileID: 768263793}
+  - {fileID: 323054716}
   - {fileID: 840342805}
   - {fileID: 1207957294}
   - {fileID: 1655102372}
@@ -7514,6 +7616,7 @@ GameObject:
   - component: {fileID: 1579171679}
   - component: {fileID: 1579171681}
   - component: {fileID: 1579171680}
+  - component: {fileID: 1579171682}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -7582,6 +7685,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579171678}
   m_CullTransparentMesh: 1
+--- !u!114 &1579171682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579171678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:47c233ca334198b4d81beb7b19295ca1
+    m_TableEntryReference:
+      m_KeyId: 26900039061504
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1579171680}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &1589633649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9202,6 +9345,7 @@ MonoBehaviour:
   - {fileID: 768263792}
   - {fileID: 941846062}
   - {fileID: 1579171678}
+  - {fileID: 323054715}
   endingHouse: {fileID: 0}
   endingThanks: {fileID: 0}
 --- !u!114 &2068900230

@@ -1,9 +1,10 @@
 using System.Threading;
 using Assets.Scripts.AudioSource.View;
-using Assets.Scripts.Map.Data;
+using Assets.Scripts.Common.Data;
 using Assets.Scripts.Title.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace Assets.Scripts.Title.Controller
 {
@@ -26,6 +27,14 @@ namespace Assets.Scripts.Title.Controller
         private void Update()
         {
             tSM.HandleInput();
+        }
+
+        public void SetJapanese(bool isJA)
+        {
+            if(isJA == (LocalizationSettings.SelectedLocale.Identifier.Code == "ja"))
+                return;
+            AudioSourceView.Instance.PlaySelectSE();
+            titleView.SetJapanese(isJA);
         }
 
         public void UpdateInitButtonSelection(int indexNew, int indexPrev, bool isInit = false)
