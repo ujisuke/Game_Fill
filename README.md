@@ -1,4 +1,5 @@
 # Filluminate開発リポジトリへようこそ
+<img width="748" height="247" alt="Title" src="https://github.com/user-attachments/assets/510b343b-cc9b-4769-944e-1174ddfadaa1" />
 
 ## 概要
 個人開発ゲーム「Filluminate」のリポジトリです。ソースコード、使用アセット、実際に遊べるファイルが置いてあります。
