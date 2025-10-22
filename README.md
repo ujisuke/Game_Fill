@@ -12,25 +12,25 @@ Unity6000.0.37f1
 
 .  
 └── Assets/  
-    ├── Audio/ ... オーディオミキサー  
-    ├── Localization/ ... 日本語と英語の変換  
-    ├── Photos/ ... 各ステージの画像  
-    ├── Prefabs/  
-    ├── Scenes/  
-    ├── ScriptableObjects/  
-    ├── Scripts/ ... (注)  
-    │   ├── AudioSource/  
-    │   ├── Common/  
-    │   ├── Farce/  
-    │   ├── Gallery/  
-    │   ├── Map/  
-    │   ├── Pause/  
-    │   ├── Player/  
-    │   ├── Stage/  
-    │   ├── Title/  
-    │   └── Volume/  
-    ├── Sounds/ ... BGMとSEの.wavファイル  
-    └── Sprites/  
+　　├── Audio/ ... オーディオミキサー  
+　　├── Localization/ ... 日本語と英語の変換  
+　　├── Photos/ ... 各ステージの画像  
+　　├── Prefabs/  
+　　├── Scenes/  
+　　├── ScriptableObjects/  
+　　├── Scripts/ ... (注)  
+　　│   ├── AudioSource/  
+　　│   ├── Common/  
+　　│   ├── Farce/  
+　　│   ├── Gallery/  
+　　│   ├── Map/  
+　　│   ├── Pause/  
+　　│   ├── Player/  
+　　│   ├── Stage/  
+　　│   ├── Title/  
+　　│   └── Volume/  
+　　├── Sounds/ ... BGMとSEの.wavファイル  
+　　└── Sprites/  
 
 (注)Scripts/ディレクトリ以下の各ディレクトリはModel/、View/、Controller/ディレクトリと、データクラス用のData/ディレクトリを含み、それぞれにソースコードが入っています(膨大なので省略)。  
 
