@@ -29,9 +29,9 @@ namespace Assets.Scripts.Stage.Controller
             blockView.SetHitBoxActive(true);
         }
 
-        public void PlayAnim(string animName, float speed = 1f)
+        public void PlayAnim(string animName, float seconds = 1f)
         {
-            blockView.PlayAnim(animName, speed);
+            blockView.PlayAnim(animName, seconds);
         }
 
         public void SetAnimSpeed(float speed)

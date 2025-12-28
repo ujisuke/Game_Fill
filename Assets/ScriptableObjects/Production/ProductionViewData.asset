@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ProductionViewData
   m_EditorClassIdentifier: 
   blockBecomeWallSeconds: 0.2
-  blockFilledAnimSeconds: 1
+  blockFilledAnimSeconds: 0.45
   slowInAnimSeconds: 0.3
   goodAnimSeconds: 0.3
   clearAnimDelaySeconds: 1

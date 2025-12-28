@@ -41,18 +41,26 @@ namespace Assets.Scripts.Stage.Model
         public async UniTask Fill()
         {
             canBeFilled = false;
-            blockController.PlayAnim("Filling");
+            blockController.PlayAnim("Filling", viewData.BlockBecomeWallSeconds);
             float wallDeltaSeconds = viewData.BlockBecomeWallSeconds * 0.01f;
             float filledAnimSeconds = viewData.BlockFilledAnimSeconds;
             for (int i = 0; i < 100; i++)
             {
                 if (PlayerModel.Instance == null)
                     return;
-                blockController.SetAnimSpeed(filledAnimSeconds * PlayerModel.Instance.CurrentDecelerationFactor);
+                blockController.SetAnimSpeed(1 / filledAnimSeconds * PlayerModel.Instance.CurrentDecelerationFactor);
                 await UniTask.Delay(TimeSpan.FromSeconds(wallDeltaSeconds / PlayerModel.Instance.CurrentDecelerationFactor), cancellationToken: token);
             }
             isWall = true;
             blockController.Fill();
+            float remainingDeltaSeconds = (filledAnimSeconds - viewData.BlockBecomeWallSeconds) * 0.01f;
+            for (int i = 0; i < 100; i++)
+            {
+                if (PlayerModel.Instance == null)
+                    return;
+                blockController.SetAnimSpeed(1 / filledAnimSeconds * PlayerModel.Instance.CurrentDecelerationFactor);
+                await UniTask.Delay(TimeSpan.FromSeconds(remainingDeltaSeconds / PlayerModel.Instance.CurrentDecelerationFactor), cancellationToken: token);
+            }
         }
 
         public void OnDestroy()
