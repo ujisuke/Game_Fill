@@ -103,3 +103,6 @@ InitTestScene*.unity*
 /[Aa]ssets/[Pp]lugins/
 /[Pp]ackages/
 /[Aa]ssets/[Ss]team/
+/[Aa]ssets/[Cc]om.rlabrecque.steamworks.net/
+/[Aa]ssets/[Ss]cripts/[Ss]teamworks.NET/
+/steam_appid.txt

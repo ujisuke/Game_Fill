@@ -1,5 +1,7 @@
 using Assets.Scripts.AudioSource.View;
 using Assets.Scripts.Common.Controller;
+using Assets.Scripts.Gallery.Model;
+using Assets.Scripts.Map.Model;
 using Unity.Mathematics;
 
 namespace Assets.Scripts.Title.Controller
@@ -21,6 +23,8 @@ namespace Assets.Scripts.Title.Controller
 
         public void OnStateEnter()
         {
+            MapModel.ResetDifficulty();
+            GalleryModel.ResetDifficulty();
             tC.SetActiveButtons(true);
             tC.UpdateInitButtonSelection(selectedIndex, selectedIndex, isFromSetVolume);
             tC.OpenScene();

@@ -23,7 +23,6 @@ namespace Assets.Scripts.Map.Controller
         {
             AudioSourceView.Instance.PlayChooseSE();
             AudioSourceView.Instance.FadeOutBGM().Forget();
-            MapModel.ReSetDifficulty();
             LoadScene().Forget();
         }
 

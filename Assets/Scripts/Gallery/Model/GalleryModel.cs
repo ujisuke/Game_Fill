@@ -83,7 +83,7 @@ namespace Assets.Scripts.Gallery.Model
             }
         }
 
-        public static void ReSetDifficulty()
+        public static void ResetDifficulty()
         {
             isEasyMode = false;
             isHardMode = false;

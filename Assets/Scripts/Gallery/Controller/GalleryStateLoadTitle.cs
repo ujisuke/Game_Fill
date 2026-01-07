@@ -21,7 +21,7 @@ namespace Assets.Scripts.Gallery.Controller
 
         public void OnStateEnter()
         {
-            GalleryModel.ReSetDifficulty();
+            GalleryModel.ResetDifficulty();
             AudioSourceView.Instance.PlayChooseSE();
             AudioSourceView.Instance.FadeOutBGM().Forget();
             LoadScene().Forget();

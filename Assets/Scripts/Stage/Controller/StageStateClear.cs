@@ -29,7 +29,6 @@ namespace Assets.Scripts.Stage.Controller
         {
             if (StageController.IsInGallery)
             {
-                StageController.SetIsOnGallery(false);
                 AudioSourceView.Instance.FadeOutBGM().Forget();
                 await sC.PlayClearEffect(token);
                 SceneManager.LoadScene(sC.GallerySceneName);
