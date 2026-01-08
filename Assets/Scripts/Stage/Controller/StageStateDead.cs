@@ -2,6 +2,7 @@ using System.Threading;
 using Assets.Scripts.Stage.Model;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
+using Assets.Steam.Scripts;
 
 namespace Assets.Scripts.Stage.Controller
 {
@@ -20,6 +21,7 @@ namespace Assets.Scripts.Stage.Controller
 
         public void OnStateEnter()
         {
+            Achievements.CheckAchievementOnDead();
             StageModel.Instance.DestroyAllBlock();
             Dead().Forget();
         }

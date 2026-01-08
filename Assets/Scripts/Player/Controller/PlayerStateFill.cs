@@ -104,7 +104,10 @@ namespace Assets.Scripts.Player.Controller
             StageModel.Instance.FillBlock(pM.HurtBox);
 
             if (CustomInputSystem.Instance.GetSlowKeyDown())
+            {
                 AudioSourceView.Instance.PlaySlowSE();
+                pM.AddSlowCount();
+            }
             if (CustomInputSystem.Instance.GetSlowKey())
             {
                 pM.Deceleration();

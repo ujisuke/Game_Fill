@@ -14,9 +14,13 @@ namespace Assets.Scripts.Stage.Model
         private readonly StageController stageController;
         private int timeLimit;
         private static StageModel instance;
+        private Vector2Int firstFilledIndex;
+        private bool doesExistFilled;
 
+        public BlockModel[,] BlockMap => blockMap;
         public int TimeLimit => timeLimit;
         public static StageModel Instance => instance;
+        public Vector2Int FirstFilledIndex => firstFilledIndex;
 
         public StageModel(Tilemap tilemap, StageController stageController, int timeLimit)
         {
@@ -24,6 +28,7 @@ namespace Assets.Scripts.Stage.Model
             instance = this;
             this.stageController = stageController;
             this.timeLimit = timeLimit;
+            doesExistFilled = false;
         }
 
         private static BlockModel[,] GetBlockMap(Tilemap tilemap)
@@ -103,6 +108,11 @@ namespace Assets.Scripts.Stage.Model
             BlockModel block = blockMap[playerPosIndex.x, playerPosIndex.y];
             if (block.CanBeFilled)
                 block.Fill().Forget();
+            if (!doesExistFilled)
+            {
+                firstFilledIndex = playerPosIndex;
+                doesExistFilled = true;
+            }
         }
 
         public bool IsAllBlockFilled()

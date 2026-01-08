@@ -102,7 +102,10 @@ namespace Assets.Scripts.Player.Controller
             pC.FlipX(isLookingLeft);
 
             if (CustomInputSystem.Instance.GetSlowKeyDown())
+            {
                 AudioSourceView.Instance.PlaySlowSE();
+                pM.AddSlowCount();
+            }
             if (CustomInputSystem.Instance.GetSlowKey())
             {
                 pM.Deceleration();

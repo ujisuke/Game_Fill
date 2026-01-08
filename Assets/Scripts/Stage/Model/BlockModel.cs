@@ -19,11 +19,13 @@ namespace Assets.Scripts.Stage.Model
         private readonly bool isExit;
         private readonly CancellationTokenSource cTS;
         private readonly CancellationToken token;
+        private bool isWallInitial;
         public Vector2 Pos => pos;
         public HitBox HitBox => hitBox;
         public bool IsWall => isWall;
         public bool CanBeFilled => canBeFilled;
         public bool IsExit => isExit;
+        public bool IsWallInitial => isWallInitial;
 
         public BlockModel(BlockController blockController, Vector2 pos, Vector2 scale, bool isWall, bool canBeFilled, bool isExit, ViewData viewData)
         {
@@ -36,6 +38,7 @@ namespace Assets.Scripts.Stage.Model
             this.isExit = isExit;
             cTS = new();
             token = cTS.Token;
+            isWallInitial = isWall;
         }
 
         public async UniTask Fill()

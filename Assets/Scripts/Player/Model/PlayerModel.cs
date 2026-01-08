@@ -9,17 +9,23 @@ namespace Assets.Scripts.Player.Model
         private HurtBox hurtBox;
         private PlayerMove playerMove;
         private static PlayerModel instance;
+        private static int slowCount;
+        private static Vector2Int posIntOnDead;
         public Vector2 Pos => playerMove.Pos;
         public HurtBox HurtBox => hurtBox;
         public bool IsOnExit => StageModel.Instance.IsPlayerOnExit(Pos);
         public float CurrentDecelerationFactor => playerMove.CurrentDecelerationFactor;
         public static PlayerModel Instance => instance;
+        public static int SlowCount => slowCount;
+        public static Vector2Int PosOnDead => posIntOnDead;
 
         public PlayerModel(PlayerData playerData, Vector2 pos)
         {
             playerMove = new PlayerMove(pos, playerData.MoveSpeed);
             hurtBox = new HurtBox(pos, playerData.HurtBoxScale);
             instance = this;
+            slowCount = 0;
+            posIntOnDead = new Vector2Int((int)pos.x, (int)pos.y);
         }
 
         public void MoveTurn(Vector2 moveDir)
@@ -48,7 +54,13 @@ namespace Assets.Scripts.Player.Model
 
         public static void RemoveInstance()
         {
+            posIntOnDead = new Vector2Int((int)Instance.Pos.x, (int)Instance.Pos.y);
             instance = null;
+        }
+
+        public void AddSlowCount()
+        {
+            slowCount++;
         }
     }
 }

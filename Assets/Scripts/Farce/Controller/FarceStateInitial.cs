@@ -18,6 +18,7 @@ namespace Assets.Scripts.Farce.Controller
         {
             fC.OpenScene();
             FarceModel.SaveClearStage();
+            Assets.Steam.Scripts.Achievements.CheckAchievementOnFarce();
         }
 
         public void HandleInput()

@@ -25,7 +25,7 @@ namespace Assets.Scripts.Stage.Controller
         [SerializeField] private string nextSceneName;
         [SerializeField] private SceneNameData sceneNameData;
         private static bool isInGallery = false;
-        private bool isEasyMode => MapModel.IsEasyMode || GalleryModel.IsEasyMode;
+        public bool isEasyMode => MapModel.IsEasyMode || GalleryModel.IsEasyMode;
         private bool isHardMode => MapModel.IsHardMode || GalleryModel.IsHardMode;
 
         public bool IsFinalStage => isFinalStage;
